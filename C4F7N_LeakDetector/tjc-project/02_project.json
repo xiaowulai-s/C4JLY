@@ -1,0 +1,35 @@
+{
+  "project": {
+    "name": "C4F7N_LeakDetector_HMI",
+    "title": "C4F7N 便携式检漏仪 · 串口屏界面",
+    "version": "1.0.0",
+    "target": "TJC",
+    "generator": "TJC-UI-Engineer-AI",
+    "generated_at": "2026-08-24",
+    "status": "SOURCE_PROJECT (待编译)",
+    "protocol_ref": "C4F7N_HMI_搭建清单.md §7（用户协议为最高优先级）"
+  },
+  "device": {
+    "model": "X5-070 系列（7.0寸 1024×600）",
+    "width": 1024,
+    "height": 600,
+    "orientation": 0,
+    "orientation_name": "landscape"
+  },
+  "pages": ["p0_main", "p1_settings", "p2_curve", "p3_about"],
+  "resources": [
+    {"id": "font_gb2312_16",  "type": "font",  "purpose": "状态/说明/小字",  "charset": "GB2312"},
+    {"id": "font_gb2312_24",  "type": "font",  "purpose": "标题/按钮/状态行", "charset": "GB2312"},
+    {"id": "font_gb2312_32",  "type": "font",  "purpose": "峰值/阈值数字",     "charset": "GB2312"},
+    {"id": "font_num_48",     "type": "font",  "purpose": "主页浓度大数字",   "charset": "ASCII 数字(可省中文)"},
+    {"id": "bg_main",         "type": "color", "purpose": "全屏背景 #0B1526", "size_bytes": 0, "note": "纯色 bco，不占 Flash 图片空间"}
+  ],
+  "variables": ["c4f7n_ppm", "peak_ppm", "avg_ppm", "temp_probe", "flow_rate", "battery_pct", "threshold_hi", "threshold_lo", "unit_mode", "buzzer_en", "pump_status", "probe_status", "alarm_status", "curve_range", "dim_level"],
+  "scripts": ["global.hmi", "p0_main.hmi", "p1_settings.hmi", "p2_curve.hmi", "p3_about.hmi"],
+  "protocol": {
+    "baudrate": 115200,
+    "mode": "Nextion 兼容文本指令 + 0xFF 0xFF 0xFF 帧尾",
+    "direction_mcu_to_hmi": "obj.attr=value / page N / add 0,n / cls 0 / dim=n / beep n",
+    "direction_hmi_to_mcu": "print 关键字（无帧尾约定，MCU 按关键字匹配）"
+  }
+}

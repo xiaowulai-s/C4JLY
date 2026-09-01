@@ -1,0 +1,237 @@
+{
+  "page": {
+    "id": 2,
+    "name": "p2_curve",
+    "title": "历史曲线",
+    "resolution": [1024, 600],
+    "background": 2212,
+    "background_hex": "#0B1526"
+  },
+  "components": [
+    {
+      "id": 0, "name": "p2_panel_chart", "type": "button",
+      "x": 24, "y": 84, "w": 720, "h": 424, "z": 0,
+      "bco": 4359, "radius": 18,
+      "role": "decor_panel",
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 1, "name": "p2_title", "type": "text",
+      "x": 48, "y": 102, "w": 240, "h": 26, "z": 10,
+      "text": "浓度历史曲线", "font": 24,
+      "pco": 59230, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 2, "name": "p2_r10", "type": "button",
+      "x": 420, "y": 98, "w": 92, "h": 32, "z": 10,
+      "text": "10分钟", "font": 16,
+      "pco": 59230, "bco": 3222, "radius": 14,
+      "touch": true,
+      "events": {"rel": "p2_r10_rel"}
+    },
+    {
+      "id": 3, "name": "p2_r1h", "type": "button",
+      "x": 520, "y": 98, "w": 92, "h": 32, "z": 10,
+      "text": "1小时", "font": 16,
+      "pco": 59230, "bco": 2212, "radius": 14,
+      "touch": true,
+      "events": {"rel": "p2_r1h_rel"}
+    },
+    {
+      "id": 4, "name": "p2_r24h", "type": "button",
+      "x": 620, "y": 98, "w": 92, "h": 32, "z": 10,
+      "text": "24小时", "font": 16,
+      "pco": 59230, "bco": 2212, "radius": 14,
+      "touch": true,
+      "events": {"rel": "p2_r24h_rel"}
+    },
+    {
+      "id": 5, "name": "p2_wave", "type": "wave",
+      "x": 48, "y": 148, "w": 672, "h": 330, "z": 10,
+      "bco": 2212, "pco": 9885, "gridc": 6603,
+      "ch": 1,
+      "val_scale": "MCU 将 0~1000ppm 映射为 0~255 后 add 0,val",
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 6, "name": "p2_leg", "type": "text",
+      "x": 48, "y": 486, "w": 400, "h": 22, "z": 10,
+      "text": "— 实时浓度   - - 报警阈值", "font": 16,
+      "pco": 31893, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 7, "name": "p2_panel_stat", "type": "button",
+      "x": 760, "y": 84, "w": 240, "h": 424, "z": 0,
+      "bco": 4359, "radius": 18,
+      "role": "decor_panel",
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 8, "name": "p2_stat_title", "type": "text",
+      "x": 784, "y": 104, "w": 160, "h": 26, "z": 10,
+      "text": "数据统计", "font": 24,
+      "pco": 59230, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 9, "name": "p2_max_lab", "type": "text",
+      "x": 784, "y": 150, "w": 80, "h": 24, "z": 10,
+      "text": "最大值", "font": 16,
+      "pco": 31893, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 10, "name": "p2_max", "type": "text",
+      "x": 900, "y": 146, "w": 80, "h": 28, "z": 10,
+      "text": "248.5", "font": 24,
+      "pco": 62689, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 11, "name": "p2_avg_lab", "type": "text",
+      "x": 784, "y": 196, "w": 80, "h": 24, "z": 10,
+      "text": "平均值", "font": 16,
+      "pco": 31893, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 12, "name": "p2_avg", "type": "text",
+      "x": 900, "y": 192, "w": 80, "h": 28, "z": 10,
+      "text": "86.3", "font": 24,
+      "pco": 9885, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 13, "name": "p2_min_lab", "type": "text",
+      "x": 784, "y": 242, "w": 80, "h": 24, "z": 10,
+      "text": "最小值", "font": 16,
+      "pco": 31893, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 14, "name": "p2_min", "type": "text",
+      "x": 900, "y": 238, "w": 80, "h": 28, "z": 10,
+      "text": "0.00", "font": 24,
+      "pco": 59230, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 15, "name": "p2_dur_lab", "type": "text",
+      "x": 784, "y": 288, "w": 80, "h": 24, "z": 10,
+      "text": "记录时长", "font": 16,
+      "pco": 31893, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 16, "name": "p2_dur", "type": "text",
+      "x": 900, "y": 284, "w": 80, "h": 28, "z": 10,
+      "text": "10 分钟", "font": 24,
+      "pco": 59230, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 17, "name": "p2_cnt_lab", "type": "text",
+      "x": 784, "y": 334, "w": 80, "h": 24, "z": 10,
+      "text": "数据点数", "font": 16,
+      "pco": 31893, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 18, "name": "p2_cnt", "type": "text",
+      "x": 900, "y": 330, "w": 80, "h": 28, "z": 10,
+      "text": "600", "font": 24,
+      "pco": 59230, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 19, "name": "p2_export", "type": "button",
+      "x": 784, "y": 408, "w": 192, "h": 52, "z": 10,
+      "text": "导出 CSV（USB）", "font": 24,
+      "pco": 59230, "bco": 3222, "radius": 12,
+      "touch": true,
+      "events": {"rel": "p2_export_rel"}
+    },
+    {
+      "id": 20, "name": "p2_title_hdr", "type": "text",
+      "x": 20, "y": 18, "w": 360, "h": 30, "z": 5,
+      "text": "C4F7N 便携式检漏仪", "font": 24,
+      "pco": 59230, "bco": 2212,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 21, "name": "p2_chip_probe", "type": "button",
+      "x": 688, "y": 18, "w": 108, "h": 28, "z": 5,
+      "text": "● 探头 已连接", "font": 16,
+      "pco": 9771, "bco": 4359, "radius": 14,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 22, "name": "p2_chip_pump", "type": "button",
+      "x": 806, "y": 18, "w": 98, "h": 28, "z": 5,
+      "text": "● 泵 运行", "font": 16,
+      "pco": 9771, "bco": 4359, "radius": 14,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 23, "name": "p2_chip_bat", "type": "button",
+      "x": 914, "y": 18, "w": 90, "h": 28, "z": 5,
+      "text": "电量 78%", "font": 16,
+      "pco": 62689, "bco": 4359, "radius": 14,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 24, "name": "p2_nav_home", "type": "button",
+      "x": 0, "y": 534, "w": 256, "h": 52, "z": 20,
+      "text": "主页", "font": 24,
+      "pco": 59230, "bco": 2212,
+      "touch": true,
+      "events": {"rel": "p2_nav_home_rel"}
+    },
+    {
+      "id": 25, "name": "p2_nav_set", "type": "button",
+      "x": 256, "y": 534, "w": 256, "h": 52, "z": 20,
+      "text": "设置", "font": 24,
+      "pco": 59230, "bco": 2212,
+      "touch": true,
+      "events": {"rel": "p2_nav_set_rel"}
+    },
+    {
+      "id": 26, "name": "p2_nav_curve", "type": "button",
+      "x": 512, "y": 534, "w": 256, "h": 52, "z": 20,
+      "text": "历史曲线", "font": 24,
+      "pco": 59230, "bco": 3222,
+      "touch": true,
+      "events": {"rel": "p2_nav_curve_rel"}
+    },
+    {
+      "id": 27, "name": "p2_nav_about", "type": "button",
+      "x": 768, "y": 534, "w": 256, "h": 52, "z": 20,
+      "text": "关于", "font": 24,
+      "pco": 59230, "bco": 2212,
+      "touch": true,
+      "events": {"rel": "p2_nav_about_rel"}
+    }
+  ]
+}

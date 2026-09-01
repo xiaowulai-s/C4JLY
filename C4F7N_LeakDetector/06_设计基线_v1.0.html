@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C₄F₇N 便携检漏仪 设计基线 v1.0</title>
+<style>
+  :root{
+    --teal:#0891B2; --teal-d:#0e7490; --teal-l:#e0f2fe;
+    --ink:#0f172a; --sub:#475569; --line:#e2e8f0; --bg:#f8fafc;
+    --ok:#15803d; --warn:#b45309; --bad:#b91c1c; --card:#ffffff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:"Microsoft YaHei","PingFang SC",-apple-system,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;font-size:14px}
+  .wrap{max-width:1000px;margin:0 auto;padding:32px 28px 80px}
+  header.hero{background:linear-gradient(135deg,#0e7490 0%,#0891b2 55%,#06b6d4 100%);border-radius:18px;color:#fff;padding:36px 40px;margin-bottom:28px}
+  header.hero .tag{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:2px 14px;font-size:12px;letter-spacing:1px;margin-bottom:14px}
+  header.hero h1{font-size:26px;font-weight:600;margin-bottom:6px}
+  header.hero .meta{font-size:13px;opacity:.9}
+  header.hero .badges{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
+  header.hero .badge{background:#fff;color:var(--teal-d);border-radius:8px;padding:4px 14px;font-size:12.5px;font-weight:500}
+  nav.toc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 24px;margin-bottom:28px}
+  nav.toc h2{font-size:15px;font-weight:600;margin-bottom:10px;color:var(--teal-d)}
+  nav.toc ol{columns:2;column-gap:40px;padding-left:20px}
+  nav.toc li{margin:3px 0}
+  nav.toc a{color:var(--sub);text-decoration:none}
+  nav.toc a:hover{color:var(--teal)}
+  section.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px 30px;margin-bottom:22px}
+  section.card h2{font-size:18px;font-weight:600;color:var(--teal-d);border-bottom:2px solid var(--teal-l);padding-bottom:10px;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+  section.card h2 .no{background:var(--teal);color:#fff;border-radius:8px;min-width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;font-size:14px}
+  h3{font-size:15px;font-weight:600;margin:16px 0 8px;color:var(--ink)}
+  p{margin:6px 0;color:var(--sub)}
+  ul,ol{margin:6px 0 6px 22px;color:var(--sub)}
+  li{margin:3px 0}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13px}
+  th{background:var(--teal-l);color:var(--teal-d);font-weight:600;text-align:left;padding:8px 12px;border:1px solid var(--line)}
+  td{padding:7px 12px;border:1px solid var(--line);color:var(--sub);vertical-align:top}
+  tr:nth-child(even) td{background:#fbfdfe}
+  .k{display:inline-block;background:#f1f5f9;border:1px solid var(--line);border-radius:6px;padding:0 8px;font-family:Consolas,monospace;font-size:12.5px;color:var(--ink)}
+  .ok{color:var(--ok);font-weight:500}
+  .warn{color:var(--warn);font-weight:500}
+  .bad{color:var(--bad);font-weight:500}
+  .note{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;margin:10px 0;font-size:13px;color:#78350f}
+  .note b{color:#92400e}
+  .arch{display:flex;gap:0;align-items:stretch;margin:14px 0}
+  .arch .box{flex:1;border-radius:12px;padding:14px 16px;font-size:13px}
+  .arch .probe{background:var(--teal-l);border:1px solid #7dd3fc}
+  .arch .host{background:#eff6ff;border:1px solid #bfdbfe}
+  .arch .mid{display:flex;flex-direction:column;justify-content:center;align-items:center;padding:0 14px;color:var(--sub);font-size:12px;text-align:center;min-width:120px}
+  .arch h4{font-size:13.5px;margin-bottom:6px}
+  .arch ul{padding-left:16px}
+  .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
+  .flow .step{background:#f1f5f9;border:1px solid var(--line);border-radius:8px;padding:6px 12px;font-size:12.5px;color:var(--sub)}
+  .flow .arrow{color:var(--teal);font-weight:600}
+  footer{margin-top:30px;text-align:center;color:#94a3b8;font-size:12px}
+  @media print{
+    body{background:#fff}
+    .wrap{max-width:none;padding:0}
+    section.card{break-inside:avoid;border:none;padding:16px 0}
+    header.hero{border-radius:0}
+    nav.toc{display:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <span class="tag">PROJECT BASELINE · 项目基线</span>
+  <h1>C₄F₇N 便携式检漏仪 · 设计基线文档</h1>
+  <div class="meta">版本 v1.0（基线）｜2026-08-20｜项目代号：C4F7N_LeakDetector</div>
+  <div class="badges">
+    <span class="badge">量程 0-1000 ppm</span>
+    <span class="badge">显示 0.01 ppm</span>
+    <span class="badge">T90 ≤5s 目标</span>
+    <span class="badge">NDIR 双波长</span>
+    <span class="badge">分布式架构</span>
+  </div>
+</header>
+
+<nav class="toc">
+  <h2>目录</h2>
+  <ol>
+    <li><a href="#s1">项目概述</a></li>
+    <li><a href="#s2">需求指标</a></li>
+    <li><a href="#s3">系统架构</a></li>
+    <li><a href="#s4">硬件选型（决策记录）</a></li>
+    <li><a href="#s5">原理图设计（主机主板）</a></li>
+    <li><a href="#s6">电源方案</a></li>
+    <li><a href="#s7">软件功能</a></li>
+    <li><a href="#s8">机械结构</a></li>
+    <li><a href="#s9">关键风险与对策</a></li>
+    <li><a href="#s10">样件验证计划</a></li>
+    <li><a href="#s11">采购预算</a></li>
+    <li><a href="#s12">版本历史</a></li>
+  </ol>
+</nav>
+
+<section class="card" id="s1">
+  <h2><span class="no">1</span>项目概述</h2>
+  <p>开发一台便携式 <b>C₄F₇N（全氟异丁腈，3M Novec 4710）检漏仪</b>，用于电力行业 GIS、高压断路器、环网柜等新型环保绝缘气体设备的现场泄漏检测与定位。</p>
+  <ul>
+    <li><b>背景</b>：C₄F₇N 作为 SF₆ 环保替代品正规模化应用，绝缘强度为 SF₆ 两倍、GWP 低，但泄漏会影响设备绝缘性能并带来环保风险，需现场快速检测。</li>
+    <li><b>竞品参考</b>：DILO LEAKSPY C4（0-1000ppm，NDIR，传感器延长杆式）、JHLK200-C4（0-1000ppm，0.01ppm 显示）、LF-300-C4（高频电离，0.01-100ppm）。</li>
+    <li><b>本机差异化</b>：传感器置于可换探头手柄（响应快）、18650 可换电池（现场续航）、4.3 寸触摸屏、板载 Flash 曲线记录 + USB 导出 CSV。</li>
+  </ul>
+</section>
+
+<section class="card" id="s2">
+  <h2><span class="no">2</span>需求指标</h2>
+  <table>
+    <tr><th style="width:160px">项目</th><th>指标</th><th style="width:220px">说明</th></tr>
+    <tr><td>检测气体</td><td>C₄F₇N（全氟异丁腈 / Novec 4710）</td><td>SF₆ 环保替代气</td></tr>
+    <tr><td>量程</td><td>0 ~ 1000 ppm</td><td>DILO 同量程</td></tr>
+    <tr><td>显示分辨率</td><td>0.01 ppm</td><td><span class="warn">实为显示步进；检出限物理上 0.3~1 ppm</span></td></tr>
+    <tr><td>响应时间</td><td>T90 ≤ 5 s（目标）</td><td>需样件台架验证确认</td></tr>
+    <tr><td>检测原理</td><td>NDIR 双波长红外</td><td>7.9μm 特征吸收 + 3.3μm 参考通道</td></tr>
+    <tr><td>使用环境</td><td>-20 ~ +60 ℃</td><td>变电站现场</td></tr>
+  </table>
+  <div class="note"><b>指标口径澄清：</b>"0.01ppm 灵敏度"为显示分辨率（JHLK200-C4 同口径），真实检出限由 NDIR 光学结构决定，行业水平 0.3~1 ppm，验收时按检出限而非显示步进考核。</div>
+</section>
+
+<section class="card" id="s3">
+  <h2><span class="no">3</span>系统架构（分布式）</h2>
+  <p><b>核心决策</b>：传感器模组放在探头手柄内，微型泵留在主机。决定响应时间的只有传感器之前的气路，泵在主机抽吸不影响读数，手柄因此轻量（<150g）且无振动。</p>
+  <div class="arch">
+    <div class="box probe">
+      <h4>🔍 探头手柄（可换）</h4>
+      <ul>
+        <li>可换探头嘴：鹅颈 / 直杆 / 延长杆</li>
+        <li>MST-N7M NDIR 模组（63g）</li>
+        <li>接口板：TTL → RS485</li>
+        <li>手温隔离层</li>
+      </ul>
+    </div>
+    <div class="mid">
+      <div>气路软管<br>（测量后传输）</div>
+      <div style="margin:8px 0;font-weight:600">+</div>
+      <div>4 芯电缆<br>5V·GND·A·B</div>
+    </div>
+    <div class="box host">
+      <h4>🎛 主机（手持机）</h4>
+      <ul>
+        <li>微型隔膜泵（抽吸·排气）</li>
+        <li>STM32F103C8T6 主控</li>
+        <li>4.3寸电容触摸串口屏</li>
+        <li>18650×2 电池 + 电源管理</li>
+        <li>声光报警 / 蜂鸣器 / 按键</li>
+      </ul>
+    </div>
+  </div>
+  <p><b>关键设计原则</b>：</p>
+  <ul>
+    <li><b>μV 级模拟信号不出手柄</b>——热电堆输出微伏级，必须手柄内数字化后走 RS485 差分传输</li>
+    <li><b>泵留主机</b>——气体在气室被测量后才进入软管，软管长度不影响响应</li>
+    <li><b>探头可快速更换</b>——GX12 航空插头（4 芯：5V/GND/A/B）</li>
+  </ul>
+  <p><b>响应时间预算</b>（T90 ≈ 3-5 s）：</p>
+  <div class="flow">
+    <span class="step">探头嘴→气室 ~0.2s</span><span class="arrow">→</span>
+    <span class="step">气室换气 0.5-1s</span><span class="arrow">→</span>
+    <span class="step">NDIR 电路 2-3s</span><span class="arrow">→</span>
+    <span class="step">数字滤波 0.5s</span>
+  </div>
+</section>
+
+<section class="card" id="s4">
+  <h2><span class="no">4</span>硬件选型（决策记录）</h2>
+  <table>
+    <tr><th style="width:90px">模块</th><th style="width:200px">选型</th><th>关键参数 / 备选</th></tr>
+    <tr><td>气体传感器</td><td><b>MST-N7M</b>（宁夏麦芽）</td><td>NDIR，0-1000ppm，1ppm 分辨率，TTL UART，3.0-5.5V，63g。备选：LARK-1QM（T90 10s，±2ppm）/ GC5G1（工业接口全但响应慢）</td></tr>
+    <tr><td>微型泵</td><td><b>5V 无刷隔膜泵</b></td><td>空载 ≥1 L/min，真空度 ≥-40kPa，噪音 &lt;50dB，寿命数千小时</td></tr>
+    <tr><td>主控 MCU</td><td><b>STM32F103C8T6</b></td><td>LQFP-48，72MHz，USB FS 原生</td></tr>
+    <tr><td>人机界面</td><td><b>4.3寸 800×480 电容触摸串口屏</b></td><td>淘晶驰 X3/X5 或迪文；串口指令控制，可视化拖拽开发</td></tr>
+    <tr><td>存储</td><td><b>W25Q16</b>（SPI Flash）</td><td>16Mbit，浓度曲线记录（数月）</td></tr>
+    <tr><td>RS485 接口</td><td><b>MAX3485</b></td><td>3.3V 收发器，半双工，A/B + 120Ω 终端</td></tr>
+    <tr><td>USB</td><td><b>Type-C</b>（与充电共用）</td><td>STM32 原生 CDC，CSV 导出</td></tr>
+    <tr><td>充电</td><td><b>TP4056</b></td><td>1A 线性充电，PROG 1.2k 设定</td></tr>
+    <tr><td>升压</td><td><b>MT3608</b></td><td>3.7V→5V 升压，10uH 电感 + SS34</td></tr>
+    <tr><td>LDO</td><td><b>AMS1117-3.3</b></td><td>5V→3.3V，1A</td></tr>
+    <tr><td>电池</td><td><b>18650 ×2 并联</b></td><td>5000mAh，可现场更换，Type-C 充电</td></tr>
+    <tr><td>驱动</td><td>SI2302（泵 N-MOS）/ MMBT2222（蜂鸣器）</td><td>泵低边开关 + 1N5819 续流</td></tr>
+    <tr><td>探头连接</td><td><b>GX12 航空插头 4 芯</b></td><td>5V / GND / RS485_A / RS485_B</td></tr>
+  </table>
+</section>
+
+<section class="card" id="s5">
+  <h2><span class="no">5</span>原理图设计（主机主板）</h2>
+  <p>56 个器件，4 大模块，48 个网络。已产出 KiCad 工程（v2）与立创 EDA 标准版 JSON 原生工程（C4F7N_MainBoard.json），并制定手动重建指引。</p>
+  <table>
+    <tr><th style="width:120px">模块</th><th>包含器件</th><th style="width:200px">关键网络</th></tr>
+    <tr><td>电源区</td><td>J1 Type-C、F1、U1 TP4056、BT1、U2 MT3608、L1、D2、U3 AMS1117、R1-R3/R12/R13、C1-C6/C9/C10/C13</td><td>VBUS / VBUS_F / BAT / VOUT5 / 5V / 3V3 / GND / CC1 / CC2</td></tr>
+    <tr><td>MCU 区</td><td>U4 STM32F103C8T6、Y1 8MHz、R4-R6、SW1、J6 SWD、R22/R23、C7/C8/C11/C12/C14</td><td>RST / BOOT0 / SWDIO / SWCLK / OSC_IN/OUT / VBAT_SENSE</td></tr>
+    <tr><td>接口区</td><td>J2 串口屏、U5 MAX3485、R9、J3 GX12、U6 W25Q16</td><td>LCD_TX/RX / RS485_*/ SPI_* / USB_DP/DM</td></tr>
+    <tr><td>驱动区</td><td>Q1/Q2、R15-R18、D3、J4 泵、BZ1、LED1/2、SW2-SW4</td><td>PUMP_CTRL / PUMP_N / BEEP / LED_* / KEY1-3</td></tr>
+  </table>
+  <h3>STM32 引脚分配</h3>
+  <table>
+    <tr><th>功能</th><th>引脚</th><th>外设</th></tr>
+    <tr><td>串口屏</td><td>PA9 / PA10</td><td>USART1 TX/RX（115200 级）</td></tr>
+    <tr><td>RS485（手柄）</td><td>PA2 / PA3 / PA1 方向</td><td>USART2 TX/RX + DE</td></tr>
+    <tr><td>SPI Flash</td><td>PA4 / PA5 / PA6 / PA7</td><td>SPI1 CS/SCK/MISO/MOSI</td></tr>
+    <tr><td>USB</td><td>PA11 / PA12</td><td>USB DM/DP（CDC 导出）</td></tr>
+    <tr><td>泵控制</td><td>PA0</td><td>PWM 可调速</td></tr>
+    <tr><td>蜂鸣器</td><td>PA1</td><td>—</td></tr>
+    <tr><td>报警 LED（红）/电源 LED（绿）</td><td>PA15 / PB0</td><td>—</td></tr>
+    <tr><td>电池电压采样</td><td>PB1</td><td>ADC（R22/R23 分压）</td></tr>
+    <tr><td>按键</td><td>PB3 / PB4 / PB5</td><td>KEY1-3（内部上拉）</td></tr>
+    <tr><td>SWD</td><td>PA13 / PA14</td><td>调试口</td></tr>
+    <tr><td>晶振</td><td>PD0 / PD1</td><td>8MHz HSE + 20pF×2 + 1M</td></tr>
+  </table>
+  <div class="note"><b>⚠ 设计修正点（基线内已生效，重建/改板时务必遵守）：</b><br>
+  ① TP4056 的 CE(2) 接 <b>VBUS_F</b>（USB 输入），不可接 5V——否则电池耗尽时 5V 无法建立，充电功能失效。<br>
+  ② MT3608 的 EN(4) 接 <b>BAT</b>（电池），不可接 5V——否则升压输出未建立时 EN 为低，升压无法自启动。</div>
+</section>
+
+<section class="card" id="s6">
+  <h2><span class="no">6</span>电源方案</h2>
+  <div class="flow">
+    <span class="step">Type-C 5V</span><span class="arrow">→</span>
+    <span class="step">TP4056 充电 1A</span><span class="arrow">→</span>
+    <span class="step">18650×2 并联 3.7V</span><span class="arrow">→</span>
+    <span class="step">MT3608 升压 5V</span><span class="arrow">→</span>
+    <span class="step">AMS1117 → 3.3V</span>
+  </div>
+  <table>
+    <tr><th>项目</th><th>方案</th><th>说明</th></tr>
+    <tr><td>电池</td><td>18650 ×2 并联（5000mAh）</td><td><b>可现场更换</b>，续航 5-6h</td></tr>
+    <tr><td>充电</td><td>TP4056 + Type-C</td><td>充电电流 ~1A（R_PROG=1.2k）</td></tr>
+    <tr><td>升压</td><td>MT3608 → 5V</td><td>泵/传感器/串口屏供电（150mA 余量充足）</td></tr>
+    <tr><td>LDO</td><td>AMS1117 → 3.3V</td><td>MCU/RS485/Flash</td></tr>
+    <tr><td>功耗预算</td><td>约 600mA @5V（峰值 ~900mA）</td><td>MST-N7M 150mA + 泵 350mA + 屏 300mA + MCU 80mA</td></tr>
+  </table>
+</section>
+
+<section class="card" id="s7">
+  <h2><span class="no">7</span>软件功能</h2>
+  <ul>
+    <li><b>浓度实时显示</b>：0.01 ppm 步进，可切 ppm / g/年</li>
+    <li><b>声光报警</b>：阈值可设（蜂鸣器频率随浓度变化 + 红色 LED）</li>
+    <li><b>峰值保持</b>：锁定最大浓度位置（检漏定位核心功能）</li>
+    <li><b>数据记录</b>：W25Q16 Flash 记录浓度曲线（数月），USB CDC 导出 CSV</li>
+    <li><b>串口屏 UI</b>：主页（浓度大字）/ 设置（阈值·标定）/ 历史曲线 / 关于</li>
+    <li><b>标定</b>：零点 + 量程标定流程（串口屏引导）</li>
+  </ul>
+  <p>无上位机、无蓝牙（保持简单可靠，按决策 v1.0）。</p>
+</section>
+
+<section class="card" id="s8">
+  <h2><span class="no">8</span>机械结构</h2>
+  <table>
+    <tr><th style="width:110px">部件</th><th>方案</th><th>要点</th></tr>
+    <tr><td>主机</td><td>手持机（对讲机式）</td><td>内置泵/电池/主板/串口屏；背夹 + 提手；IP 防尘设计</td></tr>
+    <tr><td>探头套装</td><td><b>可换</b>：鹅颈 / 直杆 / 延长杆</td><td>GX12 航空插头快换；鹅颈用于缝隙、直杆用于常规、延长杆用于高处</td></tr>
+    <tr><td>手柄</td><td>MST-N7M + 接口板</td><td>整体 &lt;150g；手温隔热层（发泡材料）；防尘过滤器可换</td></tr>
+    <tr><td>管线</td><td>复合管线（气路软管 + 4 芯电缆）</td><td>内径 4-6mm 硅胶；电缆屏蔽；长度 3m（可定制）</td></tr>
+  </table>
+</section>
+
+<section class="card" id="s9">
+  <h2><span class="no">9</span>关键风险与对策</h2>
+  <table>
+    <tr><th style="width:220px">风险</th><th>影响</th><th>对策</th></tr>
+    <tr><td>成品模组 T90 标称 &lt;20s</td><td>5s 指标不达标</td><td>高流量抽吸（&gt;0.5L/min）+ 与厂商谈固件定制（提输出频率 4Hz、缩平均窗口）；样件台架实测</td></tr>
+    <tr><td>手温漂移</td><td>影响 0.01ppm 显示稳定</td><td>手柄隔热层 + 双通道参考补偿 + 板载温度传感</td></tr>
+    <tr><td>鹅颈探头气路损耗</td><td>流量下降拖慢响应</td><td>泵选型已留余量（空载 1L/min），实测复核</td></tr>
+    <tr><td>C₄F₇N 标气采购难</td><td>绝对精度无法验证</td><td>先用 SF₆ 标气做相对 T90 验证，标气到位后补精度</td></tr>
+    <tr><td>KiCad→立创导入兼容</td><td>原理图迁移受阻</td><td>已改走立创原生 JSON + 手动重建（指引已备）</td></tr>
+  </table>
+</section>
+
+<section class="card" id="s10">
+  <h2><span class="no">10</span>样件验证计划（台架）</h2>
+  <p><b>前置条件</b>：MST-N7M ×2、5V 泵 ×1、4.3寸串口屏 ×1、标气（10/100/1000ppm）、USB-TTL、流量计。</p>
+  <table>
+    <tr><th style="width:160px">步骤</th><th>内容</th><th style="width:160px">判定标准</th></tr>
+    <tr><td>1 串口连通</td><td>上电读串口，确认协议/波特率/预热时间；索取协议手册</td><td>帧结构可解析</td></tr>
+    <tr><td>2 流量标定</td><td>0.3 / 0.5 / 1.0 L/min 三档实测</td><td>气路无泄漏</td></tr>
+    <tr><td>3 <b>T90 测试</b></td><td>空气↔标气阶跃，记录 T10→T90（三档流量 × 三浓度）</td><td><b>T90 ≤ 6s</b>（留余量）</td></tr>
+    <tr><td>4 手温漂移</td><td>手握 30min 记录漂移</td><td>&lt; 2 ppm</td></tr>
+    <tr><td>5 重复性/零点</td><td>100ppm×5 次 CV；洁净空气 10min 零点</td><td>CV &lt; ±1.5%；零点 &lt; ±1ppm</td></tr>
+    <tr><td>6 功耗</td><td>稳态/峰值电流</td><td>修正续航估算</td></tr>
+  </table>
+  <p><b>结论触发</b>：通过 → 锁定 MST-N7M、按 0.5L/min 设计气路、开始 PCB 细化；不通过 → 厂商固件定制 → 复测；仍不达标 → 回退 LARK-1QM（接受 T90 10s）。</p>
+</section>
+
+<section class="card" id="s11">
+  <h2><span class="no">11</span>采购预算</h2>
+  <table>
+    <tr><th style="width:160px">类别</th><th>金额区间</th><th>说明</th></tr>
+    <tr><td>核心样件（MST-N7M×2 + 泵×2 + 串口屏×1）</td><td>¥540 - 1080</td><td>传感器需向厂商询价并索要协议手册</td></tr>
+    <tr><td>台架物料（标气/流量计/气路/USB-TTL）</td><td>¥835 - 1555</td><td>标气为最大变量</td></tr>
+    <tr><td>元器件样品（STM32/MAX3485/TP4056 等）</td><td>¥177 - 296</td><td>立创商城采购</td></tr>
+    <tr><td><b>合计</b></td><td><b>约 ¥1550 - 2930</b></td><td>不含 PCB 打样费</td></tr>
+  </table>
+  <p>采购执行按《01_样件采购清单.md》29 项物料明细。</p>
+</section>
+
+<section class="card" id="s12">
+  <h2><span class="no">12</span>版本历史</h2>
+  <table>
+    <tr><th style="width:90px">版本</th><th style="width:110px">日期</th><th>变更内容</th><th style="width:90px">状态</th></tr>
+    <tr><td>v1.0</td><td>2026-08-20</td><td>基线建档：9 项设计决策全部锁定（量程/架构/传感器/泵/主控/显示/电池/数据/机械）；修正 2 处电源设计缺陷（CE、EN）；产出 KiCad v2 + 立创 JSON 工程 + 采购清单 + 验证方案 + 重建指引</td><td class="ok">基线</td></tr>
+  </table>
+  <p style="margin-top:12px;font-size:12.5px;color:#94a3b8">配套文件：01_样件采购清单.md ｜ 02_台架验证方案.md ｜ 03_立创元件对照表.md ｜ 04_连接清单.md ｜ 05_手动重建指引.md ｜ C4F7N_MainBoard.json（立创原生） ｜ C4F7N_MainBoard.kicad_sch（KiCad v2）</p>
+</section>
+
+<footer>
+  C₄F₇N Portable Leak Detector · Design Baseline v1.0 · 2026-08-20 · 后续 PCB / 固件 / 机械开发均以此文档为准
+</footer>
+
+</div>
+</body>
+</html>

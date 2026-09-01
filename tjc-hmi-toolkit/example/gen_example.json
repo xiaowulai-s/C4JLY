@@ -1,0 +1,32 @@
+{
+  "template": "template\\am1_1024x600.HMI",
+  "pageSeed": "seeds/tpl_am1_pas/0.pa",
+  "seeds": {
+    "btn98": { "file": "seeds/tpl_s3/0.pa", "objname": "b0" },
+    "btn53": { "file": "seeds/tpl_am1_pas/0.pa", "objname": "bt1" },
+    "text":  { "file": "seeds/tpl_s5/0.pa", "objname": "t0" },
+    "num":   { "file": "seeds/tpl_s1/0.pa", "objname": "n0" },
+    "prog":  { "file": "seeds/jd_pas/0.pa", "objname": "j0" },
+    "var":   { "file": "seeds/tpl_s5/0.pa", "objname": "temp" }
+  },
+  "pages": [
+    {
+      "file": "0.pa",
+      "name": "示例主页",
+      "pageObj": { "x": 0, "y": 0, "w": 1024, "h": 600, "bco": 2212 },
+      "widgets": [
+        { "seed": "btn98", "objname": "ex_title", "id": 1,
+          "set": { "x": 200, "y": 60, "w": 624, "h": 80, "font": 1, "txt": "示例界面", "bco": 3222, "pco": 59230 },
+          "codes": { "down": "page 0" } },
+        { "seed": "btn98", "objname": "ex_btn", "id": 2,
+          "set": { "x": 200, "y": 240, "w": 300, "h": 70, "font": 1, "txt": "计数 +1", "bco": 3222, "pco": 59230 },
+          "codes": { "down": "n.val=n.val+1\nprint\"CNT:\"\nprint n.val" } },
+        { "seed": "num", "objname": "n", "id": 3,
+          "set": { "x": 560, "y": 240, "w": 200, "h": 70, "font": 1, "val": 0 } },
+        { "seed": "btn98", "objname": "ex_reset", "id": 4,
+          "set": { "x": 200, "y": 380, "w": 300, "h": 70, "font": 1, "txt": "清零", "bco": 3222, "pco": 59230 },
+          "codes": { "down": "n.val=0" } }
+      ]
+    }
+  ]
+}

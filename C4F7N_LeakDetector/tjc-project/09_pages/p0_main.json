@@ -1,0 +1,204 @@
+{
+  "page": {
+    "id": 0,
+    "name": "p0_main",
+    "title": "主页",
+    "resolution": [1024, 600],
+    "background": 2212,
+    "background_hex": "#0B1526"
+  },
+  "components": [
+    {
+      "id": 0, "name": "p0_title", "type": "text",
+      "x": 20, "y": 18, "w": 360, "h": 30, "z": 5,
+      "text": "C4F7N 便携式检漏仪", "font": 24,
+      "pco": 59230, "bco": 2212,
+      "visible": true, "enabled": true, "touch": false,
+      "events": {}
+    },
+    {
+      "id": 1, "name": "p0_chip_probe", "type": "button",
+      "x": 688, "y": 18, "w": 108, "h": 28, "z": 5,
+      "text": "● 探头 已连接", "font": 16,
+      "pco": 9771, "bco": 4359, "radius": 14,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 2, "name": "p0_chip_pump", "type": "button",
+      "x": 806, "y": 18, "w": 98, "h": 28, "z": 5,
+      "text": "● 泵 运行", "font": 16,
+      "pco": 9771, "bco": 4359, "radius": 14,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 3, "name": "p0_chip_bat", "type": "button",
+      "x": 914, "y": 18, "w": 90, "h": 28, "z": 5,
+      "text": "电量 78%", "font": 16,
+      "pco": 62689, "bco": 4359, "radius": 14,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 4, "name": "p0_gas", "type": "text",
+      "x": 40, "y": 128, "w": 420, "h": 30, "z": 10,
+      "text": "C4F7N · 全氟异丁腈", "font": 16,
+      "pco": 31893, "bco": 2212,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 5, "name": "p0_conc", "type": "number",
+      "x": 40, "y": 168, "w": 440, "h": 130, "z": 10,
+      "font": 48, "font_ascii": true,
+      "pco": 59230, "bco": 2212,
+      "vvs": 2, "val": 0, "min": 0, "max": 1000,
+      "unit": "ppm", "data_source": "c4f7n_ppm",
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 6, "name": "p0_unit", "type": "text",
+      "x": 40, "y": 306, "w": 420, "h": 28, "z": 10,
+      "text": "ppm 浓度实时值", "font": 16,
+      "pco": 9885, "bco": 2212,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 7, "name": "p0_badge_peak", "type": "button",
+      "x": 60, "y": 372, "w": 150, "h": 32, "z": 10,
+      "text": "峰值保持 ON", "font": 16,
+      "pco": 131, "bco": 9885, "radius": 16,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 8, "name": "p0_badge_avg", "type": "button",
+      "x": 222, "y": 372, "w": 150, "h": 32, "z": 10,
+      "text": "均值 0.00", "font": 16,
+      "pco": 31893, "bco": 2212, "radius": 16,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 9, "name": "p0_strip", "type": "progress",
+      "x": 40, "y": 470, "w": 440, "h": 8, "z": 10,
+      "pco": 9771, "bco": 2212,
+      "val": 0, "min": 0, "max": 1000,
+      "note": "报警色条：MCU 按报警等级改 pco（9771 绿 / 62689 橙 / 59944 红）",
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 10, "name": "p0_panel_peak", "type": "button",
+      "x": 520, "y": 96, "w": 460, "h": 150, "z": 0,
+      "bco": 4359, "radius": 18,
+      "role": "decor_panel",
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 11, "name": "p0_peaklab", "type": "text",
+      "x": 560, "y": 116, "w": 240, "h": 24, "z": 10,
+      "text": "PEAK · 峰值浓度", "font": 16,
+      "pco": 31893, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 12, "name": "p0_peak", "type": "number",
+      "x": 560, "y": 146, "w": 380, "h": 64, "z": 10,
+      "font": 32,
+      "pco": 62689, "bco": 4359,
+      "vvs": 2, "val": 0, "min": 0, "max": 1000,
+      "unit": "ppm", "data_source": "peak_ppm",
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 13, "name": "p0_reset", "type": "button",
+      "x": 560, "y": 214, "w": 140, "h": 30, "z": 10,
+      "text": "重置峰值", "font": 16,
+      "pco": 59230, "bco": 2212, "radius": 10,
+      "touch": true,
+      "events": {
+        "rel": "p0_reset_rel"
+      },
+      "note": "原稿文字含 ↺ 符号（GB2312 无此字形），已去除；如确需图标请用图片资源"
+    },
+    {
+      "id": 14, "name": "p0_panel_st", "type": "button",
+      "x": 520, "y": 262, "w": 460, "h": 250, "z": 0,
+      "bco": 4359, "radius": 18,
+      "role": "decor_panel",
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 15, "name": "p0_t90", "type": "text",
+      "x": 560, "y": 284, "w": 380, "h": 24, "z": 10,
+      "text": "响应时间 T90  ≈ 4.2 s", "font": 16,
+      "pco": 59230, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 16, "name": "p0_flow", "type": "text",
+      "x": 560, "y": 330, "w": 380, "h": 24, "z": 10,
+      "text": "当前流量  0.5 L/min", "font": 16,
+      "pco": 59230, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 17, "name": "p0_temp", "type": "text",
+      "x": 560, "y": 376, "w": 380, "h": 24, "z": 10,
+      "text": "探头温度  28.6 ℃", "font": 16,
+      "pco": 59230, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 18, "name": "p0_thr", "type": "text",
+      "x": 560, "y": 422, "w": 380, "h": 24, "z": 10,
+      "text": "报警阈值  500 ppm", "font": 16,
+      "pco": 59230, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 19, "name": "p0_nav_home", "type": "button",
+      "x": 0, "y": 534, "w": 256, "h": 52, "z": 20,
+      "text": "主页", "font": 24,
+      "pco": 59230, "bco": 3222,
+      "touch": true,
+      "events": {"rel": "p0_nav_home_rel"}
+    },
+    {
+      "id": 20, "name": "p0_nav_set", "type": "button",
+      "x": 256, "y": 534, "w": 256, "h": 52, "z": 20,
+      "text": "设置", "font": 24,
+      "pco": 59230, "bco": 2212,
+      "touch": true,
+      "events": {"rel": "p0_nav_set_rel"}
+    },
+    {
+      "id": 21, "name": "p0_nav_curve", "type": "button",
+      "x": 512, "y": 534, "w": 256, "h": 52, "z": 20,
+      "text": "历史曲线", "font": 24,
+      "pco": 59230, "bco": 2212,
+      "touch": true,
+      "events": {"rel": "p0_nav_curve_rel"}
+    },
+    {
+      "id": 22, "name": "p0_nav_about", "type": "button",
+      "x": 768, "y": 534, "w": 256, "h": 52, "z": 20,
+      "text": "关于", "font": 24,
+      "pco": 59230, "bco": 2212,
+      "touch": true,
+      "events": {"rel": "p0_nav_about_rel"}
+    }
+  ]
+}

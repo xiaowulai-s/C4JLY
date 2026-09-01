@@ -1,0 +1,62 @@
+{
+  "alarm_config": {
+    "source": "用户阈值（搭建清单：高报默认 500ppm，低报默认 100ppm）+ 角色 §14 分级示例，用户未另行定义时采用",
+    "levels": [
+      {
+        "id": "NORMAL",
+        "name": "正常",
+        "range_ppm": "0 ~ <100",
+        "color": {"hex": "#22C55E", "rgb565": 9771},
+        "strip_pco": 9771,
+        "beep": "无",
+        "led": "绿灯常亮",
+        "popup": "无",
+        "history": "不记录"
+      },
+      {
+        "id": "WARNING",
+        "name": "预警",
+        "range_ppm": "100 ~ <500",
+        "color": {"hex": "#F59E0B", "rgb565": 62689},
+        "strip_pco": 62689,
+        "beep": "慢速间歇（如 1Hz）",
+        "led": "橙灯慢闪",
+        "popup": "无（主页色条变色提示）",
+        "history": "MCU 记录至 W25Q16"
+      },
+      {
+        "id": "ALARM",
+        "name": "报警",
+        "range_ppm": "500 ~ <1000",
+        "color": {"hex": "#EF4444", "rgb565": 59944},
+        "strip_pco": 59944,
+        "beep": "快速间歇（如 4Hz）",
+        "led": "红灯快闪",
+        "popup": "无（不占用弹窗页；色条+蜂鸣已足够醒目）",
+        "history": "MCU 记录至 W25Q16"
+      },
+      {
+        "id": "OVER_RANGE",
+        "name": "超量程",
+        "range_ppm": ">=1000",
+        "color": {"hex": "#EF4444", "rgb565": 59944},
+        "strip_pco": 59944,
+        "beep": "连续长鸣",
+        "led": "红灯常亮",
+        "popup": "无",
+        "history": "MCU 记录至 W25Q16 并标记溢出"
+      }
+    ],
+    "trigger_rule": "MCU 按 c4f7n_ppm 对比 threshold_hi(500)/threshold_lo(100) 判定等级；报警解除条件 = 浓度回落至 < 低报阈值(100)",
+    "hmi_display": {
+      "p0_strip.pco": "9771/62689/59944 三色切换",
+      "beep": "由 MCU 按 buzzer_en 与等级下发 beep n",
+      "alarm_history_page": "未规划（用户 4 页方案），历史记录在 MCU 端 W25Q16，经曲线页导出 CSV 查看"
+    },
+    "power_on_default": {
+      "alarm_status": "NORMAL",
+      "strip_pco": 9771,
+      "note": "上电后 MCU 立即下发当前浓度与等级，避免残留红色报警态"
+    }
+  }
+}

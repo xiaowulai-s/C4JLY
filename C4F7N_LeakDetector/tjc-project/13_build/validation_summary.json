@@ -1,0 +1,26 @@
+{
+  "generated_at": "2026-08-24 16:32:19",
+  "device": "X5-070 系列（7.0寸）",
+  "resolution": "1024x600",
+  "pages": 4,
+  "components": 118,
+  "errors": 0,
+  "warnings": 32,
+  "auto_fix_rounds": 1,
+  "checks": {
+    "设备型号": "X5-070 系列 7.0寸",
+    "分辨率": "1024x600",
+    "页面数量": 4,
+    "页面ID唯一": "PASS",
+    "控件ID唯一": "PASS",
+    "控件名称唯一": "PASS",
+    "无越界": "PASS",
+    "无意外重叠": "PASS",
+    "脚本引用有效": "PASS",
+    "页面跳转有效": "PASS",
+    "变量绑定完整": "PASS",
+    "字符集(非GB2312)": "PASS",
+    "触摸尺寸建议": "WARN"
+  },
+  "build_status": "NOT_COMPILED（本环境无 USART HMI 官方工具链，.tft 需人工编译）"
+}

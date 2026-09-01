@@ -1,0 +1,39 @@
+// ============================================================
+// C4F7N · page3 关于页事件脚本 (p3_about.hmi)
+// 粘贴位置：USART HMI → 对应控件 → 事件(rel) 输入框
+// 本页为纯展示页，仅底部导航有事件。
+// ============================================================
+
+// ---------- 底部导航（4 按钮 rel，同 p0 模式） ----------
+// p3_nav_home.rel：
+page 0
+p3_nav_home.bco=2212
+p3_nav_set.bco=2212
+p3_nav_curve.bco=2212
+p3_nav_about.bco=2212
+
+// p3_nav_set.rel：
+page 1
+p3_nav_home.bco=2212
+p3_nav_set.bco=2212
+p3_nav_curve.bco=2212
+p3_nav_about.bco=2212
+
+// p3_nav_curve.rel：
+page 2
+p3_nav_home.bco=2212
+p3_nav_set.bco=2212
+p3_nav_curve.bco=2212
+p3_nav_about.bco=2212
+
+// p3_nav_about.rel：
+page 3
+p3_nav_home.bco=2212
+p3_nav_set.bco=2212
+p3_nav_curve.bco=2212
+p3_nav_about.bco=3222
+
+// ---------- MCU 动态更新本页字段 ----------
+// p3_probe_st.txt  探头连接状态（断开改 pco=59944）
+// p3_probe_sub.txt RS485 通信状态 + 传感器温度
+// p3_bat.txt       电池电量

@@ -1,0 +1,68 @@
+{
+  "protocol": {
+    "name": "C4F7N_HMI_UART",
+    "version": "1.0",
+    "authority": "用户协议（C4F7N_HMI_搭建清单.md §7）为最高优先级，本文件仅结构化描述，不修改协议",
+    "uart": {
+      "baudrate": 115200,
+      "data_bits": 8,
+      "stop_bits": 1,
+      "parity": "none",
+      "flow_control": "none",
+      "stm32_peripheral": "USART1 (PA9 TX / PA10 RX)"
+    },
+    "packet_format": {
+      "type": "Nextion 兼容文本指令",
+      "mcu_to_hmi": {
+        "terminator": [255, 255, 255],
+        "terminator_hex": "0xFF 0xFF 0xFF",
+        "encoding": "ASCII 指令 + GB2312 中文文本",
+        "examples": [
+          "page 0",
+          "p0_conc.val=42",
+          "p0_peak.val=123",
+          "p0_strip.pco=62689",
+          "add 0,128",
+          "cls 0",
+          "dim=70",
+          "beep 1",
+          "p0_badge_avg.txt=\"均值 0.42\""
+        ]
+      },
+      "hmi_to_mcu": {
+        "terminator": "无",
+        "encoding": "printh 单字节命令码 (TJC 原生; print/prints长关键字受15B脚本行限制不可用)",
+        "command_codes": [
+          {"code": "0x01", "meaning": "重置峰值"},
+          {"code": "0x11", "meaning": "高报阈值变更(值由MCU get h.val回读)"},
+          {"code": "0x12", "meaning": "低报阈值变更(值由MCU get l.val回读)"},
+          {"code": "0x13", "meaning": "单位切换 ppm↔g/年"},
+          {"code": "0x14", "meaning": "蜂鸣器开关"},
+          {"code": "0x15", "meaning": "零点标定"},
+          {"code": "0x16", "meaning": "量程标定"},
+          {"code": "0x17", "meaning": "恢复出厂"},
+          {"code": "0x21", "meaning": "曲线窗口10分钟"},
+          {"code": "0x22", "meaning": "曲线窗口1小时"},
+          {"code": "0x23", "meaning": "曲线窗口24小时"},
+          {"code": "0x24", "meaning": "导出CSV(USB CDC)"}
+        ]
+      }
+    },
+    "checksum": "none（用户协议未定义校验和，沿用文本指令协议）",
+    "timeout": {"mcu_rx_timeout_ms": 50, "mcu_tx_interval_ms": 20, "note": "MCU 侧建议值，串口屏无重发机制"},
+    "retry": {"note": "文本指令无 ACK；关键状态（阈值/标定完成）由 MCU 回发控件值或文案实现确认"}
+  },
+  "optional_strict_frame": {
+    "enabled": false,
+    "reason": "用户现有协议为 Nextion 兼容文本指令；如需更强健帧结构可在 v2 增加 STX/LEN/CRC，本次不引入",
+    "proposal": {
+      "header": "0xAA 0x55",
+      "address": "0x01",
+      "command": "0x10(读) 0x20(写)",
+      "length": "1B",
+      "data": "N B",
+      "crc16": "2B (Modbus 风格)",
+      "tail": "0x0D 0x0A"
+    }
+  }
+}

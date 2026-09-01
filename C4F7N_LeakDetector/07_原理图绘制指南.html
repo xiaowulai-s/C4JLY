@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C4F7N 检漏仪 · 原理图绘制操作指南</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f5f5f3;color:#2c2c2a;line-height:1.6;font-size:14px}
+.container{max-width:900px;margin:0 auto;padding:20px}
+h1{font-size:20px;font-weight:600;text-align:center;margin:20px 0 8px;color:#085041}
+.subtitle{text-align:center;color:#888;font-size:13px;margin-bottom:24px}
+.path-card{border:2px solid;border-radius:12px;padding:16px 20px;margin-bottom:16px;cursor:pointer;transition:all .2s}
+.path-a{border-color:#1D9E75;background:#E1F5EE}
+.path-b{border-color:#378ADD;background:#E6F1FB}
+.path-card:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.08)}
+.path-card h2{font-size:15px;font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.path-a h2{color:#085041}
+.path-b h2{color:#0C447C}
+.path-card p{font-size:13px;color:#5f5e5a;margin-bottom:8px}
+.path-card .steps{font-size:13px;color:#444;line-height:1.8}
+.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:500;margin-left:8px}
+.badge-recommend{background:#1D9E75;color:#fff}
+.badge-alt{background:#378ADD;color:#fff}
+.section{margin:24px 0 16px;padding:16px 20px;background:#fff;border:1px solid #e0ddd5;border-radius:12px}
+.section h2{font-size:16px;font-weight:600;margin-bottom:12px;color:#2c2c2a;padding-bottom:8px;border-bottom:1px solid #eee}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0}
+th{background:#f8f7f4;text-align:left;padding:8px 10px;font-weight:600;color:#5f5e5a;border:1px solid #e0ddd5}
+td{padding:8px 10px;border:1px solid #e8e6e0;vertical-align:top}
+td:first-child{font-weight:500;white-space:nowrap}
+.warn{background:#FCEBEB;border:1px solid #E24B4A;border-radius:8px;padding:12px 16px;margin:12px 0}
+.warn-title{color:#A32D2D;font-weight:600;font-size:14px;margin-bottom:6px}
+.warn p{color:#791F1F;font-size:13px}
+.shortcut-table td:first-child{width:140px;color:#0C447C;font-weight:600}
+.step-list{counter-reset:step;list-style:none;padding:0}
+.step-list li{counter-increment:step;padding:10px 0 10px 40px;position:relative;border-bottom:1px solid #f0eee8}
+.step-list li:last-child{border-bottom:none}
+.step-list li::before{content:counter(step);position:absolute;left:0;top:10px;width:28px;height:28px;border-radius:50%;background:#085041;color:#fff;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center}
+.step-list .module{font-weight:600;color:#085041}
+.step-list .detail{color:#5f5e5a;font-size:12px;margin-top:4px}
+.step-list .fix{color:#A32D2D;font-weight:500}
+.nav-bar{position:sticky;top:0;background:#fff;border-bottom:1px solid #e0ddd5;padding:10px 20px;margin:-20px -20px 20px;display:flex;gap:12px;flex-wrap:wrap;z-index:100;border-radius:12px 12px 0 0}
+.nav-bar a{text-decoration:none;font-size:12px;color:#185FA5;padding:4px 10px;border-radius:4px;background:#E6F1FB}
+.nav-bar a:hover{background:#B5D4F4}
+.note{background:#FAEEDA;border:1px solid #EF9F27;border-radius:8px;padding:10px 14px;margin:8px 0;font-size:12px;color:#633806}
+details summary{cursor:pointer;font-weight:600;color:#185FA5;padding:8px 0;font-size:14px}
+details{padding:8px 0}
+code{background:#f5f5f3;padding:2px 6px;border-radius:3px;font-size:12px;color:#A32D2D;font-family:"SF Mono",Consolas,monospace}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="nav-bar">
+<a href="#path">路径选择</a>
+<a href="#shortcuts">快捷键</a>
+<a href="#steps">12步流程</a>
+<a href="#pins">引脚对照</a>
+<a href="#fixes">修正点</a>
+<a href="#erc">ERC检查</a>
+</div>
+
+<h1>C4F7N 检漏仪 · 立创EDA专业版原理图绘制指南</h1>
+<p class="subtitle">56 器件 · 4 模块 · 49 网络 · 配合 04_连接清单.md 使用</p>
+
+<div id="path">
+<div class="path-card path-a" onclick="document.getElementById('path-a-detail').style.display=document.getElementById('path-a-detail').style.display==='block'?'none':'block'">
+<h2>路径 A：直接导入 .epro 文件<span class="badge badge-recommend">推荐</span></h2>
+<p>已有 <code>C4F7N_LeakDetector.epro</code> 专业版工程文件 + <code>.elibz</code> 库包，可直接导入后检查修正。</p>
+<div id="path-a-detail" style="display:none;margin-top:12px">
+<div class="steps">
+1. 打开立创EDA专业版（在线版 lceda.cn/pro 或客户端）<br>
+2. 文件 → 导入 → 选择 <code>C4F7N_LeakDetector.elibz</code> 导入元件库<br>
+3. 文件 → 打开项目 → 选择 <code>C4F7N_LeakDetector.epro</code><br>
+4. 打开原理图 → 检查两个修正点是否正确（见下方）<br>
+5. 运行 ERC → 修复报错 → 导出 BOM
+</div>
+</div>
+</div>
+
+<div class="path-card path-b" onclick="document.getElementById('path-b-detail').style.display=document.getElementById('path-b-detail').style.display==='block'?'none':'block'">
+<h2>路径 B：从零手动重建<span class="badge badge-alt">学习用</span></h2>
+<p>新建工程 → 按 12 步流程逐模块放置器件和连线。适合深入理解电路。</p>
+<div id="path-b-detail" style="display:none;margin-top:12px">
+<div class="steps">
+1. 新建工程 <code>C4F7N_LeakDetector</code> → 新建原理图<br>
+2. 先导入 <code>.elibz</code> 库包（含自定义符号）<br>
+3. 按 12 步流程操作（见下方）<br>
+4. 每完成一个模块立即连线 + 放网络标签<br>
+5. 最后统一检查 5V/3V3/GND 总线连通性
+</div>
+</div>
+</div>
+</div>
+
+<div class="section" id="shortcuts">
+<h2>立创EDA专业版 · 常用快捷键</h2>
+<div class="note">专业版与标准版快捷键有差异，下表为专业版专用。</div>
+<table class="shortcut-table">
+<tr><th>操作</th><th>快捷键</th><th>说明</th></tr>
+<tr><td>放置导线</td><td><code>W</code></td><td>标准版是 P，专业版改为 W</td></tr>
+<tr><td>网络标签</td><td><code>N</code></td><td>给导线命名，同名即连通</td></tr>
+<tr><td>放置元件</td><td><code>Shift+F</code></td><td>从元件库搜索并放置</td></tr>
+<tr><td>电源符号</td><td><code>Shift+G</code></td><td>GND/VCC/3V3 等电源端口</td></tr>
+<tr><td>总线</td><td><code>B</code></td><td>绘制总线（可选）</td></tr>
+<tr><td> ERC 检查</td><td><code>Shift+E</code></td><td>电气规则检查</td></tr>
+<tr><td>旋转元件</td><td><code>R</code> / <code>Shift+R</code></td><td>90°/ 逆时针</td></tr>
+<tr><td>翻转</td><td><code>F</code></td><td>水平翻转</td></tr>
+<tr><td>复制</td><td><code>Shift+D</code></td><td>复制选中元件</td></tr>
+<tr><td>删除</td><td><code>Delete</code></td><td>删除选中对象</td></tr>
+<tr><td>撤销/重做</td><td><code>Ctrl+Z</code> / <code>Ctrl+Y</code></td><td>—</td></tr>
+<tr><td>保存</td><td><code>Ctrl+S</code></td><td>云端自动保存</td></tr>
+<tr><td>放大/缩小</td><td>滚轮</td><td>Ctrl+滚轮平移</td></tr>
+</table>
+</div>
+
+<div class="warn">
+<div class="warn-title">两处必须修正的设计缺陷</div>
+<p><strong>修正点 1：</strong>U1 TP4056 的 CE 引脚(2) 必须接 <code>VBUS_F</code>（USB 输入端），<strong>不能接 5V</strong>。<br>
+原因：电池耗尽时 5V 总线无法建立 → TP4056 CE 为低 → 充电功能失效。</p>
+<p><strong>修正点 2：</strong>U2 MT3608 的 EN 引脚(4) 必须接 <code>BAT</code>（电池端），<strong>不能接 5V</code>。<br>
+原因：升压输出未建立时 EN 为低 → MT3608 无法自启动。</p>
+</div>
+
+<div class="section" id="steps">
+<h2>12 步绘制流程（每步 = 一个模块）</h2>
+<div class="note">原则：每完成一个模块立即连线 + 放网络标签。不要全部放完再连。</div>
+<ol class="step-list">
+<li>
+<span class="module">电源-充电模块</span>（4 器件）<br>
+放置：J1 Type-C · F1 保险丝 · U1 TP4056 · BT1 电池座<br>
+<span class="detail">网络：VBUS → F1 → VBUS_F → U1.VCC · U1.BAT → BT1 · GND</span><br>
+<span class="fix">U1.CE(2) → VBUS_F（修正点1）</span>
+</li>
+<li>
+<span class="module">电源-升压模块</span>（7 器件）<br>
+放置：U2 MT3608 · L1 10uH · D2 SS34 · R2 100k · R3 20k · C1 · C2<br>
+<span class="detail">网络：BAT→U2.VIN · BAT→L1→U2.SW · SW→D2→VOUT5 · R2/R3分压→FB</span><br>
+<span class="fix">U2.EN(4) → BAT（修正点2）</span>
+</li>
+<li>
+<span class="module">电源-LDO 模块</span>（3 器件）<br>
+放置：U3 AMS1117-3.3 · C3 10uF · C4 10uF<br>
+<span class="detail">网络：VOUT5→U3.VIN · U3.VOUT→3V3 · C3/C4 滤波→GND</span>
+</li>
+<li>
+<span class="module">去耦电容 + CC 电阻</span>（7 器件）<br>
+放置：C5/C6/C9/C10/C13 100nF · R12/R13 5.1k<br>
+<span class="detail">C5/C6/C9/C10→3V3&GND · C13→5V&GND · R12:CC1→GND · R13:CC2→GND</span>
+</li>
+<li>
+<span class="module">MCU 核心</span>（U4 STM32F103C8T6）<br>
+放置：U4 → 立创搜 "STM32F103C8T6" 直接出 LQFP-48 符号<br>
+<span class="detail">VDD/VDDA/VBAT→3V3 · VSS→GND · NRST→R5 10k上拉+SW1 · BOOT0→R6下拉</span>
+</li>
+<li>
+<span class="module">MCU 时钟/调试</span>（5 器件）<br>
+放置：Y1 8MHz · R4 1M · C7/C8 20pF · J6 排针1x4<br>
+<span class="detail">PD0↔Y1.X1 · PD1↔Y1.X2 · C7:OSC_IN→GND · C8:OSC_OUT→GND · J6:3V3/SWDIO/SWCLK/GND</span>
+</li>
+<li>
+<span class="module">电池采样</span>（3 器件）<br>
+放置：R22/R23 100k · C14 100nF<br>
+<span class="detail">BAT→R22→VBAT_SENSE→R23→GND · C14滤波</span>
+</li>
+<li>
+<span class="module">串口屏接口</span>（J2）<br>
+放置：J2 排针1x4<br>
+<span class="detail">5V/GND/LCD_TX(PA9)/LCD_RX(PA10)</span>
+</li>
+<li>
+<span class="module">RS485 手柄接口</span>（3 器件）<br>
+放置：U5 MAX3485 · R9 120Ω · J3 GX12 4芯<br>
+<span class="detail">RO→RS485_RX(PA3) · DI→RS485_TX(PA2) · /RE&DE→RS485_DE · A/B之间R9 · J3:5V/GND/A/B</span>
+</li>
+<li>
+<span class="module">Flash 存储</span>（U6）<br>
+放置：U6 W25Q16<br>
+<span class="detail">/CS→SPI_CS(PA4) · DO→MISO(PA6) · DI→MOSI(PA7) · CLK→SCK(PA5) · /WP,/HOLD,VCC→3V3</span>
+</li>
+<li>
+<span class="module">泵驱动</span>（4 器件）<br>
+放置：Q1 SI2302 · R15 100k · D3 1N5819 · J4 XH2.54 2P<br>
+<span class="detail">PA0→Q1.G · Q1.D→PUMP_N · Q1.S→GND · J4:VOUT5/PUMP_N · D3续流</span>
+</li>
+<li>
+<span class="module">蜂鸣器/LED/按键</span>（10 器件）<br>
+放置：Q2 MMBT2222 · R16 1k · BZ1 · R17/R18 330Ω · LED1红 · LED2绿 · SW2/SW3/SW4<br>
+<span class="detail">PA1→R16→Q2.B · Q2.C→BZ1 · PA15→R17→LED1红 · PB0→R18→LED2绿 · PB3/PB4/PB5→SW2/3/4→GND</span>
+</li>
+</ol>
+</div>
+
+<div class="section" id="pins">
+<h2>STM32F103C8T6 引脚速查（28脚已分配）</h2>
+<table>
+<tr><th>引脚</th><th>网络名</th><th>外设</th><th>方向</th></tr>
+<tr><td>PA0</td><td>PUMP_CTRL</td><td>泵 PWM</td><td>输出</td></tr>
+<tr><td>PA1</td><td>BEEP</td><td>蜂鸣器</td><td>输出</td></tr>
+<tr><td>PA2</td><td>RS485_TX</td><td>USART2 TX</td><td>AF</td></tr>
+<tr><td>PA3</td><td>RS485_RX</td><td>USART2 RX</td><td>AF</td></tr>
+<tr><td>PA4</td><td>SPI_CS</td><td>SPI1 CS</td><td>输出</td></tr>
+<tr><td>PA5</td><td>SPI_SCK</td><td>SPI1 SCK</td><td>AF</td></tr>
+<tr><td>PA6</td><td>SPI_MISO</td><td>SPI1 MISO</td><td>AF</td></tr>
+<tr><td>PA7</td><td>SPI_MOSI</td><td>SPI1 MOSI</td><td>AF</td></tr>
+<tr><td>PA9</td><td>LCD_TX</td><td>USART1 TX</td><td>AF</td></tr>
+<tr><td>PA10</td><td>LCD_RX</td><td>USART1 RX</td><td>AF</td></tr>
+<tr><td>PA11</td><td>USB_DM</td><td>USB D-</td><td>AF</td></tr>
+<tr><td>PA12</td><td>USB_DP</td><td>USB D+</td><td>AF</td></tr>
+<tr><td>PA13</td><td>SWDIO</td><td>SWD</td><td>AF</td></tr>
+<tr><td>PA14</td><td>SWCLK</td><td>SWD</td><td>AF</td></tr>
+<tr><td>PA15</td><td>LED_RED</td><td>报警LED</td><td>输出</td></tr>
+<tr><td>PB0</td><td>LED_GREEN</td><td>电源LED</td><td>输出</td></tr>
+<tr><td>PB1</td><td>VBAT_SENSE</td><td>ADC</td><td>输入</td></tr>
+<tr><td>PB3</td><td>KEY1</td><td>设置键</td><td>输入</td></tr>
+<tr><td>PB4</td><td>KEY2</td><td>上键</td><td>输入</td></tr>
+<tr><td>PB5</td><td>KEY3</td><td>下键</td><td>输入</td></tr>
+<tr><td>PD0</td><td>OSC_IN</td><td>HSE</td><td>AF</td></tr>
+<tr><td>PD1</td><td>OSC_OUT</td><td>HSE</td><td>AF</td></tr>
+<tr><td>NRST</td><td>RST</td><td>复位</td><td>输入</td></tr>
+<tr><td>BOOT0</td><td>BOOT0</td><td>启动模式</td><td>输入</td></tr>
+</table>
+</div>
+
+<div class="section" id="erc">
+<h2>完成后的 ERC 检查清单</h2>
+<table>
+<tr><th>检查项</th><th>方法</th><th>标准</th></tr>
+<tr><td>电气规则 ERC</td><td>设计 → 检查 → ERC（<code>Shift+E</code>）</td><td>0 错误</td></tr>
+<tr><td>网络连通性</td><td>点击网络标签 → 高亮整条网络</td><td>5V/3V3/GND 连通所有器件</td></tr>
+<tr><td>位号完整性</td><td>设计 → 器件管理</td><td>无重复位号</td></tr>
+<tr><td>修正点 1</td><td>U1.CE(2) 网络标签</td><td>= VBUS_F</td></tr>
+<tr><td>修正点 2</td><td>U2.EN(4) 网络标签</td><td>= BAT</td></tr>
+<tr><td>封装一致性</td><td>每个器件已选立创封装</td><td>56/56 器件有封装</td></tr>
+</table>
+</div>
+
+<details>
+<summary>49 个网络名速查（点击展开）</summary>
+<div style="margin-top:8px;font-size:12px;color:#5f5e5a;line-height:1.8">
+3V3 · 5V · BAT · BEEP · BEEP_B · BOOT0 · BZ_C · CC1 · CC2 · CHRG · EN · FB · GND · KEY1 · KEY2 · KEY3 · LCD_RX · LCD_TX · LED_A · LED_GREEN · LED_G_A · LED_RED · OSC_IN · OSC_OUT · PROG · PUMP_CTRL · PUMP_N · RS485_A · RS485_B · RS485_DE · RS485_RX · RS485_TX · RST · SPI_CS · SPI_MISO · SPI_MOSI · SPI_SCK · STDBY_NC · SW · SWCLK · SWDIO · TEMP_NC · USB_DM · USB_DP · VBAT_SENSE · VBUS · VBUS_F · VOUT5
+</div>
+</details>
+
+<div style="text-align:center;margin:24px 0 16px;padding:16px;background:#E1F5EE;border-radius:12px">
+<p style="font-size:13px;color:#085041;font-weight:500">建议分 2 次完成</p>
+<p style="font-size:12px;color:#5f5e5a">第1次：电源区(1-4步) + MCU区(5-7步) → 保存 → 休息<br>第2次：接口/驱动区(8-12步) → ERC → 导出BOM</p>
+</div>
+
+<div style="text-align:center;font-size:11px;color:#888;padding:8px">
+C4F7N Portable Leak Detector · Schematic Drawing Guide · 2026-08-21<br>
+配合文件：04_连接清单.md · 05_手动重建指引.md · 03_立创元件对照表.md
+</div>
+</div>
+</body>
+</html>

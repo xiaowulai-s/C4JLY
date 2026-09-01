@@ -1,0 +1,22 @@
+{
+  "template": "C4F7N\\base.HMI",
+  "pageSeed": "C4F7N/base_pas/0.pa",
+  "seeds": {
+    "btn53": { "file": "seeds/tpl_am1_pas/0.pa", "objname": "bt1" },
+    "text": { "file": "seeds/tpl_s5/0.pa", "objname": "t0" }
+  },
+  "pages": [
+    {
+      "file": "0.pa",
+      "name": "test",
+      "pageObj": { "x": 0, "y": 0, "w": 1024, "h": 600, "bco": 2212 },
+      "widgets": [
+        { "seed": "btn53", "objname": "b1", "set": { "x": 100, "y": 100, "w": 200, "h": 60, "font": 0, "txt": "test" },
+          "codes": { "up": "print\"HELLO\"" } }
+      ]
+    },
+    { "file": "1.pa", "name": "p1", "pageObj": { "x": 0, "y": 0, "w": 1024, "h": 600, "bco": 2212 }, "widgets": [] },
+    { "file": "2.pa", "name": "p2", "pageObj": { "x": 0, "y": 0, "w": 1024, "h": 600, "bco": 2212 }, "widgets": [] },
+    { "file": "3.pa", "name": "p3", "pageObj": { "x": 0, "y": 0, "w": 1024, "h": 600, "bco": 2212 }, "widgets": [] }
+  ]
+}

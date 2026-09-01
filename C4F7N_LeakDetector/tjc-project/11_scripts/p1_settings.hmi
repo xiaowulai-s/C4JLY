@@ -1,0 +1,115 @@
+// ============================================================
+// C4F7N · page1 设置页事件脚本 (p1_settings.hmi)
+// 粘贴位置：USART HMI → 对应控件 → 事件(rel/up) 输入框
+// ============================================================
+
+// ---------- 高报阈值 步进 rel ----------
+// p1_hi_plus.rel：
+p1_hi_val.val=p1_hi_val.val+50
+if(p1_hi_val.val>1000)
+  p1_hi_val.val=1000
+endif
+print "THR:HI:"
+// [A] 若固件不支持 print 变量值，改发下面一行（并注释上面 print "THR:HI:"）：
+// print "THR:HI:CHANGED"   （MCU 收到后回读 p1_hi_val.val）
+print p1_hi_val.val
+
+// p1_hi_minus.rel：
+p1_hi_val.val=p1_hi_val.val-50
+if(p1_hi_val.val<100)
+  p1_hi_val.val=100
+endif
+print "THR:HI:"
+print p1_hi_val.val
+
+// ---------- 低报阈值 步进 rel（步进 10，范围 10~1000） ----------
+// p1_lo_plus.rel：
+p1_lo_val.val=p1_lo_val.val+10
+if(p1_lo_val.val>1000)
+  p1_lo_val.val=1000
+endif
+print "THR:LO:"
+print p1_lo_val.val
+
+// p1_lo_minus.rel：
+p1_lo_val.val=p1_lo_val.val-10
+if(p1_lo_val.val<10)
+  p1_lo_val.val=10
+endif
+print "THR:LO:"
+print p1_lo_val.val
+
+// ---------- 单位切换 rel ----------
+// p1_unit_btn.rel：
+if(p1_unit_btn.txt=="ppm")
+  p1_unit_btn.txt="g/年"
+else
+  p1_unit_btn.txt="ppm"
+endif
+print "UNIT:TOGGLE"
+
+// ---------- 蜂鸣器开关 rel ----------
+// p1_buz_btn.rel：
+if(p1_buz_btn.txt=="开")
+  p1_buz_btn.txt="关"
+  p1_buz_btn.bco=2212
+else
+  p1_buz_btn.txt="开"
+  p1_buz_btn.bco=9771
+endif
+print "BUZ:TOGGLE"
+
+// ---------- 背光亮度 滑动条 up（拖动结束） ----------
+// p1_dim.up：
+dim=p1_dim.val
+p1_dim_val.val=p1_dim.val
+
+// 说明：背光值已用“数字控件+静态%”方案，避免 txt 字符串
+// 拼接语法（风险项 [B]）。如需 MCU 记忆背光，可加：
+// print "DIM:"
+// print p1_dim.val
+
+// ---------- 标定按钮 rel ----------
+// p1_cal0_btn.rel（零点标定）：
+p1_cal0_btn.txt="执行中…"
+print "CAL:ZERO"
+
+// p1_cal1_btn.rel（量程标定）：
+p1_cal1_btn.txt="执行中…"
+print "CAL:SPAN"
+
+// p1_fac_btn.rel（恢复出厂）：
+print "CAL:FACTORY"
+
+// 说明：标定完成后由 MCU 回发
+// p1_cal0_btn.txt="执行" / p1_cal1_btn.txt="执行"
+// 复位按钮文字，并同步阈值/单位/蜂鸣器等参数。
+
+// ---------- 底部导航（4 按钮 rel，同 p0 模式） ----------
+// p1_nav_home.rel：
+page 0
+p1_nav_home.bco=2212
+p1_nav_set.bco=2212
+p1_nav_curve.bco=2212
+p1_nav_about.bco=2212
+
+// p1_nav_set.rel：
+page 1
+p1_nav_home.bco=2212
+p1_nav_set.bco=3222
+p1_nav_curve.bco=2212
+p1_nav_about.bco=2212
+
+// p1_nav_curve.rel：
+page 2
+p1_nav_home.bco=2212
+p1_nav_set.bco=2212
+p1_nav_curve.bco=3222
+p1_nav_about.bco=2212
+
+// p1_nav_about.rel：
+page 3
+p1_nav_home.bco=2212
+p1_nav_set.bco=2212
+p1_nav_curve.bco=2212
+p1_nav_about.bco=3222

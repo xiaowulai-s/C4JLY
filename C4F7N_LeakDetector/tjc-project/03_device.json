@@ -1,0 +1,47 @@
+{
+  "device_profile": {
+    "brand": "淘晶驰 TJC",
+    "platform": "X5",
+    "model": "X5-070 系列（7.0寸）",
+    "model_note": "以实际购买型号为准（SGprj.hmi 实测 SCREENDSIZE=1024X600，SPADDRESS=5000，PICFIX=1）",
+    "width": 1024,
+    "height": 600,
+    "orientation": "landscape",
+    "color_depth": "RGB565 (16bit)",
+    "flash_mb": 16,
+    "flash_note": "X5 系列典型值，编译前在 USART HMI 工程设置中核对实际容量",
+    "ram_note": "以实际型号为准；曲线 add 喂点/文本刷新应控制在固件可承受频率",
+    "usart_hmi_version": "X5 平台（淘晶驰官方最新版 USART HMI 上位机）",
+    "baudrate": 115200
+  },
+  "supported_widgets": {
+    "used": ["text", "number", "button", "progress", "wave", "hscroll"],
+    "available_but_unused": ["picture", "gauge", "slider_v", "timer(tm)"],
+    "not_used_reason": "其余控件类型未使用，避免资源浪费与刷新负担"
+  },
+  "script_features": {
+    "confirmed_supported": [
+      "page N",
+      "obj.val / obj.txt / obj.bco / obj.pco / obj.font / obj.vis 属性读写",
+      "if(cond) ... else ... endif",
+      "print \"text\"",
+      "cls n",
+      "add ch,val",
+      "dim=n",
+      "beep n"
+    ],
+    "uncertain": [
+      {"feature": "print 输出变量数值 (print p1_hi_val.val)", "risk": "固件版本相关；若不支持则改发 print \"THR:HI:CHANGED\" 由 MCU 回读", "action": "脚本中已给双方案注释"},
+      {"feature": "txt 字符串拼接 (txt=..+\"%\")", "risk": "旧固件不支持拼接", "action": "已规避：背光值改用数字控件 + 静态 % 文本"},
+      {"feature": "radius 圆角属性", "risk": "X5 部分固件可能不渲染圆角", "action": "保留属性，不依赖其视觉效果"},
+      {"feature": "beep n 蜂鸣", "risk": "需在真机确认蜂鸣时长参数", "action": "仅报警联动时由 MCU 下发"}
+    ],
+    "forbidden": ["Web JS", "Python", "C++", "伪代码"]
+  },
+  "resource_limits": {
+    "max_components_note": "以 USART HMI 编辑器实际提示为准（本项目共 4 页 70+ 控件，X5 平台无压力）",
+    "font_flash_note": "GB2312 全字库 48/64 号中文占用大；主页大数字建议用 ASCII 数字字库（font_num_48），中文大字仅在 16/24/32 三档",
+    "wave_note": "波形 0 通道，数据由 MCU 以 add 0,val(0~255) 增量喂点，不整帧刷新",
+    "background_note": "全工程使用纯色背景 bco=2212(#0B1526)，不加载大图背景，省 Flash"
+  }
+}

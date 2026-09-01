@@ -1,0 +1,55 @@
+{
+  "screen": {"width": 1024, "height": 600},
+  "layout_zones": {
+    "header":  {"y0": 0,   "y1": 64,  "desc": "顶部状态栏：标题 + 3 状态芯片"},
+    "content": {"y0": 64,  "y1": 526, "desc": "主内容区"},
+    "nav":     {"y0": 526, "y1": 600, "desc": "底部导航栏 4 按钮（h=52 触摸友好）"}
+  },
+  "pages": [
+    {
+      "id": 0,
+      "name": "p0_main",
+      "title": "主页",
+      "function": "浓度实时大字显示 + 峰值保持 + 状态面板 + 报警色条",
+      "entry": ["开机默认页", "p1/p2/p3 底部导航"],
+      "exit": ["page 1 设置", "page 2 历史曲线", "page 3 关于"],
+      "related": ["p1_settings(阈值)", "p2_curve(波形)", "p3_about(探头状态)"],
+      "background": "#0B1526"
+    },
+    {
+      "id": 1,
+      "name": "p1_settings",
+      "title": "设置",
+      "function": "报警阈值步进 / 单位切换 / 蜂鸣器开关 / 背光亮度 / 零点·量程标定 / 恢复出厂",
+      "entry": ["p0/p2/p3 底部导航"],
+      "exit": ["page 0 主页", "page 2 历史曲线", "page 3 关于"],
+      "related": ["p0_main(报警阈值同步)", "p3_about(探头信息)", "MCU 标定流程"],
+      "background": "#0B1526"
+    },
+    {
+      "id": 2,
+      "name": "p2_curve",
+      "title": "历史曲线",
+      "function": "浓度历史波形（10分钟/1小时/24小时）+ 数据统计 + 导出 CSV",
+      "entry": ["p0/p1/p3 底部导航"],
+      "exit": ["page 0 主页", "page 1 设置", "page 3 关于"],
+      "related": ["p0_main(实时浓度同源)", "MCU W25Q16 记录 + USB CDC 导出"],
+      "background": "#0B1526"
+    },
+    {
+      "id": 3,
+      "name": "p3_about",
+      "title": "关于",
+      "function": "设备信息 / 传感器与探头状态 / 量程参数（纯展示）",
+      "entry": ["p0/p1/p2 底部导航"],
+      "exit": ["page 0 主页", "page 1 设置", "page 2 历史曲线"],
+      "related": ["p0_main(探头状态芯片)", "p1_settings(标定状态)"],
+      "background": "#0B1526"
+    }
+  ],
+  "page_transitions": {
+    "type": "底部导航 4 按钮 rel 事件 page N + bco 高亮同步",
+    "default_page": "page 0",
+    "startup": "上电后 MCU 下发 page 0；HMI 侧 global 初始化默认值"
+  }
+}

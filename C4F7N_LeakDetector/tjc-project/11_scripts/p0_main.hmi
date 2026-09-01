@@ -1,0 +1,41 @@
+// ============================================================
+// C4F7N · page0 主页事件脚本 (p0_main.hmi)
+// 粘贴位置：USART HMI → 对应控件 → 事件(rel) 输入框
+// ============================================================
+
+// ---------- 底部导航（4 按钮 rel） ----------
+// p0_nav_home.rel：
+page 0
+p0_nav_home.bco=3222
+p0_nav_set.bco=2212
+p0_nav_curve.bco=2212
+p0_nav_about.bco=2212
+
+// p0_nav_set.rel：
+page 1
+p0_nav_home.bco=2212
+p0_nav_set.bco=3222
+p0_nav_curve.bco=2212
+p0_nav_about.bco=2212
+
+// p0_nav_curve.rel：
+page 2
+p0_nav_home.bco=2212
+p0_nav_set.bco=2212
+p0_nav_curve.bco=3222
+p0_nav_about.bco=2212
+
+// p0_nav_about.rel：
+page 3
+p0_nav_home.bco=2212
+p0_nav_set.bco=2212
+p0_nav_curve.bco=2212
+p0_nav_about.bco=3222
+
+// ---------- 重置峰值按钮 rel ----------
+// p0_reset.rel：
+p0_peak.val=0
+print "PEAK:RESET"
+
+// 说明：MCU 收到 PEAK:RESET 后同步清零内部峰值并回发
+// p0_peak.val=0 作为确认。

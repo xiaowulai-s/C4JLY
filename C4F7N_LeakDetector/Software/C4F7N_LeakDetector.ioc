@@ -1,0 +1,106 @@
+#MicroXplorer Configuration settings - do not modify
+File.Version=6
+ProjectManager.ProjectBuildStrategy=0
+ProjectManager.ProjectFileName=C4F7N_LeakDetector.ioc
+ProjectManager.ProjectName=C4F7N_LeakDetector
+ProjectManager.ProjectStructure=
+ProjectManager.UnderRoot=true
+ProjectManager.TargetToolchain=MDK-ARM V5.32
+ProjectManager.firmwarePackage=STM32Cube FW_F1 V1.8.5
+ProjectManager.KEIL5.CPU=DARMCM
+ProjectManager.KEIL5.FPU=NotUsed
+ProjectManager.unknownBinary=true
+
+# ---------------- MCU ----------------
+Mcu.Family=STM32F1
+Mcu.IP0=USART1
+Mcu.IP1=NVIC
+Mcu.IP2=SYS
+Mcu.IPsNb=3
+Mcu.Name=STM32F103RCT6
+Mcu.Package=LQFP64
+Mcu.PartNumber=STM32F103RCT6
+Mcu.Pin0=PA9
+Mcu.Pin1=PA10
+Mcu.Pin2=PD0-OSC_IN
+Mcu.Pin3=PD1-OSC_OUT
+Mcu.PinsNb=4
+Mcu.UserConstants=
+
+# ---------------- System / Clock ----------------
+RCC.HSE_VALUE=8000000
+RCC.LSE_VALUE=32768
+RCC.PLLSource=RCC_PLLSOURCE_HSE
+RCC.PLLState=RCC_PLL_ON
+RCC.SYSCLKSource=RCC_SYSCLKSOURCE_PLLCLK
+RCC.OSCSource=RCC_HSEBYPASS_OFF
+RCC.HCLKFreq_Value=72000000
+RCC.FCLKCortexFreq_Value=72000000
+RCC.PCLK1Freq_Value=36000000
+RCC.PCLK2Freq_Value=72000000
+RCC.APB1CLKDivider=RCC_HCLK_DIV2
+RCC.APB2CLKDivider=RCC_HCLK_DIV1
+RCC.AHBCLKDivider=RCC_SYSCLK_DIV1
+RCC.PLLMUL=RCC_PLL_MUL9
+RCC.PLLDiv=0
+RCC.PREDIV1=RCC_PREDIV1_SRC_HSE
+RCC.SysClkFreq_Value=72000000
+RCC.Tim1OutputFreq_Value=72000000
+RCC.Tim2OutputFreq_Value=36000000
+
+# ---------------- USART1 @ 115200 8N1 ----------------
+USART1.BaudRate=115200
+USART1.Mode=Asynchronous
+USART1.WordLength=8
+USART1.StopBits=1
+USART1.Parity=None
+USART1.MaskParityBit=false
+USART1.ParityBit=false
+USART1.MakeDefaultTask=Disabled
+USART1.IPParameters=WordLength,StopBits,Parity,Mode,BaudRate,IPParameters
+USART1.VirtualMode-Asynchronous=VM_ASYNC
+
+# ---------------- Pin Configuration ----------------
+PA9.Mode=Asynchronous
+PA9.Signal=USART1_TX
+PA9.Locked=false
+PA9.Label=
+PA10.Mode=Asynchronous
+PA10.Signal=USART1_RX
+PA10.Locked=false
+PA10.Label=
+
+# ---------------- NVIC ----------------
+NVIC.USART1_IRQn=true
+NVIC.USART1_IRQn.PreemptionPriority=0
+NVIC.USART1_IRQn.SubPriority=0
+NVIC.USART1_IRQn.Enable=true
+
+# ---------------- SYS ----------------
+SYS.Debug=NoDebug
+SYS.Trace=Disabled
+
+# ---------------- Project Manager placeholders ----------------
+ProjectManager.DeviceId=STM32F103RCT6
+ProjectManager.DeviceFamily=STM32F1
+ProjectManager.FCubeSettingsVersion=2025.8.20000
+ProjectManager.LastFirmware=true
+ProjectManager.LibraryCopy=1
+ProjectManager.MainLocation=Core
+ProjectManager.UserApplicationLocation=
+ProjectManager.CoupleFile=false
+ProjectManager.CustomerFirmwarePackage=
+ProjectManager.DefaultFWLocation=true
+ProjectManager.DeleteInit=true
+ProjectManager.DeleteGeneratedFiles=false
+ProjectManager.EnableEmbeddedActivation=true
+ProjectManager.GenerateExternFiles=true
+ProjectManager.HalAdditive=true
+ProjectManager.HalAssertFull=false
+ProjectManager.HeapSize=0x200
+ProjectManager.KeepUserCode=true
+ProjectManager.StackSize=0x400
+ProjectManager.ToolChainSettings=
+ProjectManager.UnderRoot=true
+ProjectManager.UseMcuAsMainUsePinWorkspace=false
+ProjectManager.AdvancedFilePaths=true

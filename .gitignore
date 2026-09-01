@@ -1,0 +1,50 @@
+# ===== 编译 / 构建产物 =====
+.pack/
+MDK-ARM/build/
+**/build/
+**/.obj/
+*.o
+*.d
+*.axf
+*.crf
+*.lnp
+*.map
+*.lst
+*.htm
+*.dep
+
+# Windows 保留设备名误建文件
+nul
+
+# 编辑器 / Agent 内部状态（勿公开）
+.trae/
+.workbuddy/
+
+# Keil / eIDE 临时配置
+*.uvguix.*
+.eide/*.ini
+
+# ===== 大体积演示 / 示例工程（非主业资产）=====
+HMI/DEMO.HMI
+HMI/DEMO_poc2.HMI
+HMI/SGprj.hmi
+HMI/SGprj.tft
+HMI/tjc_sample.HMI
+HMI/touchScreen.HMI
+HMI/串口屏文件.HMI
+tjc-hmi-toolkit/example/out_example.HMI
+
+# ===== 屏幕中间 / 生成资源（可从 .HMI 重建）=====
+HMI/extracted/
+HMI/images/
+HMI/auto/
+
+# ===== 工具链 / 调试生成物 =====
+tjc-hmi-toolkit/tools/*.pdb
+tjc-hmi-toolkit/tools/*.deps.json
+
+# ===== 归档 / 大体积二进制 =====
+*.zip
+*.elibz
+*.epro
+*.tft

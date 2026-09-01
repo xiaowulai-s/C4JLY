@@ -1,0 +1,355 @@
+{
+  "page": {
+    "id": 1,
+    "name": "p1_settings",
+    "title": "设置",
+    "resolution": [1024, 600],
+    "background": 2212,
+    "background_hex": "#0B1526"
+  },
+  "components": [
+    {
+      "id": 0, "name": "p1_panel_thr", "type": "button",
+      "x": 24, "y": 84, "w": 496, "h": 424, "z": 0,
+      "bco": 4359, "radius": 18,
+      "role": "decor_panel",
+      "touch": false,
+      "events": {},
+      "note": "宽度由原稿 480 调整为 496，确保 hi_plus(x476,w44) 完整落于面板内"
+    },
+    {
+      "id": 1, "name": "p1_thr_title", "type": "text",
+      "x": 48, "y": 104, "w": 200, "h": 28, "z": 10,
+      "text": "报警阈值", "font": 24,
+      "pco": 59230, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 2, "name": "p1_hi_lab", "type": "text",
+      "x": 48, "y": 150, "w": 200, "h": 26, "z": 10,
+      "text": "高报阈值", "font": 16,
+      "pco": 59230, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 3, "name": "p1_hi_desc", "type": "text",
+      "x": 48, "y": 178, "w": 280, "h": 22, "z": 10,
+      "text": "浓度达到后声光报警", "font": 16,
+      "pco": 31893, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 4, "name": "p1_hi_minus", "type": "button",
+      "x": 300, "y": 142, "w": 44, "h": 44, "z": 10,
+      "text": "-", "font": 32,
+      "pco": 59230, "bco": 2212, "radius": 10,
+      "touch": true,
+      "events": {"rel": "p1_hi_minus_rel"}
+    },
+    {
+      "id": 5, "name": "p1_hi_val", "type": "number",
+      "x": 352, "y": 142, "w": 116, "h": 44, "z": 10,
+      "font": 32,
+      "pco": 59230, "bco": 2212,
+      "vvs": 0, "val": 500, "min": 100, "max": 1000,
+      "unit": "ppm", "data_source": "threshold_hi",
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 6, "name": "p1_hi_plus", "type": "button",
+      "x": 476, "y": 142, "w": 44, "h": 44, "z": 10,
+      "text": "+", "font": 32,
+      "pco": 59230, "bco": 2212, "radius": 10,
+      "touch": true,
+      "events": {"rel": "p1_hi_plus_rel"}
+    },
+    {
+      "id": 7, "name": "p1_lo_lab", "type": "text",
+      "x": 48, "y": 212, "w": 200, "h": 26, "z": 10,
+      "text": "低报阈值", "font": 16,
+      "pco": 59230, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 8, "name": "p1_lo_desc", "type": "text",
+      "x": 48, "y": 240, "w": 280, "h": 22, "z": 10,
+      "text": "低于此值解除报警", "font": 16,
+      "pco": 31893, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 9, "name": "p1_lo_minus", "type": "button",
+      "x": 300, "y": 204, "w": 44, "h": 44, "z": 10,
+      "text": "-", "font": 32,
+      "pco": 59230, "bco": 2212, "radius": 10,
+      "touch": true,
+      "events": {"rel": "p1_lo_minus_rel"}
+    },
+    {
+      "id": 10, "name": "p1_lo_val", "type": "number",
+      "x": 352, "y": 204, "w": 116, "h": 44, "z": 10,
+      "font": 32,
+      "pco": 59230, "bco": 2212,
+      "vvs": 0, "val": 100, "min": 10, "max": 1000,
+      "unit": "ppm", "data_source": "threshold_lo",
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 11, "name": "p1_lo_plus", "type": "button",
+      "x": 476, "y": 204, "w": 44, "h": 44, "z": 10,
+      "text": "+", "font": 32,
+      "pco": 59230, "bco": 2212, "radius": 10,
+      "touch": true,
+      "events": {"rel": "p1_lo_plus_rel"}
+    },
+    {
+      "id": 12, "name": "p1_unit_lab", "type": "text",
+      "x": 48, "y": 278, "w": 200, "h": 26, "z": 10,
+      "text": "单位切换", "font": 16,
+      "pco": 59230, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 13, "name": "p1_unit_desc", "type": "text",
+      "x": 48, "y": 306, "w": 280, "h": 22, "z": 10,
+      "text": "ppm / 克每年(g·yr)", "font": 16,
+      "pco": 31893, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 14, "name": "p1_unit_btn", "type": "button",
+      "x": 300, "y": 270, "w": 140, "h": 40, "z": 10,
+      "text": "ppm", "font": 24,
+      "pco": 59230, "bco": 3222, "radius": 10,
+      "touch": true,
+      "events": {"rel": "p1_unit_btn_rel"}
+    },
+    {
+      "id": 15, "name": "p1_buz_lab", "type": "text",
+      "x": 48, "y": 340, "w": 200, "h": 26, "z": 10,
+      "text": "蜂鸣器", "font": 16,
+      "pco": 59230, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 16, "name": "p1_buz_desc", "type": "text",
+      "x": 48, "y": 368, "w": 280, "h": 22, "z": 10,
+      "text": "报警声音提示", "font": 16,
+      "pco": 31893, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 17, "name": "p1_buz_btn", "type": "button",
+      "x": 300, "y": 332, "w": 140, "h": 40, "z": 10,
+      "text": "开", "font": 24,
+      "pco": 59230, "bco": 9771, "radius": 10,
+      "touch": true,
+      "events": {"rel": "p1_buz_btn_rel"}
+    },
+    {
+      "id": 18, "name": "p1_dim_lab", "type": "text",
+      "x": 48, "y": 402, "w": 180, "h": 26, "z": 10,
+      "text": "背光亮度", "font": 16,
+      "pco": 59230, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 19, "name": "p1_dim", "type": "hscroll",
+      "x": 240, "y": 402, "w": 200, "h": 30, "z": 10,
+      "min": 10, "max": 100, "val": 70,
+      "touch": true,
+      "events": {"up": "p1_dim_up"},
+      "note": "滑动条 h=30 低于 40px 触摸建议值，7寸屏实际约 4.5mm 可接受，如需加高可调 h=40 并对齐 y=400"
+    },
+    {
+      "id": 20, "name": "p1_dim_val", "type": "number",
+      "x": 452, "y": 404, "w": 44, "h": 26, "z": 10,
+      "font": 16,
+      "pco": 9885, "bco": 4359,
+      "vvs": 0, "val": 70, "min": 10, "max": 100,
+      "touch": false,
+      "events": {},
+      "note": "由原文本控件改为数字控件：避免 txt 字符串拼接语法风险"
+    },
+    {
+      "id": 21, "name": "p1_dim_pct", "type": "text",
+      "x": 498, "y": 404, "w": 18, "h": 26, "z": 10,
+      "text": "%", "font": 16,
+      "pco": 9885, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 22, "name": "p1_panel_cal", "type": "button",
+      "x": 520, "y": 84, "w": 480, "h": 424, "z": 0,
+      "bco": 4359, "radius": 18,
+      "role": "decor_panel",
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 23, "name": "p1_cal_title", "type": "text",
+      "x": 544, "y": 104, "w": 200, "h": 28, "z": 10,
+      "text": "标定", "font": 24,
+      "pco": 59230, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 24, "name": "p1_cal0_lab", "type": "text",
+      "x": 544, "y": 156, "w": 200, "h": 26, "z": 10,
+      "text": "零点标定", "font": 16,
+      "pco": 59230, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 25, "name": "p1_cal0_desc", "type": "text",
+      "x": 544, "y": 184, "w": 300, "h": 22, "z": 10,
+      "text": "通入洁净空气后执行", "font": 16,
+      "pco": 31893, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 26, "name": "p1_cal0_btn", "type": "button",
+      "x": 860, "y": 150, "w": 110, "h": 44, "z": 10,
+      "text": "执行", "font": 24,
+      "pco": 59230, "bco": 3222, "radius": 10,
+      "touch": true,
+      "events": {"rel": "p1_cal0_btn_rel"}
+    },
+    {
+      "id": 27, "name": "p1_cal1_lab", "type": "text",
+      "x": 544, "y": 240, "w": 200, "h": 26, "z": 10,
+      "text": "量程标定", "font": 16,
+      "pco": 59230, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 28, "name": "p1_cal1_desc", "type": "text",
+      "x": 544, "y": 268, "w": 300, "h": 22, "z": 10,
+      "text": "通入 1000 ppm 标气", "font": 16,
+      "pco": 31893, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 29, "name": "p1_cal1_btn", "type": "button",
+      "x": 860, "y": 234, "w": 110, "h": 44, "z": 10,
+      "text": "执行", "font": 24,
+      "pco": 59230, "bco": 3222, "radius": 10,
+      "touch": true,
+      "events": {"rel": "p1_cal1_btn_rel"}
+    },
+    {
+      "id": 30, "name": "p1_fac_lab", "type": "text",
+      "x": 544, "y": 324, "w": 200, "h": 26, "z": 10,
+      "text": "恢复出厂", "font": 16,
+      "pco": 59230, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 31, "name": "p1_fac_desc", "type": "text",
+      "x": 544, "y": 352, "w": 300, "h": 22, "z": 10,
+      "text": "重置全部参数", "font": 16,
+      "pco": 31893, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 32, "name": "p1_fac_btn", "type": "button",
+      "x": 860, "y": 318, "w": 110, "h": 44, "z": 10,
+      "text": "恢复", "font": 24,
+      "pco": 59230, "bco": 59944, "radius": 10,
+      "touch": true,
+      "events": {"rel": "p1_fac_btn_rel"}
+    },
+    {
+      "id": 33, "name": "p1_hint", "type": "text",
+      "x": 544, "y": 416, "w": 432, "h": 60, "z": 10,
+      "text": "标定过程需保持气路稳定 60 秒，完成后自动保存至 Flash。", "font": 16,
+      "pco": 31893, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 34, "name": "p1_title", "type": "text",
+      "x": 20, "y": 18, "w": 360, "h": 30, "z": 5,
+      "text": "C4F7N 便携式检漏仪", "font": 24,
+      "pco": 59230, "bco": 2212,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 35, "name": "p1_chip_probe", "type": "button",
+      "x": 688, "y": 18, "w": 108, "h": 28, "z": 5,
+      "text": "● 探头 已连接", "font": 16,
+      "pco": 9771, "bco": 4359, "radius": 14,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 36, "name": "p1_chip_pump", "type": "button",
+      "x": 806, "y": 18, "w": 98, "h": 28, "z": 5,
+      "text": "● 泵 运行", "font": 16,
+      "pco": 9771, "bco": 4359, "radius": 14,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 37, "name": "p1_chip_bat", "type": "button",
+      "x": 914, "y": 18, "w": 90, "h": 28, "z": 5,
+      "text": "电量 78%", "font": 16,
+      "pco": 62689, "bco": 4359, "radius": 14,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 38, "name": "p1_nav_home", "type": "button",
+      "x": 0, "y": 534, "w": 256, "h": 52, "z": 20,
+      "text": "主页", "font": 24,
+      "pco": 59230, "bco": 2212,
+      "touch": true,
+      "events": {"rel": "p1_nav_home_rel"}
+    },
+    {
+      "id": 39, "name": "p1_nav_set", "type": "button",
+      "x": 256, "y": 534, "w": 256, "h": 52, "z": 20,
+      "text": "设置", "font": 24,
+      "pco": 59230, "bco": 3222,
+      "touch": true,
+      "events": {"rel": "p1_nav_set_rel"}
+    },
+    {
+      "id": 40, "name": "p1_nav_curve", "type": "button",
+      "x": 512, "y": 534, "w": 256, "h": 52, "z": 20,
+      "text": "历史曲线", "font": 24,
+      "pco": 59230, "bco": 2212,
+      "touch": true,
+      "events": {"rel": "p1_nav_curve_rel"}
+    },
+    {
+      "id": 41, "name": "p1_nav_about", "type": "button",
+      "x": 768, "y": 534, "w": 256, "h": 52, "z": 20,
+      "text": "关于", "font": 24,
+      "pco": 59230, "bco": 2212,
+      "touch": true,
+      "events": {"rel": "p1_nav_about_rel"}
+    }
+  ]
+}

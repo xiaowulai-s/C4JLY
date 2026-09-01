@@ -1,0 +1,281 @@
+{
+  "template": "C4F7N\\base.HMI",
+  "pageSeed": "C4F7N/base_pas/0.pa",
+  "seeds": {
+    "btn98": {
+      "file": "seeds/tpl_s3/0.pa",
+      "objname": "b0"
+    },
+    "btn53": {
+      "file": "seeds/tpl_am1_pas/0.pa",
+      "objname": "bt1"
+    },
+    "text": {
+      "file": "seeds/tpl_s5/0.pa",
+      "objname": "t0"
+    },
+    "num": {
+      "file": "seeds/tpl_s1/0.pa",
+      "objname": "n0"
+    },
+    "wave": {
+      "file": "seeds/tpl_s3/0.pa",
+      "objname": "s0"
+    },
+    "slider": {
+      "file": "seeds/tpl_s4/0.pa",
+      "objname": "h0"
+    },
+    "prog": {
+      "file": "seeds/jd_pas/0.pa",
+      "objname": "j0"
+    }
+  },
+  "pages": [
+    {
+      "file": "0.pa",
+      "name": "主页",
+      "pageObj": {
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 600,
+        "bco": 2212,
+        "pic": 65535
+      },
+      "widgets": [
+        {
+          "seed": "text",
+          "objname": "p0t",
+          "set": {
+            "x": 20,
+            "y": 18,
+            "w": 360,
+            "h": 30,
+            "font": 0,
+            "txt": "C4F7N 便携式检漏仪",
+            "bco": 2212,
+            "pco": 59230,
+            "pic": 65535,
+            "picc": 65535
+          }
+        },
+        {
+          "seed": "btn53",
+          "objname": "pc0",
+          "set": {
+            "x": 688,
+            "y": 18,
+            "w": 108,
+            "h": 28,
+            "font": 0,
+            "txt": "● 探头 已连接",
+            "bco": 4359,
+            "pco": 9771,
+            "picc": 65535,
+            "picc2": 65535
+          }
+        },
+        {
+          "seed": "btn53",
+          "objname": "pc1",
+          "set": {
+            "x": 806,
+            "y": 18,
+            "w": 98,
+            "h": 28,
+            "font": 0,
+            "txt": "● 泵 运行",
+            "bco": 4359,
+            "pco": 9771,
+            "picc": 65535,
+            "picc2": 65535
+          }
+        }
+      ]
+    },
+    {
+      "file": "1.pa",
+      "name": "设置",
+      "pageObj": {
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 600,
+        "bco": 2212,
+        "pic": 65535
+      },
+      "widgets": [
+        {
+          "seed": "text",
+          "objname": "p1L",
+          "set": {
+            "x": 24,
+            "y": 84,
+            "w": 480,
+            "h": 424,
+            "bco": 4359,
+            "txt": " ",
+            "pic": 65535,
+            "picc": 65535
+          }
+        },
+        {
+          "seed": "text",
+          "objname": "htt",
+          "set": {
+            "x": 48,
+            "y": 104,
+            "w": 200,
+            "h": 28,
+            "font": 0,
+            "txt": "报警阈值",
+            "bco": 4359,
+            "pco": 59230,
+            "pic": 65535,
+            "picc": 65535
+          }
+        },
+        {
+          "seed": "text",
+          "objname": "hl",
+          "set": {
+            "x": 48,
+            "y": 150,
+            "w": 200,
+            "h": 26,
+            "font": 0,
+            "txt": "高报阈值",
+            "bco": 4359,
+            "pco": 59230,
+            "pic": 65535,
+            "picc": 65535
+          }
+        }
+      ]
+    },
+    {
+      "file": "2.pa",
+      "name": "历史曲线",
+      "pageObj": {
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 600,
+        "bco": 2212,
+        "pic": 65535
+      },
+      "widgets": [
+        {
+          "seed": "text",
+          "objname": "p2L",
+          "set": {
+            "x": 24,
+            "y": 84,
+            "w": 720,
+            "h": 424,
+            "bco": 4359,
+            "txt": " ",
+            "pic": 65535,
+            "picc": 65535
+          }
+        },
+        {
+          "seed": "text",
+          "objname": "ctt",
+          "set": {
+            "x": 48,
+            "y": 102,
+            "w": 240,
+            "h": 26,
+            "font": 0,
+            "txt": "浓度历史曲线",
+            "bco": 4359,
+            "pco": 59230,
+            "pic": 65535,
+            "picc": 65535
+          }
+        },
+        {
+          "seed": "btn53",
+          "objname": "r0",
+          "set": {
+            "x": 420,
+            "y": 98,
+            "w": 92,
+            "h": 32,
+            "font": 0,
+            "txt": "10分钟",
+            "bco": 3222,
+            "pco": 59230,
+            "picc": 65535,
+            "picc2": 65535
+          },
+          "codes": {
+            "up": "r0.bco=3222\nr1.bco=2212\nr2.bco=2212\ncls 0\nprint\"RG:10M\""
+          }
+        }
+      ]
+    },
+    {
+      "file": "3.pa",
+      "name": "关于",
+      "pageObj": {
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 600,
+        "bco": 2212,
+        "pic": 65535
+      },
+      "widgets": [
+        {
+          "seed": "text",
+          "objname": "p3L",
+          "set": {
+            "x": 24,
+            "y": 84,
+            "w": 480,
+            "h": 424,
+            "bco": 4359,
+            "txt": " ",
+            "pic": 65535,
+            "picc": 65535
+          }
+        },
+        {
+          "seed": "text",
+          "objname": "itt",
+          "set": {
+            "x": 48,
+            "y": 104,
+            "w": 200,
+            "h": 28,
+            "font": 0,
+            "txt": "设备信息",
+            "bco": 4359,
+            "pco": 59230,
+            "pic": 65535,
+            "picc": 65535
+          }
+        },
+        {
+          "seed": "text",
+          "objname": "mod",
+          "set": {
+            "x": 48,
+            "y": 156,
+            "w": 420,
+            "h": 24,
+            "font": 0,
+            "txt": "产品型号    C4F7N-1000",
+            "bco": 4359,
+            "pco": 59230,
+            "pic": 65535,
+            "picc": 65535
+          }
+        }
+      ]
+    }
+  ]
+}

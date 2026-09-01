@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C4F7N 便携式检漏仪 · HMI 视觉稿（1024×600）</title>
+<style>
+  :root{
+    --bg:#0B1526; --panel:#12233C; --panel2:#16294A; --line:#1E3A5F;
+    --txt:#E2E8F0; --sub:#7D93AD; --cyan:#0891B2; --cyan-br:#22D3EE;
+    --green:#22C55E; --orange:#F59E0B; --red:#EF4444; --dk:#06121F;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;font-family:"Segoe UI","Microsoft YaHei",sans-serif}
+  body{background:#060B14;color:var(--txt);display:flex;flex-direction:column;align-items:center;padding:24px 12px;min-height:100vh}
+  .page-tabs{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;justify-content:center}
+  .page-tabs button{background:var(--panel);color:var(--sub);border:1px solid var(--line);border-radius:8px;padding:8px 18px;font-size:14px;cursor:pointer;transition:.15s}
+  .page-tabs button.on{background:var(--cyan);color:#fff;border-color:var(--cyan)}
+  .viewer{width:100%;max-width:1060px;display:flex;justify-content:center}
+  .stage-wrap{transform-origin:top center}
+  .stage{width:1024px;height:600px;background:var(--bg);position:relative;overflow:hidden;border-radius:10px;box-shadow:0 18px 60px rgba(0,0,0,.55);border:1px solid #1b2a44}
+  /* 通用 */
+  .abs{position:absolute}
+  .panel{background:var(--panel);border-radius:18px}
+  .btn{display:flex;align-items:center;justify-content:center;border:none;color:var(--txt);cursor:pointer;font-weight:600}
+  .f16{font-size:16px}.f24{font-size:24px}.f32{font-size:32px}.f48{font-size:48px;font-weight:700}
+  .sub{color:var(--sub)}
+  /* 顶栏 */
+  .hdr{position:absolute;top:18px;left:20px;width:360px;font-size:24px;font-weight:700;color:var(--txt)}
+  .chip{position:absolute;top:18px;height:28px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:16px;padding:0 12px}
+  .chip .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
+  /* 底部导航 */
+  .nav{position:absolute;top:534px;height:52px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:600;border:none;cursor:pointer}
+  .nav.on{background:var(--cyan);color:#fff}
+  .nav.off{background:var(--bg);color:var(--txt)}
+  /* 数据行 */
+  .drow{position:absolute;left:560px;width:380px;height:24px;font-size:16px;color:var(--txt)}
+  .lbl{position:absolute;font-size:16px;color:var(--txt)}
+  .sublbl{position:absolute;font-size:16px;color:var(--sub)}
+  /* 曲线 */
+  .wave{position:absolute;background:var(--bg);border:1px solid #0d1d33}
+  .stat-lab{position:absolute;width:80px;height:24px;font-size:16px;color:var(--sub)}
+  .stat-val{position:absolute;width:80px;height:28px;font-size:24px;font-weight:600;text-align:right}
+  /* 标签说明 */
+  .tag{position:absolute;left:12px;bottom:8px;font-size:11px;color:#3d5678;letter-spacing:.5px}
+  .sim{position:fixed;right:16px;bottom:16px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:13px;color:var(--sub);z-index:99;cursor:pointer;transition:.15s}
+  .sim:hover{border-color:var(--cyan);color:var(--txt)}
+</style>
+</head>
+<body>
+
+<div class="page-tabs">
+  <button class="on" data-p="0" onclick="go(0)">P0 主页</button>
+  <button data-p="1" onclick="go(1)">P1 设置</button>
+  <button data-p="2" onclick="go(2)">P2 历史曲线</button>
+  <button data-p="3" onclick="go(3)">P3 关于</button>
+</div>
+
+<div class="viewer"><div class="stage-wrap" id="wrap"><div class="stage" id="stage">
+
+<!-- ================= P0 主页 ================= -->
+<div class="page" id="page0">
+  <div class="hdr">C4F7N 便携式检漏仪</div>
+  <div class="chip" style="left:688px;width:108px;background:var(--panel);color:var(--green)"><span class="dot" style="background:var(--green)"></span>探头 已连接</div>
+  <div class="chip" style="left:806px;width:98px;background:var(--panel);color:var(--green)"><span class="dot" style="background:var(--green)"></span>泵 运行</div>
+  <div class="chip" style="left:914px;width:90px;background:var(--panel);color:var(--orange)"><span class="dot" style="background:var(--orange)"></span>电量 78%</div>
+
+  <div class="sublbl" style="left:40px;top:128px">C4F7N · 全氟异丁腈</div>
+  <div class="abs f48" id="conc" style="left:40px;top:168px;width:440px;height:130px;color:var(--txt);line-height:130px">0.00</div>
+  <div class="abs" style="left:40px;top:306px;color:var(--cyan-br);font-size:16px">ppm 浓度实时值</div>
+
+  <div class="btn abs" style="left:60px;top:372px;width:150px;height:32px;border-radius:16px;background:var(--cyan-br);color:var(--dk);font-size:16px">峰值保持 ON</div>
+  <div class="btn abs" style="left:222px;top:372px;width:150px;height:32px;border-radius:16px;background:var(--bg);color:var(--sub);font-size:16px">均值 0.00</div>
+  <div class="abs" id="strip" style="left:40px;top:470px;width:440px;height:8px;border-radius:4px;background:var(--green)"></div>
+
+  <div class="panel abs" style="left:520px;top:96px;width:460px;height:150px"></div>
+  <div class="sublbl" style="left:560px;top:116px">PEAK · 峰值浓度</div>
+  <div class="abs f32" id="peak" style="left:560px;top:146px;width:380px;height:64px;color:var(--orange);font-weight:700">0.00</div>
+  <div class="btn abs" style="left:560px;top:214px;width:140px;height:30px;border-radius:10px;background:var(--bg);color:var(--txt);font-size:16px">重置峰值</div>
+
+  <div class="panel abs" style="left:520px;top:262px;width:460px;height:250px"></div>
+  <div class="drow" style="top:284px">响应时间 T90 &nbsp;≈ 4.2 s</div>
+  <div class="drow" style="top:330px">当前流量 &nbsp;0.5 L/min</div>
+  <div class="drow" style="top:376px">探头温度 &nbsp;28.6 ℃</div>
+  <div class="drow" style="top:422px">报警阈值 &nbsp;500 ppm</div>
+
+  <button class="nav on"  style="left:0;width:256px"  onclick="go(0)">主页</button>
+  <button class="nav off" style="left:256px;width:256px" onclick="go(1)">设置</button>
+  <button class="nav off" style="left:512px;width:256px" onclick="go(2)">历史曲线</button>
+  <button class="nav off" style="left:768px;width:256px" onclick="go(3)">关于</button>
+  <div class="tag">P0 · 主页 / 浓度大字 · 峰值 · 状态面板</div>
+</div>
+
+<!-- ================= P1 设置 ================= -->
+<div class="page" id="page1" style="display:none">
+  <div class="hdr">C4F7N 便携式检漏仪</div>
+  <div class="chip" style="left:688px;width:108px;background:var(--panel);color:var(--green)"><span class="dot" style="background:var(--green)"></span>探头 已连接</div>
+  <div class="chip" style="left:806px;width:98px;background:var(--panel);color:var(--green)"><span class="dot" style="background:var(--green)"></span>泵 运行</div>
+  <div class="chip" style="left:914px;width:90px;background:var(--panel);color:var(--orange)"><span class="dot" style="background:var(--orange)"></span>电量 78%</div>
+
+  <div class="panel abs" style="left:24px;top:84px;width:496px;height:424px"></div>
+  <div class="abs f24" style="left:48px;top:104px">报警阈值</div>
+  <div class="lbl" style="left:48px;top:150px">高报阈值</div>
+  <div class="sublbl" style="left:48px;top:178px">浓度达到后声光报警</div>
+  <div class="btn abs" style="left:300px;top:142px;width:44px;height:44px;border-radius:10px;background:var(--bg);font-size:32px" onclick="step('hi',-1)">−</div>
+  <div class="abs f32" id="hiVal" style="left:352px;top:142px;width:116px;height:44px;line-height:44px;text-align:center;color:var(--txt)">500</div>
+  <div class="btn abs" style="left:476px;top:142px;width:44px;height:44px;border-radius:10px;background:var(--bg);font-size:32px" onclick="step('hi',1)">+</div>
+
+  <div class="lbl" style="left:48px;top:212px">低报阈值</div>
+  <div class="sublbl" style="left:48px;top:240px">低于此值解除报警</div>
+  <div class="btn abs" style="left:300px;top:204px;width:44px;height:44px;border-radius:10px;background:var(--bg);font-size:32px" onclick="step('lo',-1)">−</div>
+  <div class="abs f32" id="loVal" style="left:352px;top:204px;width:116px;height:44px;line-height:44px;text-align:center;color:var(--txt)">100</div>
+  <div class="btn abs" style="left:476px;top:204px;width:44px;height:44px;border-radius:10px;background:var(--bg);font-size:32px" onclick="step('lo',1)">+</div>
+
+  <div class="lbl" style="left:48px;top:278px">单位切换</div>
+  <div class="sublbl" style="left:48px;top:306px">ppm / 克每年(g·yr)</div>
+  <div class="btn abs" id="unitBtn" style="left:300px;top:270px;width:140px;height:40px;border-radius:10px;background:var(--cyan);font-size:24px" onclick="toggleUnit()">ppm</div>
+
+  <div class="lbl" style="left:48px;top:340px">蜂鸣器</div>
+  <div class="sublbl" style="left:48px;top:368px">报警声音提示</div>
+  <div class="btn abs" id="buzBtn" style="left:300px;top:332px;width:140px;height:40px;border-radius:10px;background:var(--green);font-size:24px" onclick="toggleBuz()">开</div>
+
+  <div class="lbl" style="left:48px;top:402px">背光亮度</div>
+  <input type="range" id="dimS" min="10" max="100" value="70" oninput="dimUp()"
+         style="position:absolute;left:240px;top:404px;width:200px;accent-color:var(--cyan-br)">
+  <div class="abs f16" id="dimVal" style="left:452px;top:404px;width:44px;height:26px;color:var(--cyan-br);text-align:right">70</div>
+  <div class="abs f16" style="left:498px;top:404px;width:18px;height:26px;color:var(--cyan-br)">%</div>
+
+  <div class="panel abs" style="left:520px;top:84px;width:480px;height:424px"></div>
+  <div class="abs f24" style="left:544px;top:104px">标定</div>
+  <div class="lbl" style="left:544px;top:156px">零点标定</div>
+  <div class="sublbl" style="left:544px;top:184px">通入洁净空气后执行</div>
+  <div class="btn abs" style="left:860px;top:150px;width:110px;height:44px;border-radius:10px;background:var(--cyan);font-size:24px" onclick="cal('零点')">执行</div>
+  <div class="lbl" style="left:544px;top:240px">量程标定</div>
+  <div class="sublbl" style="left:544px;top:268px">通入 1000 ppm 标气</div>
+  <div class="btn abs" style="left:860px;top:234px;width:110px;height:44px;border-radius:10px;background:var(--cyan);font-size:24px" onclick="cal('量程')">执行</div>
+  <div class="lbl" style="left:544px;top:324px">恢复出厂</div>
+  <div class="sublbl" style="left:544px;top:352px">重置全部参数</div>
+  <div class="btn abs" style="left:860px;top:318px;width:110px;height:44px;border-radius:10px;background:var(--red);font-size:24px" onclick="cal('恢复出厂')">恢复</div>
+  <div class="sublbl" style="left:544px;top:416px;width:432px;height:60px">标定过程需保持气路稳定 60 秒，完成后自动保存至 Flash。</div>
+
+  <button class="nav off" style="left:0;width:256px"  onclick="go(0)">主页</button>
+  <button class="nav on"  style="left:256px;width:256px" onclick="go(1)">设置</button>
+  <button class="nav off" style="left:512px;width:256px" onclick="go(2)">历史曲线</button>
+  <button class="nav off" style="left:768px;width:256px" onclick="go(3)">关于</button>
+  <div class="tag">P1 · 设置 / 阈值步进 · 单位 · 蜂鸣器 · 背光 · 标定</div>
+</div>
+
+<!-- ================= P2 历史曲线 ================= -->
+<div class="page" id="page2" style="display:none">
+  <div class="hdr">C4F7N 便携式检漏仪</div>
+  <div class="chip" style="left:688px;width:108px;background:var(--panel);color:var(--green)"><span class="dot" style="background:var(--green)"></span>探头 已连接</div>
+  <div class="chip" style="left:806px;width:98px;background:var(--panel);color:var(--green)"><span class="dot" style="background:var(--green)"></span>泵 运行</div>
+  <div class="chip" style="left:914px;width:90px;background:var(--panel);color:var(--orange)"><span class="dot" style="background:var(--orange)"></span>电量 78%</div>
+
+  <div class="panel abs" style="left:24px;top:84px;width:720px;height:424px"></div>
+  <div class="abs f24" style="left:48px;top:102px">浓度历史曲线</div>
+  <button class="btn abs" id="r10"  style="left:420px;top:98px;width:92px;height:32px;border-radius:14px;background:var(--cyan);font-size:16px" onclick="range(0)">10分钟</button>
+  <button class="btn abs" id="r1h"  style="left:520px;top:98px;width:92px;height:32px;border-radius:14px;background:var(--bg);font-size:16px" onclick="range(1)">1小时</button>
+  <button class="btn abs" id="r24h" style="left:620px;top:98px;width:92px;height:32px;border-radius:14px;background:var(--bg);font-size:16px" onclick="range(2)">24小时</button>
+
+  <div class="wave abs" style="left:48px;top:148px;width:672px;height:330px;border-radius:8px">
+    <canvas id="waveCanvas" width="672" height="330" style="width:672px;height:330px;display:block"></canvas>
+    <div style="position:absolute;left:8px;top:8px;font-size:12px;color:#3d5678">1000 ppm ─</div>
+    <div style="position:absolute;left:8px;top:150px;font-size:12px;color:#3d5678">500 ppm ─</div>
+    <div style="position:absolute;left:8px;top:292px;font-size:12px;color:#3d5678">0 ppm ─</div>
+  </div>
+  <div class="sublbl" style="left:48px;top:486px;width:400px">— 实时浓度&nbsp;&nbsp;- - 报警阈值</div>
+
+  <div class="panel abs" style="left:760px;top:84px;width:240px;height:424px"></div>
+  <div class="abs f24" style="left:784px;top:104px">数据统计</div>
+  <div class="stat-lab" style="left:784px;top:150px">最大值</div><div class="stat-val" id="stMax" style="left:900px;top:146px;color:var(--orange)">248.5</div>
+  <div class="stat-lab" style="left:784px;top:196px">平均值</div><div class="stat-val" id="stAvg" style="left:900px;top:192px;color:var(--cyan-br)">86.3</div>
+  <div class="stat-lab" style="left:784px;top:242px">最小值</div><div class="stat-val" id="stMin" style="left:900px;top:238px;color:var(--txt)">0.00</div>
+  <div class="stat-lab" style="left:784px;top:288px">记录时长</div><div class="stat-val" id="stDur" style="left:900px;top:284px;color:var(--txt);font-size:20px">10 分钟</div>
+  <div class="stat-lab" style="left:784px;top:334px">数据点数</div><div class="stat-val" id="stCnt" style="left:900px;top:330px;color:var(--txt);font-size:20px">600</div>
+  <div class="btn abs" style="left:784px;top:408px;width:192px;height:52px;border-radius:12px;background:var(--cyan);font-size:24px" onclick="exp()">导出 CSV（USB）</div>
+
+  <button class="nav off" style="left:0;width:256px"  onclick="go(0)">主页</button>
+  <button class="nav off" style="left:256px;width:256px" onclick="go(1)">设置</button>
+  <button class="nav on"  style="left:512px;width:256px" onclick="go(2)">历史曲线</button>
+  <button class="nav off" style="left:768px;width:256px" onclick="go(3)">关于</button>
+  <div class="tag">P2 · 历史曲线 / 波形 · 统计 · 导出</div>
+</div>
+
+<!-- ================= P3 关于 ================= -->
+<div class="page" id="page3" style="display:none">
+  <div class="hdr">C4F7N 便携式检漏仪</div>
+  <div class="chip" style="left:688px;width:108px;background:var(--panel);color:var(--green)"><span class="dot" style="background:var(--green)"></span>探头 已连接</div>
+  <div class="chip" style="left:806px;width:98px;background:var(--panel);color:var(--green)"><span class="dot" style="background:var(--green)"></span>泵 运行</div>
+  <div class="chip" style="left:914px;width:90px;background:var(--panel);color:var(--orange)"><span class="dot" style="background:var(--orange)"></span>电量 78%</div>
+
+  <div class="panel abs" style="left:24px;top:84px;width:480px;height:424px"></div>
+  <div class="abs f24" style="left:48px;top:104px">设备信息</div>
+  <div class="lbl" style="left:48px;top:156px">产品型号&nbsp;&nbsp;&nbsp;&nbsp;C4F7N-1000</div>
+  <div class="lbl" style="left:48px;top:196px">序列号&nbsp;&nbsp;&nbsp;&nbsp;SN-C4F7N-2026-0001</div>
+  <div class="lbl" style="left:48px;top:236px">固件版本&nbsp;&nbsp;&nbsp;&nbsp;V1.0.0</div>
+  <div class="lbl" style="left:48px;top:276px">主控&nbsp;&nbsp;&nbsp;&nbsp;STM32F103C8T6</div>
+  <div class="lbl" style="left:48px;top:316px">屏幕&nbsp;&nbsp;&nbsp;&nbsp;淘晶驰 7寸 1024×600</div>
+  <div class="lbl" style="left:48px;top:356px">检测原理&nbsp;&nbsp;&nbsp;&nbsp;NDIR 双波长红外</div>
+
+  <div class="panel abs" style="left:520px;top:84px;width:480px;height:424px"></div>
+  <div class="abs f24" style="left:544px;top:104px">传感器与探头</div>
+  <div class="lbl" style="left:544px;top:156px;color:var(--green)">MST-N7M 探头 · 已连接</div>
+  <div class="sublbl" style="left:544px;top:186px">RS485 通信正常 · 传感器温度 28.6℃</div>
+  <div class="lbl" style="left:544px;top:244px">量程&nbsp;&nbsp;&nbsp;&nbsp;0 ~ 1000 ppm</div>
+  <div class="lbl" style="left:544px;top:284px">显示分辨率&nbsp;&nbsp;&nbsp;&nbsp;0.01 ppm</div>
+  <div class="lbl" style="left:544px;top:324px">响应时间&nbsp;&nbsp;&nbsp;&nbsp;T90 ≤ 5 s</div>
+  <div class="lbl" style="left:544px;top:364px">电池&nbsp;&nbsp;&nbsp;&nbsp;18650×2 · 78%</div>
+  <div class="sublbl" style="left:544px;top:420px;width:432px;height:60px">用于 GIS / 高压断路器 / 环网柜等新型环保绝缘气体设备（C4F7N · Novec 4710）现场泄漏检测与定位。</div>
+
+  <button class="nav off" style="left:0;width:256px"  onclick="go(0)">主页</button>
+  <button class="nav off" style="left:256px;width:256px" onclick="go(1)">设置</button>
+  <button class="nav off" style="left:512px;width:256px" onclick="go(2)">历史曲线</button>
+  <button class="nav on"  style="left:768px;width:256px" onclick="go(3)">关于</button>
+  <div class="tag">P3 · 关于 / 设备信息 · 探头状态（纯展示）</div>
+</div>
+
+</div></div></div>
+
+<button class="sim" id="simBtn" onclick="toggleSim()">● 模拟数据：开</button>
+
+<script>
+  // ---------- 页面切换 ----------
+  const PAGES = ["page0","page1","page2","page3"];
+  function go(i){
+    PAGES.forEach((p,k)=>{document.getElementById(p).style.display = k===i ? "block":"none";});
+    document.querySelectorAll(".page-tabs button").forEach(b=>b.classList.toggle("on",+b.dataset.p===i));
+  }
+  // ---------- 适配缩放 ----------
+  function fit(){
+    const vw = document.querySelector(".viewer").clientWidth - 16;
+    const s = Math.min(1, vw/1024);
+    document.getElementById("wrap").style.transform = `scale(${s})`;
+    document.body.style.minHeight = 600*s + 140 + "px";
+  }
+  window.addEventListener("resize", fit); fit();
+
+  // ---------- 模拟数据 ----------
+  let sim = true, t = 0, peak = 0, buf = [];
+  const concEl = document.getElementById("conc"), peakEl = document.getElementById("peak");
+  function tick(){
+    if(!sim) return;
+    t++;
+    const base = 120 + 90*Math.sin(t/14) + (Math.random()*40-20);
+    const v = Math.max(0, Math.min(999, base));
+    concEl.textContent = v.toFixed(2);
+    peak = Math.max(peak, v); peakEl.textContent = peak.toFixed(2);
+    // 报警条颜色
+    const strip = document.getElementById("strip");
+    const hi = parseInt(document.getElementById("hiVal")?.textContent||500);
+    if(v>=hi) strip.style.background = "var(--red)";
+    else if(v>=100) strip.style.background = "var(--orange)";
+    else strip.style.background = "var(--green)";
+    // 曲线
+    buf.push(v/1000*255);
+    if(buf.length>672) buf.shift();
+    drawWave();
+  }
+  function drawWave(){
+    const c = document.getElementById("waveCanvas"); if(!c) return;
+    const ctx = c.getContext("2d");
+    ctx.fillStyle = "#0B1526"; ctx.fillRect(0,0,672,330);
+    // 网格
+    ctx.strokeStyle = "#1E3A5F"; ctx.lineWidth = 1;
+    for(let gy=0; gy<=4; gy++){ ctx.beginPath(); ctx.moveTo(0,gy*66); ctx.lineTo(672,gy*66); ctx.stroke(); }
+    // 阈值虚线 (500ppm → 255*0.5=127.5)
+    ctx.strokeStyle = "#F59E0B"; ctx.setLineDash([6,6]);
+    ctx.beginPath(); ctx.moveTo(0, 330-127.5); ctx.lineTo(672, 330-127.5); ctx.stroke();
+    ctx.setLineDash([]);
+    // 波形
+    ctx.strokeStyle = "#22D3EE"; ctx.lineWidth = 2;
+    ctx.beginPath();
+    buf.forEach((v,i)=>{ const x=i, y=330-v; i===0?ctx.moveTo(x,y):ctx.lineTo(x,y); });
+    ctx.stroke();
+  }
+  setInterval(tick, 250); tick();
+
+  // ---------- 设置页交互 ----------
+  function step(k,d){
+    const el = document.getElementById(k==="hi"?"hiVal":"loVal");
+    let v = parseInt(el.textContent) + (k==="hi"?d*50:d*10);
+    v = Math.max(k==="hi"?100:10, Math.min(1000, v));
+    el.textContent = v;
+  }
+  function toggleUnit(){
+    const b = document.getElementById("unitBtn");
+    b.textContent = b.textContent==="ppm" ? "g/年" : "ppm";
+  }
+  function toggleBuz(){
+    const b = document.getElementById("buzBtn");
+    b.textContent = b.textContent==="开" ? "关":"开";
+    b.style.background = b.textContent==="开" ? "var(--green)" : "var(--bg)";
+  }
+  function dimUp(){
+    document.getElementById("dimVal").textContent = document.getElementById("dimS").value;
+  }
+  function cal(name){ alert("模拟：向 MCU 发送 CAL:xxx（"+name+" 标定流程由 STM32 执行）"); }
+  function range(i){
+    const ids=["r10","r1h","r24h"], dur=["10 分钟","1 小时","24 小时"], cnt=["600","3600","86400"];
+    ids.forEach((id,k)=>{ document.getElementById(id).style.background = k===i?"var(--cyan)":"var(--bg)"; });
+    document.getElementById("stDur").textContent = dur[i];
+    document.getElementById("stCnt").textContent = cnt[i];
+    buf = []; drawWave();
+  }
+  function exp(){ alert("模拟：发送 EXPORT，STM32 通过 USB CDC 导出 CSV"); }
+  function toggleSim(){
+    sim = !sim;
+    document.getElementById("simBtn").textContent = sim ? "● 模拟数据：开" : "○ 模拟数据：关";
+  }
+</script>
+</body>
+</html>

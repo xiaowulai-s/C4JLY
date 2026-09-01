@@ -1,0 +1,212 @@
+{
+  "page": {
+    "id": 3,
+    "name": "p3_about",
+    "title": "关于",
+    "resolution": [1024, 600],
+    "background": 2212,
+    "background_hex": "#0B1526"
+  },
+  "components": [
+    {
+      "id": 0, "name": "p3_panel_info", "type": "button",
+      "x": 24, "y": 84, "w": 480, "h": 424, "z": 0,
+      "bco": 4359, "radius": 18,
+      "role": "decor_panel",
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 1, "name": "p3_info_title", "type": "text",
+      "x": 48, "y": 104, "w": 200, "h": 28, "z": 10,
+      "text": "设备信息", "font": 24,
+      "pco": 59230, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 2, "name": "p3_model", "type": "text",
+      "x": 48, "y": 156, "w": 420, "h": 24, "z": 10,
+      "text": "产品型号    C4F7N-1000", "font": 16,
+      "pco": 59230, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 3, "name": "p3_sn", "type": "text",
+      "x": 48, "y": 196, "w": 420, "h": 24, "z": 10,
+      "text": "序列号    SN-C4F7N-2026-0001", "font": 16,
+      "pco": 59230, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 4, "name": "p3_fw", "type": "text",
+      "x": 48, "y": 236, "w": 420, "h": 24, "z": 10,
+      "text": "固件版本    V1.0.0", "font": 16,
+      "pco": 59230, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 5, "name": "p3_mcu", "type": "text",
+      "x": 48, "y": 276, "w": 420, "h": 24, "z": 10,
+      "text": "主控    STM32F103C8T6", "font": 16,
+      "pco": 59230, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 6, "name": "p3_lcd", "type": "text",
+      "x": 48, "y": 316, "w": 420, "h": 24, "z": 10,
+      "text": "屏幕    淘晶驰 7寸 1024×600", "font": 16,
+      "pco": 59230, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 7, "name": "p3_principle", "type": "text",
+      "x": 48, "y": 356, "w": 420, "h": 24, "z": 10,
+      "text": "检测原理    NDIR 双波长红外", "font": 16,
+      "pco": 59230, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 8, "name": "p3_panel_probe", "type": "button",
+      "x": 520, "y": 84, "w": 480, "h": 424, "z": 0,
+      "bco": 4359, "radius": 18,
+      "role": "decor_panel",
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 9, "name": "p3_probe_title", "type": "text",
+      "x": 544, "y": 104, "w": 200, "h": 28, "z": 10,
+      "text": "传感器与探头", "font": 24,
+      "pco": 59230, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 10, "name": "p3_probe_st", "type": "text",
+      "x": 544, "y": 156, "w": 420, "h": 26, "z": 10,
+      "text": "MST-N7M 探头 · 已连接", "font": 16,
+      "pco": 9771, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 11, "name": "p3_probe_sub", "type": "text",
+      "x": 544, "y": 186, "w": 420, "h": 22, "z": 10,
+      "text": "RS485 通信正常 · 传感器温度 28.6℃", "font": 16,
+      "pco": 31893, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 12, "name": "p3_range", "type": "text",
+      "x": 544, "y": 244, "w": 420, "h": 24, "z": 10,
+      "text": "量程    0 ~ 1000 ppm", "font": 16,
+      "pco": 59230, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 13, "name": "p3_res", "type": "text",
+      "x": 544, "y": 284, "w": 420, "h": 24, "z": 10,
+      "text": "显示分辨率    0.01 ppm", "font": 16,
+      "pco": 59230, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 14, "name": "p3_t90", "type": "text",
+      "x": 544, "y": 324, "w": 420, "h": 24, "z": 10,
+      "text": "响应时间    T90 ≤ 5 s", "font": 16,
+      "pco": 59230, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 15, "name": "p3_bat", "type": "text",
+      "x": 544, "y": 364, "w": 420, "h": 24, "z": 10,
+      "text": "电池    18650×2 · 78%", "font": 16,
+      "pco": 59230, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 16, "name": "p3_note", "type": "text",
+      "x": 544, "y": 420, "w": 432, "h": 60, "z": 10,
+      "text": "用于 GIS / 高压断路器 / 环网柜等新型环保绝缘气体设备（C4F7N · Novec 4710）现场泄漏检测与定位。", "font": 16,
+      "pco": 31893, "bco": 4359,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 17, "name": "p3_title_hdr", "type": "text",
+      "x": 20, "y": 18, "w": 360, "h": 30, "z": 5,
+      "text": "C4F7N 便携式检漏仪", "font": 24,
+      "pco": 59230, "bco": 2212,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 18, "name": "p3_chip_probe", "type": "button",
+      "x": 688, "y": 18, "w": 108, "h": 28, "z": 5,
+      "text": "● 探头 已连接", "font": 16,
+      "pco": 9771, "bco": 4359, "radius": 14,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 19, "name": "p3_chip_pump", "type": "button",
+      "x": 806, "y": 18, "w": 98, "h": 28, "z": 5,
+      "text": "● 泵 运行", "font": 16,
+      "pco": 9771, "bco": 4359, "radius": 14,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 20, "name": "p3_chip_bat", "type": "button",
+      "x": 914, "y": 18, "w": 90, "h": 28, "z": 5,
+      "text": "电量 78%", "font": 16,
+      "pco": 62689, "bco": 4359, "radius": 14,
+      "touch": false,
+      "events": {}
+    },
+    {
+      "id": 21, "name": "p3_nav_home", "type": "button",
+      "x": 0, "y": 534, "w": 256, "h": 52, "z": 20,
+      "text": "主页", "font": 24,
+      "pco": 59230, "bco": 2212,
+      "touch": true,
+      "events": {"rel": "p3_nav_home_rel"}
+    },
+    {
+      "id": 22, "name": "p3_nav_set", "type": "button",
+      "x": 256, "y": 534, "w": 256, "h": 52, "z": 20,
+      "text": "设置", "font": 24,
+      "pco": 59230, "bco": 2212,
+      "touch": true,
+      "events": {"rel": "p3_nav_set_rel"}
+    },
+    {
+      "id": 23, "name": "p3_nav_curve", "type": "button",
+      "x": 512, "y": 534, "w": 256, "h": 52, "z": 20,
+      "text": "历史曲线", "font": 24,
+      "pco": 59230, "bco": 2212,
+      "touch": true,
+      "events": {"rel": "p3_nav_curve_rel"}
+    },
+    {
+      "id": 24, "name": "p3_nav_about", "type": "button",
+      "x": 768, "y": 534, "w": 256, "h": 52, "z": 20,
+      "text": "关于", "font": 24,
+      "pco": 59230, "bco": 3222,
+      "touch": true,
+      "events": {"rel": "p3_nav_about_rel"}
+    }
+  ]
+}

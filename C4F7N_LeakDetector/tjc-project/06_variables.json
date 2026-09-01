@@ -1,0 +1,146 @@
+{
+  "variables": [
+    {
+      "name": "c4f7n_ppm", "type": "float", "unit": "ppm",
+      "min": 0, "max": 1000, "default": 0,
+      "display_resolution": 0.01,
+      "source": "STM32 (MST-N7M NDIR 传感器)",
+      "refresh_rate_ms": 250,
+      "readonly": true,
+      "hmi_mapping": "p0_conc.val (vvs=2)",
+      "mcu_mapping": "p0_conc.val=xx  (val×100 取整)"
+    },
+    {
+      "name": "peak_ppm", "type": "float", "unit": "ppm",
+      "min": 0, "max": 1000, "default": 0,
+      "display_resolution": 0.01,
+      "source": "STM32（峰值保持逻辑）",
+      "refresh_rate_ms": 250,
+      "readonly": true,
+      "hmi_mapping": "p0_peak.val (vvs=2)",
+      "mcu_mapping": "p0_peak.val=xx；用户重置→MCU 收到 PEAK:RESET 后清零并回发"
+    },
+    {
+      "name": "avg_ppm", "type": "float", "unit": "ppm",
+      "min": 0, "max": 1000, "default": 0,
+      "display_resolution": 0.01,
+      "source": "STM32（统计窗口均值）",
+      "refresh_rate_ms": 1000,
+      "readonly": true,
+      "hmi_mapping": "p0_badge_avg.txt=\"均值 x.xx\"",
+      "mcu_mapping": "p0_badge_avg.txt=\"均值 \"+数值（GB2312）"
+    },
+    {
+      "name": "temp_probe", "type": "float", "unit": "℃",
+      "min": -20, "max": 60, "default": 25,
+      "display_resolution": 0.1,
+      "source": "STM32（探头接口板温度）",
+      "refresh_rate_ms": 1000,
+      "readonly": true,
+      "hmi_mapping": "p0_temp.txt",
+      "mcu_mapping": "p0_temp.txt=\"探头温度  28.6 ℃\""
+    },
+    {
+      "name": "flow_rate", "type": "float", "unit": "L/min",
+      "min": 0, "max": 1.5, "default": 0,
+      "display_resolution": 0.1,
+      "source": "STM32（泵反馈/流量计）",
+      "refresh_rate_ms": 1000,
+      "readonly": true,
+      "hmi_mapping": "p0_flow.txt",
+      "mcu_mapping": "p0_flow.txt=\"当前流量  0.5 L/min\""
+    },
+    {
+      "name": "battery_pct", "type": "int", "unit": "%",
+      "min": 0, "max": 100, "default": 100,
+      "source": "STM32（PB1 ADC 分压采样）",
+      "refresh_rate_ms": 5000,
+      "readonly": true,
+      "hmi_mapping": "p0_chip_bat.txt / p3_bat.txt",
+      "mcu_mapping": "p0_chip_bat.txt=\"电量 78%\""
+    },
+    {
+      "name": "threshold_hi", "type": "int", "unit": "ppm",
+      "min": 100, "max": 1000, "default": 500,
+      "source": "STM32 Flash 保存，HMI 步进修改",
+      "refresh_rate_ms": "事件触发",
+      "readonly": false,
+      "hmi_mapping": "p1_hi_val.val",
+      "mcu_mapping": "MCU 收到 THR:HI:n 后保存并回发 p1_hi_val.val=n 确认；开机下发同步"
+    },
+    {
+      "name": "threshold_lo", "type": "int", "unit": "ppm",
+      "min": 10, "max": 1000, "default": 100,
+      "source": "STM32 Flash 保存，HMI 步进修改",
+      "refresh_rate_ms": "事件触发",
+      "readonly": false,
+      "hmi_mapping": "p1_lo_val.val",
+      "mcu_mapping": "MCU 收到 THR:LO:n 后保存并回发确认；开机下发同步"
+    },
+    {
+      "name": "unit_mode", "type": "enum", "unit": "ppm / g·yr",
+      "values": ["ppm", "g/年"],
+      "default": "ppm",
+      "source": "STM32 换算，HMI 显示切换",
+      "readonly": false,
+      "hmi_mapping": "p1_unit_btn.txt",
+      "mcu_mapping": "MCU 收到 UNIT:TOGGLE 后换算显示值并回发 p0_conc.val"
+    },
+    {
+      "name": "buzzer_en", "type": "bool", "unit": "",
+      "values": ["true(开)", "false(关)"],
+      "default": true,
+      "source": "STM32 Flash 保存",
+      "readonly": false,
+      "hmi_mapping": "p1_buz_btn.txt + bco（开=绿 9771 / 关=2212）",
+      "mcu_mapping": "MCU 收到 BUZ:TOGGLE 后保存；报警蜂鸣受此开关控制"
+    },
+    {
+      "name": "pump_status", "type": "bool", "unit": "",
+      "values": ["true(运行)", "false(停止)"],
+      "default": true,
+      "source": "STM32（泵 PWM 控制）",
+      "refresh_rate_ms": 1000,
+      "readonly": true,
+      "hmi_mapping": "p0_chip_pump.txt + pco",
+      "mcu_mapping": "p0_chip_pump.txt=\"● 泵 运行/停止\""
+    },
+    {
+      "name": "probe_status", "type": "bool", "unit": "",
+      "values": ["true(已连接)", "false(断开)"],
+      "default": true,
+      "source": "STM32（RS485 握手检测）",
+      "refresh_rate_ms": 1000,
+      "readonly": true,
+      "hmi_mapping": "p0_chip_probe.txt + pco / p3_probe_st.txt",
+      "mcu_mapping": "断开时 pco 改红(59944) 并更新文案"
+    },
+    {
+      "name": "alarm_status", "type": "enum", "unit": "",
+      "values": ["NORMAL", "WARNING", "ALARM", "OVER_RANGE"],
+      "default": "NORMAL",
+      "source": "STM32（浓度 vs 阈值判定）",
+      "refresh_rate_ms": 250,
+      "readonly": true,
+      "hmi_mapping": "p0_strip.pco（9771/62689/59944）+ beep",
+      "mcu_mapping": "p0_strip.pco=9771|62689|59944；beep 联动"
+    },
+    {
+      "name": "curve_range", "type": "enum", "unit": "",
+      "values": ["10M", "1H", "24H"],
+      "default": "10M",
+      "source": "HMI 按钮选择，MCU 回放对应窗口",
+      "readonly": false,
+      "hmi_mapping": "p2_r10/r1h/r24h 高亮",
+      "mcu_mapping": "MCU 收到 RANGE:10M|1H|24H 后 cls 0 并按新窗口喂点"
+    },
+    {
+      "name": "dim_level", "type": "int", "unit": "%",
+      "min": 10, "max": 100, "default": 70,
+      "source": "HMI 本地 + STM32 可选持久化",
+      "readonly": false,
+      "hmi_mapping": "p1_dim.val + p1_dim_val.val",
+      "mcu_mapping": "HMI 本地 dim=val 生效；如需断电记忆由 MCU 保存并开机回发"
+    }
+  ]
+}

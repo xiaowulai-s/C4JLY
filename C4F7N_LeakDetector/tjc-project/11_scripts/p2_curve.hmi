@@ -1,0 +1,65 @@
+// ============================================================
+// C4F7N · page2 历史曲线页事件脚本 (p2_curve.hmi)
+// 粘贴位置：USART HMI → 对应控件 → 事件(rel) 输入框
+// ============================================================
+
+// ---------- 时间范围切换 rel（高亮 + 清屏 + 上报） ----------
+// p2_r10.rel：
+p2_r10.bco=3222
+p2_r1h.bco=2212
+p2_r24h.bco=2212
+cls 0
+print "RANGE:10M"
+
+// p2_r1h.rel：
+p2_r10.bco=2212
+p2_r1h.bco=3222
+p2_r24h.bco=2212
+cls 0
+print "RANGE:1H"
+
+// p2_r24h.rel：
+p2_r10.bco=2212
+p2_r1h.bco=2212
+p2_r24h.bco=3222
+cls 0
+print "RANGE:24H"
+
+// 说明：cls 0 清除波形 0 通道；MCU 收到 RANGE 后按新窗口
+// 重放历史数据（add 0,val），并回发 p2_max/avg/min/dur/cnt。
+
+// ---------- 导出 CSV rel ----------
+// p2_export.rel：
+print "EXPORT"
+p2_export.txt="导出中…"
+
+// 说明：导出完成后由 MCU 回发 p2_export.txt="导出 CSV（USB）" 复位。
+
+// ---------- 底部导航（4 按钮 rel，同 p0 模式） ----------
+// p2_nav_home.rel：
+page 0
+p2_nav_home.bco=2212
+p2_nav_set.bco=2212
+p2_nav_curve.bco=2212
+p2_nav_about.bco=2212
+
+// p2_nav_set.rel：
+page 1
+p2_nav_home.bco=2212
+p2_nav_set.bco=2212
+p2_nav_curve.bco=2212
+p2_nav_about.bco=2212
+
+// p2_nav_curve.rel：
+page 2
+p2_nav_home.bco=2212
+p2_nav_set.bco=2212
+p2_nav_curve.bco=3222
+p2_nav_about.bco=2212
+
+// p2_nav_about.rel：
+page 3
+p2_nav_home.bco=2212
+p2_nav_set.bco=2212
+p2_nav_curve.bco=2212
+p2_nav_about.bco=3222
