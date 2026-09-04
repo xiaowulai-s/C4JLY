@@ -35,6 +35,7 @@ virtualFolder:
               files:
                 - path: BSP/Src/sensor.c
                 - path: BSP/Src/battery.c
+                - path: BSP/Src/history.c
                 - path: BSP/Src/w25q16.c
                 - path: BSP/Src/param_store.c
               folders: []
@@ -208,6 +209,11 @@ targets:
         otherCmds: ""
         proType: 1
         speed: 8000
+      OpenOCD:
+        baseAddr: "0x08000000"
+        bin: ""
+        interface: cmsis-dap
+        target: stm32f1x
       STLink:
         address: "0x08000000"
         bin: ""
@@ -218,4 +224,4 @@ targets:
         resetMode: default
         runAfterProgram: true
         speed: 4000
-    uploader: STLink
+    uploader: OpenOCD

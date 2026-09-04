@@ -269,3 +269,119 @@ node C4F7N/verify_scripts.js                                  # 脚本级深度�
 - §2 对象名宏：替换所有 MCU→屏幕 指令拼装
 - §3 指令宏：`HMI_CMD_SET_VAL(OBJ_CONC, 42)` 等
 - 示例：告警条切红 → `HMI_CMD_SET_PCO(OBJ_STRIP, C_STRIP_RED);`
+
+---
+
+# 9. 补充 · 当前工程完整对象清单（v19，唯一事实源 = config_c4f7n.json）
+
+> 以下为 v19（`C4F7N_HMI_v19.HMI`）实际对象全表。对象名 ≤16B、脚本行 ≤15B（GBK）前提不变。
+> 顶栏已在 4 页全局化：`lg / p0t / psub / pc0 / pc1 / pc2 / dvr`（第 2~4 页加 `_sN` 后缀）。
+
+## 9.1 顶栏（4 页公共，`_sN` 为从页副本：设置=1、历史=2、关于=3）
+
+| 对象（页0 / 从页） | 类型 | 说明 |
+|---|---|---|
+| `lg` / `lg_sN` | btn53 | 品牌徽标「C4」 |
+| `p0t` / `p0t_sN` | text | 标题「C4F7N 便携式检漏仪」 |
+| `psub` / `psub_sN` | text | 副标题「NOVEC 4710」 |
+| `pc0` / `pc0_sN` | btn53 | 探头顶栏 chip（绿 pco=9771） |
+| `pc1` / `pc1_sN` | btn53 | 泵顶栏 chip（绿） |
+| `pc2` / `pc2_sN` | btn53 | **电量 chip**（橙 pco=62689，MCU 刷新） |
+| `dvr` / `dvr_sN` | text | 顶栏分割线 |
+
+> 电量 chip：`pc2`（页0）、`pc2_s1`（设置）、`pc2_s2`（历史）、`pc2_s3`（关于）均需刷新。
+
+## 9.2 Page 0 主页
+
+| 对象 | 类型 | 说明 | MCU 下发 |
+|---|---|---|---|
+| `pg` | text | 气体名「C4F7N · 全氟异丁腈」 | — |
+| `cc` | num | **浓度大字**（vvs=2，val=42→0.42） | `HMI_CMD_SET_VAL` |
+| `pu` | text | 单位行「ppm 浓度实时值」 | 单位切换时更新 |
+| `bp` | btn53 | 峰值保持徽章 | — |
+| `ba` | btn53 | 均值徽章（txt） | `HMI_CMD_SET_TXT` |
+| `ps` | prog | **报警色条**（pco 切色 9771/62689/59944） | `HMI_CMD_SET_PCO` |
+| `pk` | text | 峰值面板（装饰） | — |
+| `pl` | text | PEAK 标签 | — |
+| `pv` | num | 峰值（vvs=2） | `HMI_CMD_SET_VAL` |
+| `pr` | btn53 | 重置峰值（`up: pv.val=0\nprinth 01`） | — |
+| `pd` | text | 状态面板（装饰） | — |
+| `p9` `pf` `pt` `pth` | text | T90 / 流量 / 温度 / 阈值状态行 | `HMI_CMD_SET_TXT` |
+| `nh ns nc na` | btn98 | 底部导航（`up: page N`） | — |
+
+## 9.3 Page 1 设置
+
+| 对象 | 类型 | 说明 | 脚本 / MCU 下发 |
+|---|---|---|---|
+| `p1L` | text | 左面板（装饰） | — |
+| `htt` | text | 报警阈值标题 | — |
+| `hl`/`hld`/`sep_hl` | text | 高报标签/说明/分隔线 | — |
+| `hm` | btn53 | 高报 −（`h.val=h.val-50\nif(h.val<100){h.val=100}\nprinth 11`） | — |
+| `h` | num | **高报值**（val=500） | `HMI_CMD_SET_VAL` |
+| `hp` | btn53 | 高报 +（`h.val=h.val+50\nif(h.val>1000){h.val=1000}\nprinth 11`） | — |
+| `lo`/`lod`/`sep_lo` | text | 低报标签/说明/分隔线 | — |
+| `lm` | btn53 | 低报 −（`l.val=l.val-10\nif(l.val<10){l.val=10}\nprinth 12`） | — |
+| `l` | num | **低报值**（val=100） | `HMI_CMD_SET_VAL` |
+| `lp` | btn53 | 低报 +（`l.val=l.val+10\nif(l.val>1000){l.val=1000}\nprinth 12`） | — |
+| `ul`/`uld`/`sep_ce` | text | 单位标签/说明/分隔线 | — |
+| `u` | btn53 | **单位按钮**（`printh 13`） | `HMI_CMD_SET_TXT`("ppm"/"g/年") |
+| `bl`/`bld`/`sep_bz` | text | 蜂鸣标签/说明/分隔线 | — |
+| `bb` | btn53 | **蜂鸣开关**（`printh 14`） | `HMI_CMD_SET_TXT` |
+| `dl` | text | 背光标签 | — |
+| `di` | slider | 背光滑块（min10/max100/val70，无脚本） | `dim=N` |
+| `dv`/`dvp` | text | 亮度数字 + 固定「%」 | — |
+| `p1R` | text | 右面板（装饰） | — |
+| `calt` | text | 标定标题 | — |
+| `czl`/`czd`/`sep_c0` | text | 零点标定标签/说明/分隔线 | — |
+| `c0` | btn53 | **零点执行**（`c0.txt="执行中"\nprinth 15`） | `HMI_CMD_SET_TXT` |
+| `csl`/`csd`/`sep_c1` | text | 量程标定标签/说明/分隔线 | — |
+| `c1` | btn53 | **量程执行**（`c1.txt="执行中"\nprinth 16`） | `HMI_CMD_SET_TXT` |
+| `cfl`/`cfd`/`sep_cf` | text | 恢复出厂标签/说明/分隔线 | — |
+| `cf` | btn53 | 恢复出厂（`printh 17`，红 bco=59944） | — |
+| `cht` | text | 标定提示 | — |
+| `nh1 ns1 nc1 na1` | btn98 | 底部导航 | — |
+
+## 9.4 Page 2 历史曲线
+
+| 对象 | 类型 | 说明 | 脚本 |
+|---|---|---|---|
+| `p2L` | text | 左面板 | — |
+| `ctt` | text | 标题「浓度历史曲线」 | — |
+| `r0` `r1` `r2` | btn53 | 范围 10分钟/1小时/24小时（**胶囊图**，pic/pco 高亮切换） | r0选中:`r0.pic=1 r1.pic=0 r2.pic=0 r0.pco=65535 r1.pco=59230 r2.pco=59230` + `printh 2X` |
+| `wv` | wave | 波形（ch=1，pco0=9885 青，gdc=6603） | `add 0,val` / `cls 0` |
+| `leg` | text | 图例 | — |
+| `alarm` | text | 报警阈值线（bco=59944 红） | — |
+| `cys0`~`cys4` | text | Y 轴刻度 0/125/250/375/500 | — |
+| `p2R` | text | 右面板 | — |
+| `stt` | text | 数据统计标题 | — |
+| `mxl`/`mx` | text | 最大值（mx 橙） | `HMI_CMD_SET_TXT` |
+| `avl`/`av` | text | 平均值（av 青） | `HMI_CMD_SET_TXT` |
+| `mnl`/`mn` | text | 最小值 | `HMI_CMD_SET_TXT` |
+| `dul`/`du` | text | 记录时长 | `HMI_CMD_SET_TXT` |
+| `ctl`/`ct` | text | 数据点数 | `HMI_CMD_SET_TXT` |
+| `ex` | btn53 | 导出 CSV（`ex.txt="导出中"\nprinth 24`） | — |
+| `nh2 ns2 nc2 na2` | btn98 | 底部导航 | — |
+
+> 注：曲线 tab 胶囊图用 btn53 的 `pic`(nor=0/1)+`pco`(65535=无底色) 切换，非图片控件叠加；页内自足无跨页引用。
+
+## 9.5 Page 3 关于
+
+| 对象 | 类型 | 说明 |
+|---|---|---|
+| `p3L` | text | 信息面板 |
+| `itt` | text | 设备信息标题 |
+| `mod` `sn` `fw` `mcu` `lcd` `pri` | text | 产品型号/序列号/固件版本/主控/屏幕/检测原理 + `sep_m1~m5` 分隔线 |
+| `p3R` | text | 探头面板 |
+| `ptt` | text | 传感器与探头标题 |
+| `pst` | text | **探头状态**（绿 pco=9771，MCU 可改红） |
+| `psu` | text | 探头副行 |
+| `rng` `res` `t90` `bat` | text | 量程/分辨率/响应时间/**电量行** + `sep_p1~p4` 分隔线 |
+| `note` | text | 应用说明 |
+| `nh3 ns3 nc3 na3` | btn98 | 底部导航 |
+
+> 关于页整列靠左对齐（x=48/544 起）。
+
+## 9.6 被脚本引用的「可交互对象」汇总（MCU 需分发/回写）
+
+`printh` 上报：`pr(01)` `hm/hp(11)` `lm/lp(12)` `u(13)` `bb(14)` `c0(15)` `c1(16)` `cf(17)` `r0(21)` `r1(22)` `r2(23)` `ex(24)`。
+MCU 回写：`cc` `pv` `ba` `ps` `p9` `pf` `pt` `pth` `h` `l` `u` `bb` `c0` `c1` `mx` `av` `mn` `du` `ct` `pst` `pc2` `pc2_s1` `pc2_s2` `pc2_s3` `bat` ≥ 与 `c4f7n_hmi_protocol.h` 一致。

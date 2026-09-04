@@ -22,10 +22,16 @@ void hmi_on_rx_byte(uint8_t b) {
     case HMI_CMD_CAL_ZERO:     hmi_on_cal_zero();     break;
     case HMI_CMD_CAL_SPAN:     hmi_on_cal_span();     break;
     case HMI_CMD_CAL_FAC:      hmi_on_cal_factory();  break;
-    case HMI_CMD_RANGE_10M:    hmi_on_range(10);      break;
-    case HMI_CMD_RANGE_1H:     hmi_on_range(60);      break;
-    case HMI_CMD_RANGE_24H:    hmi_on_range(1440);    break;
-    case HMI_CMD_EXPORT:       hmi_on_export();       break;
+    case HMI_CMD_VIEW_CURVE:    hmi_on_view(0);      break;
+    case HMI_CMD_VIEW_DATA:     hmi_on_view(1);      break;
+    case HMI_CMD_TBL_NEXT:      hmi_on_tbl_page(1);  break;
+    case HMI_CMD_TBL_PREV:      hmi_on_tbl_page(-1); break;
+    case HMI_CMD_EXPORT:        hmi_on_export();     break;
+    case HMI_CMD_PAGE0_ENTER:
+    case HMI_CMD_PAGE1_ENTER:
+    case HMI_CMD_PAGE2_ENTER:
+    case HMI_CMD_PAGE3_ENTER:
+      hmi_on_page_enter((int)b - (int)HMI_CMD_PAGE0_ENTER); break;
     default:                   /* 忽略与 0xFF 帧尾冲突等无关字节 */ break;
   }
 }

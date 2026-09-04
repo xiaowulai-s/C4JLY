@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C4F7N 便携式检漏仪 · HMI 视觉稿 (1024×600)</title>
+<style>
+  :root{
+    --bg:#0b1526; --panel:#12233c; --panel2:#16294a; --line:#1e3a5f;
+    --cyan:#0891b2; --cyan-l:#22d3ee; --txt:#e2e8f0; --sub:#7d93ad;
+    --ok:#22c55e; --warn:#f59e0b; --alarm:#ef4444;
+    --r:18px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;-webkit-user-select:none;user-select:none}
+  body{background:#050a14;display:flex;flex-direction:column;align-items:center;padding:24px 12px;min-height:100vh}
+  .stage-label{color:#4b6a8f;font-size:13px;letter-spacing:2px;margin-bottom:10px;text-align:center}
+  .stage-label b{color:#22d3ee}
+  .screen{
+    width:1024px;height:600px;border-radius:22px;overflow:hidden;position:relative;
+    background:linear-gradient(160deg,#0c1730 0%,#0b1526 55%,#0a1322 100%);
+    box-shadow:0 0 0 1px #1e3a5f,0 24px 80px rgba(8,145,178,.18),0 8px 30px rgba(0,0,0,.6);
+    transform-origin:top center;font-size:16px;
+  }
+  /* 顶部状态栏 */
+  .topbar{
+    height:64px;display:flex;align-items:center;justify-content:space-between;
+    padding:0 22px;border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg,rgba(18,35,60,.9),rgba(11,21,38,.4));
+  }
+  .topbar .title{display:flex;align-items:center;gap:12px}
+  .topbar .logo{
+    width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg,var(--cyan),#065f78);font-weight:900;font-size:15px;color:#fff;
+    box-shadow:0 0 14px rgba(34,211,238,.45);
+  }
+  .topbar .title b{font-size:19px;color:var(--txt);letter-spacing:1px}
+  .topbar .title span{font-size:12px;color:var(--sub);margin-left:6px}
+  .topbar .status{display:flex;align-items:center;gap:16px}
+  .chip{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--sub);background:var(--panel);border:1px solid var(--line);padding:5px 10px;border-radius:20px}
+  .chip .dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px var(--ok)}
+  .chip .dot.warn{background:var(--warn);box-shadow:0 0 8px var(--warn)}
+  .chip .dot.alarm{background:var(--alarm);box-shadow:0 0 8px var(--alarm)}
+  .chip .dot.off{background:#3b4f6b;box-shadow:none}
+  /* 页面容器 */
+  .pages{height:calc(600px - 64px - 74px);position:relative;overflow:hidden}
+  .page{position:absolute;inset:0;padding:20px 24px;display:none;animation:fadeIn .25s ease}
+  .page.active{display:block}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  /* 底部导航 */
+  .navbar{
+    height:74px;display:flex;border-top:1px solid var(--line);
+    background:linear-gradient(180deg,rgba(18,35,60,.5),rgba(11,21,38,.95));
+  }
+  .nav-item{
+    flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+    color:var(--sub);cursor:pointer;position:relative;transition:.2s;
+  }
+  .nav-item svg{width:24px;height:24px}
+  .nav-item span{font-size:13px}
+  .nav-item.active{color:var(--cyan-l)}
+  .nav-item.active::before{
+    content:"";position:absolute;top:0;left:18%;right:18%;height:3px;border-radius:0 0 4px 4px;
+    background:linear-gradient(90deg,var(--cyan),var(--cyan-l));box-shadow:0 0 12px var(--cyan);
+  }
+  /* 通用面板 */
+  .panel{background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:var(--r);padding:18px 20px}
+  .panel h3{font-size:15px;color:var(--txt);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .panel h3::before{content:"";width:4px;height:16px;border-radius:2px;background:linear-gradient(180deg,var(--cyan-l),var(--cyan));box-shadow:0 0 8px var(--cyan)}
+  /* 主页 */
+  .home-grid{display:grid;grid-template-columns:1fr 300px;gap:18px;height:100%}
+  .readout{display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative;overflow:hidden}
+  .readout .gas-name{font-size:18px;color:var(--sub);letter-spacing:6px;margin-bottom:6px}
+  .readout .big-num{
+    font-size:118px;font-weight:800;line-height:1;letter-spacing:2px;color:#eaf6ff;
+    text-shadow:0 0 30px rgba(34,211,238,.5),0 0 80px rgba(8,145,178,.35);
+    font-variant-numeric:tabular-nums;
+  }
+  .readout .unit{font-size:24px;color:var(--cyan-l);margin-top:8px}
+  .readout .unit small{font-size:14px;color:var(--sub);margin-left:8px}
+  .readout .mode-badges{display:flex;gap:10px;margin-top:16px}
+  .badge{padding:4px 14px;border-radius:16px;font-size:12px;border:1px solid var(--line);color:var(--sub);background:rgba(18,35,60,.6)}
+  .badge.on{color:#06121f;background:linear-gradient(135deg,var(--cyan-l),var(--cyan));border-color:transparent;font-weight:600}
+  .readout .alarm-strip{
+    position:absolute;bottom:0;left:0;right:0;height:6px;
+    background:linear-gradient(90deg,var(--ok),#16a34a);border-radius:3px;
+    transition:.3s;
+  }
+  .readout .alarm-strip.warn{background:linear-gradient(90deg,var(--warn),#d97706)}
+  .readout .alarm-strip.alarm{background:linear-gradient(90deg,var(--alarm),#b91c1c);animation:blink 1s infinite}
+  @keyframes blink{50%{opacity:.35}}
+  .side-col{display:flex;flex-direction:column;gap:16px}
+  .peak-box{text-align:center;padding:14px}
+  .peak-box .lab{font-size:12px;color:var(--sub);letter-spacing:3px}
+  .peak-box .val{font-size:40px;font-weight:700;color:var(--warn);margin-top:4px;font-variant-numeric:tabular-nums}
+  .peak-box .reset{font-size:12px;color:var(--cyan-l);margin-top:6px;cursor:pointer}
+  .stat-row{display:flex;justify-content:space-between;font-size:13px;color:var(--sub);padding:5px 0;border-bottom:1px dashed var(--line)}
+  .stat-row:last-child{border-bottom:none}
+  .stat-row b{color:var(--txt);font-variant-numeric:tabular-nums}
+  /* 设置页 */
+  .set-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;height:100%}
+  .set-item{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px dashed var(--line)}
+  .set-item:last-child{border-bottom:none}
+  .set-item .lab{font-size:14px;color:var(--txt)}
+  .set-item .desc{font-size:11px;color:var(--sub);margin-top:3px}
+  .btn{
+    padding:8px 18px;border-radius:10px;font-size:13px;cursor:pointer;text-align:center;
+    background:var(--panel2);border:1px solid var(--line);color:var(--txt);transition:.15s;
+  }
+  .btn:active{transform:scale(.96)}
+  .btn.primary{background:linear-gradient(135deg,var(--cyan),#065f78);border-color:transparent;color:#fff;font-weight:600}
+  .btn.warn-btn{background:linear-gradient(135deg,#f59e0b,#b45309);border-color:transparent;color:#fff;font-weight:600}
+  .btn.danger{background:linear-gradient(135deg,#ef4444,#b91c1c);border-color:transparent;color:#fff;font-weight:600}
+  .btn-group{display:flex;gap:8px}
+  .num-stepper{display:flex;align-items:center;gap:8px}
+  .stepper-btn{width:34px;height:34px;border-radius:10px;background:var(--panel2);border:1px solid var(--line);color:var(--cyan-l);font-size:20px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .stepper-btn:active{background:var(--cyan);color:#fff}
+  .stepper-val{width:110px;text-align:center;font-size:24px;font-weight:700;color:var(--txt);font-variant-numeric:tabular-nums}
+  .stepper-sub{font-size:12px;color:var(--sub)}
+  /* 开关 */
+  .switch{width:52px;height:28px;border-radius:16px;background:#2a3f5e;position:relative;cursor:pointer;transition:.25s;border:1px solid var(--line)}
+  .switch::after{content:"";position:absolute;top:2px;left:2px;width:22px;height:22px;border-radius:50%;background:#8fa6c4;transition:.25s}
+  .switch.on{background:linear-gradient(135deg,var(--cyan),#065f78);border-color:transparent}
+  .switch.on::after{left:26px;background:#fff;box-shadow:0 0 10px rgba(34,211,238,.7)}
+  /* 滑块 */
+  .slider-wrap{display:flex;align-items:center;gap:10px;flex:1}
+  input[type=range]{-webkit-appearance:none;width:100%;height:6px;border-radius:3px;background:linear-gradient(90deg,var(--cyan) var(--fill,60%),#2a3f5e var(--fill,60%));outline:none}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:#fff;border:3px solid var(--cyan);box-shadow:0 0 10px rgba(34,211,238,.6);cursor:pointer}
+  /* 曲线页 */
+  .curve-grid{display:grid;grid-template-columns:1fr 250px;gap:18px;height:100%}
+  .chart-wrap{position:relative;overflow:hidden}
+  .chart-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .range-tabs{display:flex;gap:6px}
+  .range-tab{padding:4px 14px;border-radius:14px;font-size:12px;color:var(--sub);border:1px solid var(--line);cursor:pointer;background:transparent}
+  .range-tab.active{color:#06121f;background:linear-gradient(135deg,var(--cyan-l),var(--cyan));border-color:transparent;font-weight:600}
+  /* 曲线/表格 统一视图容器 */
+  .view-wrap{display:flex;flex-direction:column;height:100%}
+  .chart-view{flex:1;display:flex;flex-direction:column;position:relative;overflow:hidden}
+  .chart-view.hide{display:none}
+  .table-view{flex:1;display:none;flex-direction:column;overflow:hidden}
+  .table-view.show{display:flex}
+  #tableBody{display:flex;flex-direction:column;flex:1;min-height:0}
+  .table-foot{margin-top:auto}
+  .chart-svg{flex:1;width:100%;min-height:0}
+  .chart-view .legend{margin-top:4px;padding-bottom:2px}
+  .stat-box .big{font-size:34px;font-weight:700;color:var(--cyan-l);font-variant-numeric:tabular-nums}
+  /* 曲线/数据 视图切换 */
+  .view-tabs{display:flex;gap:6px}
+  .view-tab{padding:4px 16px;border-radius:14px;font-size:12px;color:var(--sub);border:1px solid var(--line);cursor:pointer;background:transparent}
+  .view-tab.active{color:#06121f;background:linear-gradient(135deg,var(--cyan-l),var(--cyan));border-color:transparent;font-weight:600}
+  /* 数据表视图 */
+  .table-view{display:none;flex-direction:column;height:100%}
+  .table-view.show{display:flex}
+  .table-head,.data-row{display:grid;grid-template-columns:1fr 1fr;padding:7px 12px;font-size:14px}
+  .table-head{color:var(--sub);font-size:12px;letter-spacing:1px;border-bottom:1px solid var(--line)}
+  .table-head span:nth-child(2),.data-row span:nth-child(2){text-align:right;font-variant-numeric:tabular-nums}
+  .data-row{border-bottom:1px dashed rgba(30,58,95,.4);color:var(--txt)}
+  .data-row:last-child{border-bottom:none}
+  .data-row .t{color:var(--sub)}
+  .table-foot{display:flex;align-items:center;justify-content:flex-end;gap:10px;margin-top:8px}
+  .table-foot .pg{font-size:13px;color:var(--sub);margin-right:8px}
+  .pg-btn{padding:6px 16px;border-radius:8px;font-size:13px;cursor:pointer;background:var(--panel2);border:1px solid var(--line);color:var(--cyan-l)}
+  .pg-btn:active{background:var(--cyan);color:#fff}
+  /* 关于页 */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;height:100%}
+  .info-row{display:flex;justify-content:space-between;font-size:14px;padding:10px 0;border-bottom:1px dashed var(--line)}
+  .info-row:last-child{border-bottom:none}
+  .info-row .k{color:var(--sub)}
+  .info-row .v{color:var(--txt);font-variant-numeric:tabular-nums}
+  .probe-state{display:flex;align-items:center;gap:10px;padding:10px;border-radius:12px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.3);margin-top:8px}
+  .probe-state.err{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.3)}
+  .probe-state .ic{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(34,197,94,.15);font-size:16px}
+  .probe-state.err .ic{background:rgba(239,68,68,.15)}
+  .ver{position:absolute;bottom:12px;right:24px;font-size:11px;color:#3b4f6b}
+  /* 打印辅助 */
+  .print-note{display:none}
+</style>
+</head>
+<body>
+
+<div class="stage-label">C₄F₇N 便携式检漏仪 · HMI 视觉稿 <b>v2</b> — 淘晶驰 7寸 <b>1024×600</b> · 工业深色风格（主色 #0891B2）</div>
+
+<div class="screen" id="screen">
+  <!-- 顶部状态栏 -->
+  <div class="topbar">
+    <div class="title">
+      <div class="logo">C4</div>
+      <b>C₄F₇N 便携式检漏仪</b>
+      <span>NOVEC 4710</span>
+    </div>
+    <div class="status">
+      <div class="chip"><span class="dot"></span>探头 已连接</div>
+      <div class="chip"><span class="dot"></span>泵 运行</div>
+      <div class="chip"><span class="dot warn"></span>电量 78%</div>
+    </div>
+  </div>
+
+  <!-- 页面区 -->
+  <div class="pages">
+    <!-- ================= 主页 ================= -->
+    <div class="page active" id="page-home">
+      <div class="home-grid">
+        <div class="readout panel">
+          <div class="gas-name">C₄F₇N · 全氟异丁腈</div>
+          <div class="big-num" id="bigNum">0.00</div>
+          <div class="unit">ppm <small id="unitSub">浓度实时值</small></div>
+          <div class="mode-badges">
+            <span class="badge on" id="bPeak">⚡ 峰值保持</span>
+            <span class="badge" id="bAvg">均值 0.00</span>
+          </div>
+          <div class="alarm-strip" id="alarmStrip"></div>
+        </div>
+        <div class="side-col">
+          <div class="panel peak-box">
+            <div class="lab">PEAK · 峰值浓度</div>
+            <div class="val" id="peakVal">0.00</div>
+            <div class="reset" onclick="resetPeak()">↺ 重置峰值</div>
+          </div>
+          <div class="panel">
+            <h3>检测状态</h3>
+            <div class="stat-row"><span>响应时间 T90</span><b>≈ 4.2 s</b></div>
+            <div class="stat-row"><span>当前流量</span><b>0.5 L/min</b></div>
+            <div class="stat-row"><span>探头温度</span><b>28.6 ℃</b></div>
+            <div class="stat-row"><span>报警阈值</span><b>500 ppm</b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= 设置 ================= -->
+    <div class="page" id="page-set">
+      <div class="set-grid">
+        <div class="panel">
+          <h3>报警阈值</h3>
+          <div class="set-item">
+            <div><div class="lab">高报阈值</div><div class="desc">浓度达到后声光报警</div></div>
+            <div class="num-stepper">
+              <div class="stepper-btn" onclick="step('hi',-50)">−</div>
+              <div class="stepper-val" id="thHi">500</div>
+              <div class="stepper-btn" onclick="step('hi',50)">+</div>
+            </div>
+          </div>
+          <div class="set-item">
+            <div><div class="lab">低报阈值</div><div class="desc">低于此值解除报警</div></div>
+            <div class="num-stepper">
+              <div class="stepper-btn" onclick="step('lo',-10)">−</div>
+              <div class="stepper-val" id="thLo">100</div>
+              <div class="stepper-btn" onclick="step('lo',10)">+</div>
+            </div>
+          </div>
+          <div class="set-item">
+            <div><div class="lab">单位切换</div><div class="desc">ppm / 克每年(g·yr)</div></div>
+            <div class="btn primary" onclick="toggleUnit()" id="unitBtn">ppm</div>
+          </div>
+          <div class="set-item">
+            <div><div class="lab">蜂鸣器</div><div class="desc">报警声音提示</div></div>
+            <div class="switch on" onclick="this.classList.toggle('on')"></div>
+          </div>
+          <div class="set-item">
+            <div><div class="lab">背光亮度</div></div>
+            <div class="slider-wrap">
+              <input type="range" min="10" max="100" value="70" style="--fill:70%" oninput="this.style.setProperty('--fill',this.value+'%')">
+              <span style="color:var(--sub);font-size:12px;width:34px">70%</span>
+            </div>
+          </div>
+        </div>
+        <div class="panel">
+          <h3>标定</h3>
+          <div class="set-item">
+            <div><div class="lab">零点标定</div><div class="desc">通入洁净空气后执行</div></div>
+            <div class="btn" onclick="this.textContent='执行中…';setTimeout(()=>this.textContent='零点标定 ✓ 完成',1200)">执行</div>
+          </div>
+          <div class="set-item">
+            <div><div class="lab">量程标定</div><div class="desc">通入 1000 ppm 标气</div></div>
+            <div class="btn" onclick="this.textContent='执行中…';setTimeout(()=>this.textContent='量程标定 ✓ 完成',1200)">执行</div>
+          </div>
+          <div class="set-item">
+            <div><div class="lab">恢复出厂</div><div class="desc">重置全部参数</div></div>
+            <div class="btn danger" onclick="if(confirm('确认恢复出厂设置？'))this.textContent='已恢复 ✓'">恢复</div>
+          </div>
+          <div style="margin-top:18px;padding:14px;border-radius:12px;background:rgba(8,145,178,.08);border:1px solid rgba(8,145,178,.3);font-size:12px;color:var(--sub)">
+            💡 标定过程需保持气路稳定 60 秒，完成后自动保存至 Flash。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= 历史曲线 ================= -->
+    <div class="page" id="page-curve">
+      <div class="curve-grid">
+        <div class="panel chart-wrap">
+          <div class="chart-head">
+            <h3 style="margin:0">浓度历史曲线</h3>
+            <div class="view-tabs">
+              <span class="view-tab active" onclick="setView(0)">曲线</span>
+              <span class="view-tab" onclick="setView(1)">数据</span>
+            </div>
+          </div>
+          <!-- 曲线视图 -->
+          <div class="view-wrap">
+            <div class="chart-view" id="chartView">
+              <svg class="chart-svg" id="chartSvg" viewBox="0 0 690 320" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="areaFill" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#0891b2" stop-opacity=".45"/>
+                    <stop offset="100%" stop-color="#0891b2" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <!-- 网格 -->
+                <g stroke="#1e3a5f" stroke-width="1">
+                  <line x1="50" y1="30" x2="680" y2="30"/><line x1="50" y1="95" x2="680" y2="95"/>
+                  <line x1="50" y1="160" x2="680" y2="160"/><line x1="50" y1="225" x2="680" y2="225"/>
+                  <line x1="50" y1="290" x2="680" y2="290"/>
+                </g>
+                <g fill="#4b6a8f" font-size="11">
+                  <text x="10" y="34">500</text><text x="10" y="99">375</text>
+                  <text x="10" y="164">250</text><text x="10" y="229">125</text>
+                  <text x="10" y="294">0</text>
+                </g>
+                <!-- 报警线 -->
+                <line x1="50" y1="55" x2="680" y2="55" stroke="#ef4444" stroke-width="1.2" stroke-dasharray="6 5" opacity=".7"/>
+                <text x="548" y="48" fill="#ef4444" font-size="11">报警线 500ppm</text>
+                <path id="areaPath" fill="url(#areaFill)"/>
+                <path id="linePath" fill="none" stroke="#22d3ee" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+              </svg>
+              <div class="legend">
+                <span><i style="background:#22d3ee"></i>实时浓度</span>
+                <span><i style="background:#ef4444"></i>报警阈值</span>
+              </div>
+            </div>
+            <!-- 数据表视图 -->
+            <div class="table-view" id="tableView">
+              <div class="table-head"><span>时间</span><span>浓度 (ppm)</span></div>
+              <div id="tableBody"></div>
+            </div>
+          </div>
+        </div>
+        <div class="panel stat-box">
+          <h3>数据统计</h3>
+          <div class="stat-row"><span>最大值</span><b style="color:var(--warn);font-size:20px" id="stMax">248.5</b></div>
+          <div class="stat-row"><span>平均值</span><b style="font-size:20px" id="stAvg">86.3</b></div>
+          <div class="stat-row"><span>最小值</span><b style="font-size:20px" id="stMin">0.00</b></div>
+          <div class="stat-row"><span>记录时长</span><b id="stDur">10 分钟</b></div>
+          <div class="stat-row"><span>数据点数</span><b id="stCnt">600</b></div>
+          <div style="margin-top:14px" class="btn primary" style="width:100%;text-align:center">📤 导出 CSV（USB）</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= 关于 ================= -->
+    <div class="page" id="page-about">
+      <div class="about-grid">
+        <div class="panel">
+          <h3>设备信息</h3>
+          <div class="info-row"><span class="k">产品型号</span><span class="v">C4F7N-1000</span></div>
+          <div class="info-row"><span class="k">序列号</span><span class="v">SN-C4F7N-2026-0001</span></div>
+          <div class="info-row"><span class="k">固件版本</span><span class="v">V1.0.0</span></div>
+          <div class="info-row"><span class="k">主控</span><span class="v">STM32F103RCT6</span></div>
+          <div class="info-row"><span class="k">屏幕</span><span class="v">淘晶驰 7寸 1024×600</span></div>
+          <div class="info-row"><span class="k">检测原理</span><span class="v">NDIR 双波长红外</span></div>
+        </div>
+        <div class="panel">
+          <h3>传感器与探头</h3>
+          <div class="probe-state">
+            <div class="ic">🔍</div>
+            <div>
+              <div style="color:var(--txt);font-size:14px">GC5G1 探头 · 已连接</div>
+              <div style="color:var(--sub);font-size:12px">数字UART 主动上报 · 探头温度 28.6 ℃</div>
+            </div>
+          </div>
+          <div style="margin-top:10px">
+            <div class="info-row"><span class="k">量程</span><span class="v">0 ~ 1000 ppm</span></div>
+            <div class="info-row"><span class="k">显示分辨率</span><span class="v">0.01 ppm</span></div>
+            <div class="info-row"><span class="k">响应时间</span><span class="v">T90 ≤ 5 s</span></div>
+            <div class="info-row"><span class="k">电池</span><span class="v">18650×2 · 78%</span></div>
+          </div>
+          <div style="margin-top:14px;font-size:12px;color:var(--sub);line-height:1.7">
+            本设备用于电力行业 GIS / 高压断路器 / 环网柜等新型环保绝缘气体设备
+            （C₄F₇N · Novec 4710）的现场泄漏检测与定位。
+          </div>
+        </div>
+      </div>
+      <div class="ver">C4F7N Leak Detector · HMI v2.0 · 历史曲线页曲线/数据双态</div>
+    </div>
+  </div>
+
+  <!-- 底部导航 -->
+  <div class="navbar">
+    <div class="nav-item active" data-page="home" onclick="goPage('home')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
+      <span>主页</span>
+    </div>
+    <div class="nav-item" data-page="set" onclick="goPage('set')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      <span>设置</span>
+    </div>
+    <div class="nav-item" data-page="curve" onclick="goPage('curve')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 15l4-6 4 3 5-8"/></svg>
+      <span>历史曲线</span>
+    </div>
+    <div class="nav-item" data-page="about" onclick="goPage('about')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      <span>关于</span>
+    </div>
+  </div>
+</div>
+
+<div class="print-note">HMI 视觉稿 v2 · 1024×600 · 深色工业风格 · 4 页面（主页/设置/历史曲线/关于），历史曲线页为曲线/数据双态</div>
+
+<script>
+  // 页面切换
+  function goPage(p){
+    document.querySelectorAll('.page').forEach(el=>el.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));
+    document.getElementById('page-'+p).classList.add('active');
+    document.querySelector('.nav-item[data-page="'+p+'"]').classList.add('active');
+  }
+  // 模拟浓度
+  let level=0, peak=0, t=0;
+  setInterval(()=>{
+    t+=0.12;
+    level = Math.max(0, 42 + Math.sin(t)*14 + Math.sin(t*2.7)*8 + (Math.random()*6-3));
+    if(level>peak){peak=level;document.getElementById('peakVal').textContent=peak.toFixed(2)}
+    document.getElementById('bigNum').textContent=level.toFixed(2);
+    document.getElementById('bAvg').textContent='均值 '+level.toFixed(1);
+    const strip=document.getElementById('alarmStrip');
+    strip.className='alarm-strip'+(level>500?' alarm':level>300?' warn':'');
+  },500);
+  function resetPeak(){peak=0;document.getElementById('peakVal').textContent='0.00'}
+  // 阈值步进
+  function step(k,d){
+    const el=document.getElementById(k==='hi'?'thHi':'thLo');
+    let v=parseInt(el.textContent)+d;
+    v=Math.max(k==='hi'?100:10, Math.min(1000,v));
+    el.textContent=v;
+  }
+  // 单位切换
+  function toggleUnit(){
+    const b=document.getElementById('unitBtn');
+    b.textContent = b.textContent==='ppm' ? 'g/年' : 'ppm';
+    document.getElementById('unitSub').textContent = b.textContent==='ppm' ? '浓度实时值' : '年泄漏率';
+  }
+  // 曲线渲染
+  const linePath=document.getElementById('linePath'), areaPath=document.getElementById('areaPath');
+  function renderChart(){
+    const pts=[]; let max=0;
+    for(let i=0;i<120;i++){
+      const v=Math.max(0, 60+Math.sin(i/9)*35+Math.sin(i/3.3)*12+Math.random()*18);
+      max=Math.max(max,v);
+      pts.push([50+i*5.25, 290-v*0.82]);
+    }
+    let d='M'+pts.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join('L');
+    linePath.setAttribute('d',d);
+    areaPath.setAttribute('d',d+'L680,290L50,290Z');
+    document.getElementById('stMax').textContent=max.toFixed(1);
+  }
+  renderChart();
+  // 曲线/数据 视图切换
+  const chartView=document.getElementById('chartView');
+  const tableView=document.getElementById('tableView');
+  function setView(v){
+    document.querySelectorAll('.view-tab').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.view-tab')[v].classList.add('active');
+    chartView.classList.toggle('hide', v===1);
+    tableView.classList.toggle('show', v===1);
+    if(v===1) renderTable(1);
+  }
+  // 数据表渲染 (12行/页, 第page页, 行0=最新)
+  let tblPage=1, TBL_PER=12;
+  const sample=[[490,'00:00:18'],[486,'00:00:17'],[495,'00:00:16'],[470,'00:00:15'],[512,'00:00:14'],[460,'00:00:13'],[448,'00:00:12'],[433,'00:00:11'],[455,'00:00:10'],[420,'00:00:09'],[390,'00:00:08'],[368,'00:00:07'],[355,'00:00:06'],[340,'00:00:05'],[310,'00:00:04'],[285,'00:00:03'],[260,'00:00:02'],[240,'00:00:01'],[230,'00:00:00'],[0,'—']];
+  function renderTable(page){
+    tblPage=page; const body=document.getElementById('tableBody'); body.innerHTML='';
+    const start=(page-1)*TBL_PER;
+    for(let i=0;i<TBL_PER;i++){
+      const s=sample[start+i]||null;
+      if(!s){body.insertAdjacentHTML('beforeend','<div class="data-row"><span class="t"></span><span></span></div>');continue;}
+      body.insertAdjacentHTML('beforeend','<div class="data-row"><span class="t">'+s[1]+'</span><span>'+s[0]+'</span></div>');
+    }
+    body.insertAdjacentHTML('beforeend',
+      '<div class="table-foot"><span class="pg">第 '+(page)+'/'+Math.ceil(sample.length/TBL_PER)+' 页</span>'+
+      '<span class="pg-btn" onclick="renderTable('+Math.max(1,page-1)+')">上一页</span>'+
+      '<span class="pg-btn" onclick="renderTable('+(page+1)+')">下一页</span></div>');
+  }
+</script>
+</body>
+</html>

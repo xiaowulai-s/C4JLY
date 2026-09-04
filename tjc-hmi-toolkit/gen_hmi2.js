@@ -240,37 +240,82 @@ function buildPage(pg) {
   var usedIds = [0];
   var nextId = 1;
   pg.widgets.forEach(function(w) {
-    var src = loadSeed(w.seed);
-    var obj = cloneObj(src);
-    setObjname(obj, w.objname);
     var id = w.id !== undefined ? w.id : nextId;
     if (usedIds.indexOf(id) >= 0) { console.log('  ERROR duplicate id ' + id); process.exit(1); }
     usedIds.push(id);
     nextId = id + 1;
-    setAttr(obj, 'id', id);
-    Object.keys(w.set || {}).forEach(function(k) { setAttr(obj, k, w.set[k]); });
-    // TJC validates txt against txt_maxl (in GBK bytes, since CJK is multi-byte).
-    // Seed txt_maxl is ~10, but our Chinese labels encode to more bytes. Bump it to
-    // the actual written txt length so every text/button loads without
-    // "txt 长度超过最大值".
-    var txtAttr = obj.items.find(function(i) { return i.kind === 'attr' && i.key === 'txt'; });
-    var mxAttr = obj.items.find(function(i) { return i.kind === 'attr' && i.key === 'txt_maxl'; });
-    if (txtAttr && mxAttr) {
-      var need = txtAttr.raw.length; // exact GBK byte count just written
-      if (need > mxAttr.value) setAttr(obj, 'txt_maxl', need);
+
+    var obj;
+    if (w.attrs) {
+      // ==== full 模式：按 config 内嵌快照整对象还原（跳过 seed 克隆） ====
+      // 由 _v65_to_config.js 生成：attrs = 保序 [key,val] 列表（除 id/objname/endx/endy），
+      // codes = 事件脚本文本。这样与 v65 等价的属性/脚本能精确重建，不引入 seed 默认值。
+      var items = [];
+      items.push({ kind: 'mark', text: w.typeMark || 'att-39' });
+      // objname + id 前置
+      items.push({ kind: 'attr', key: 'objname', raw: iconv.encode(w.objname, 'gbk'), value: w.objname });
+      items.push({ kind: 'attr', key: 'id', raw: Buffer.from([id]), value: id });
+      (w.attrs || []).forEach(function (kv) {
+        var key = kv[0], val = kv[1];
+        var raw;
+        if (typeof val === 'string') raw = iconv.encode(val === '' ? ' ' : val, 'gbk');
+        else if (val === undefined || val === null) return;
+        else {
+          var n = (val & 0xffffffff) > 0xffff ? 4 : ((val & 0xffff) > 0xff ? 2 : (val > 0 ? 1 : 1));
+          raw = Buffer.alloc(n || 1);
+          if (n === 1) raw.writeUInt8(val & 0xff, 0);
+          else if (n === 2) raw.writeUInt16LE(val & 0xffff, 0);
+          else raw.writeUInt32LE(val >>> 0, 0);
+        }
+        items.push({ kind: 'attr', key: key, raw: raw, value: val });
+      });
+      // endx/endy 由尺寸推导（2字节小端）
+      var gx = w.attrs.filter(function (kv) { return kv[0] === 'x'; }).map(function (kv) { return kv[1]; })[0];
+      var gy = w.attrs.filter(function (kv) { return kv[0] === 'y'; }).map(function (kv) { return kv[1]; })[0];
+      var gw = w.attrs.filter(function (kv) { return kv[0] === 'w'; }).map(function (kv) { return kv[1]; })[0];
+      var gh = w.attrs.filter(function (kv) { return kv[0] === 'h'; }).map(function (kv) { return kv[1]; })[0];
+      function endBuf(v) { var b = Buffer.alloc(2); b.writeUInt16LE((v) & 0xffff, 0); return b; }
+      if (gx !== undefined && gw !== undefined)
+        items.push({ kind: 'attr', key: 'endx', raw: endBuf(gx + gw - 1), value: (gx + gw - 1) & 0xffff });
+      if (gy !== undefined && gh !== undefined)
+        items.push({ kind: 'attr', key: 'endy', raw: endBuf(gy + gh - 1), value: (gy + gh - 1) & 0xffff });
+      // 事件槽：所有 TJC 对象都有 codesdown-N/codesup-N；slider 额外有 codesslide-N
+      var evNames = ['down', 'up'];
+      if (w.seed === 'slider') evNames.push('slide');
+      evNames.forEach(function (ev) {
+        var code = w.codes && w.codes[ev];
+        if (!code || !code.length) { items.push({ kind: 'mark', text: 'codes' + ev + '-0' }); return; }
+        var lines = code.split('\n').filter(function (l) { return l.trim().length > 0; });
+        items.push({ kind: 'mark', text: 'codes' + ev + '-' + lines.length });
+        lines.forEach(function (l) {
+          items.push({ kind: 'mark', text: iconv.encode(l.trim(), 'gbk').toString('latin1') });
+        });
+      });
+      items.push({ kind: 'end' });
+      obj = { items: items };
+    } else {
+      // ==== 传统 seed 模式 ====
+      var src = loadSeed(w.seed);
+      obj = cloneObj(src);
+      setObjname(obj, w.objname);
+      setAttr(obj, 'id', id);
+      Object.keys(w.set || {}).forEach(function(k) { setAttr(obj, k, w.set[k]); });
+      // TJC validates txt against txt_maxl (in GBK bytes, since CJK is multi-byte).
+      var txtAttr = obj.items.find(function(i) { return i.kind === 'attr' && i.key === 'txt'; });
+      var mxAttr = obj.items.find(function(i) { return i.kind === 'attr' && i.key === 'txt_maxl'; });
+      if (txtAttr && mxAttr) {
+        var need = txtAttr.raw.length;
+        if (need > mxAttr.value) setAttr(obj, 'txt_maxl', need);
+      }
+      var sx = w.set && w.set.x !== undefined ? w.set.x : PAGE.get(obj, 'x');
+      var sy = w.set && w.set.y !== undefined ? w.set.y : PAGE.get(obj, 'y');
+      var sw = w.set && w.set.w !== undefined ? w.set.w : PAGE.get(obj, 'w');
+      var sh = w.set && w.set.h !== undefined ? w.set.h : PAGE.get(obj, 'h');
+      if (sx !== undefined && sw !== undefined) setAttr(obj, 'endx', sx + sw - 1);
+      if (sy !== undefined && sh !== undefined) setAttr(obj, 'endy', sy + sh - 1);
+      clearCodes(obj);
+      Object.keys(w.codes || {}).forEach(function(ev) { setCodes(obj, ev, w.codes[ev]); });
     }
-    // Sync endx/endy = x+w-1 / y+h-1. Seeds keep their own endx/endy (from the
-    // example they were cloned from); engine uses endx/endy for touch/hit testing
-    // and a mismatch with the new x/y/w/h causes "索引超出了数组界限" on GUI load.
-    var sx = w.set && w.set.x !== undefined ? w.set.x : PAGE.get(obj, 'x');
-    var sy = w.set && w.set.y !== undefined ? w.set.y : PAGE.get(obj, 'y');
-    var sw = w.set && w.set.w !== undefined ? w.set.w : PAGE.get(obj, 'w');
-    var sh = w.set && w.set.h !== undefined ? w.set.h : PAGE.get(obj, 'h');
-    if (sx !== undefined && sw !== undefined) setAttr(obj, 'endx', sx + sw - 1);
-    if (sy !== undefined && sh !== undefined) setAttr(obj, 'endy', sy + sh - 1);
-    // always drop stray seed event code, then apply configured scripts
-    clearCodes(obj);
-    Object.keys(w.codes || {}).forEach(function(ev) { setCodes(obj, ev, w.codes[ev]); });
     objs.push(obj);
   });
 

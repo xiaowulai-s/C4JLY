@@ -20,6 +20,8 @@ static uint8_t  fidx = 0;
 static uint8_t  synced = 0;    /* 已看到帧头0 */
 static float    g_ppm_now = 0.0f;
 static volatile uint8_t g_new = 0;
+static volatile uint32_t g_last_frame_ms = 0;   /* 最近一次成功解析帧的 tick(HAL_GetTick) */
+#define PROBE_ONLINE_TIMEOUT_MS  3000u          /* 超过此时长无帧 => 视为"未连接" */
 
 /* 标定接口: 数字直出浓度时不参与换算, 仅占位保留 */
 static int32_t s_cal_k = 625;
@@ -37,6 +39,7 @@ static void parse_frame(void)
     v |= (uint16_t)frm[SENSOR_PPM_OFFSET + i] << (8 * i);
   g_ppm_now = (v > 1000) ? 1000.0f : (float)v;   /* 截到满量程 */
   g_new = 1;
+  g_last_frame_ms = HAL_GetTick();
 }
 
 void sensor_init(void)
@@ -79,6 +82,15 @@ void sensor_init(void)
 float sensor_read_ppm(void) { return g_ppm_now; }
 float sensor_read_voltage(void) { return 0.0f; }   /* 数字方案无电压 */
 int   sensor_has_new(void) { uint8_t n; __disable_irq(); n = g_new; g_new = 0; __enable_irq(); return n; }
+
+/* 探头在线判定: 最近一次有效帧距今未超时 => 在线 */
+int sensor_online(void) {
+  uint32_t now, last;
+  __disable_irq(); last = g_last_frame_ms; __enable_irq();
+  if (last == 0) return 0;                       /* 从未收到过帧 */
+  now = HAL_GetTick();
+  return (now - last) < PROBE_ONLINE_TIMEOUT_MS;
+}
 
 /* 逐字节喂入, 帧解析状态机 (HEAD0 HEAD1 [数据...]) */
 static void feed_byte(uint8_t b)

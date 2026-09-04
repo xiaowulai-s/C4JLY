@@ -1,0 +1,1355 @@
+
+============================================================
+FILE 0.pa  pageName=主页  objCount=45
+============================================================
+[ 0] Ö÷Ò³ type=121 x=0 y=0 w=1024 h=600
+      bco=2212 sta=1 pic=65535 up=255 down=255 id=0
+      >> att-28
+      >> codesload-0
+      >> codesloadend-0
+      >> codesdown-0
+      >> codesup-0
+      >> codesunload-0
+[ 1] p0t type=116 x=66 y=16 w=360 h=26
+      font=0 txt="C4F7N 便携式检漏仪" txt_maxl=18 bco=2212 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=1
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[ 2] dvr type=116 x=0 y=64 w=1024 h=2
+      font=0 txt=" " txt_maxl=10 bco=6603 pco=0 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=2
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[ 3] pg type=116 x=40 y=128 w=420 h=30
+      font=0 txt="C4F7N · 全氟异丁腈" txt_maxl=19 bco=2212 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=3
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[ 4] cc type=54 x=40 y=168 w=440 h=130
+      font=1 bco=2212 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=1 val=0 lenth=0 format=0 key=255 spax=0 spay=0 borderw=2 id=4
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[ 5] pu type=116 x=40 y=306 w=420 h=28
+      font=0 txt="ppm 浓度实时值" txt_maxl=14 bco=2212 pco=9885 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=5
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[ 6] bp type=116 x=60 y=372 w=150 h=32
+      font=0 txt="峰值保持" txt_maxl=10 bco=9885 pco=2212 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=6
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[ 7] ba type=116 x=222 y=372 w=150 h=32
+      font=0 txt="均值 0.00" txt_maxl=10 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=7
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[ 8] ps type=106 x=40 y=470 w=440 h=8
+      bco=2212 pco=9771 sta=1 val=0 dis=25 dez=0 id=8
+      >> att-29
+      >> codesdown-0
+      >> codesup-0
+[ 9] pk type=116 x=520 y=96 w=460 h=150
+      font=0 txt=" " txt_maxl=10 bco=4359 pco=0 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=9
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[10] pl type=116 x=520 y=116 w=464 h=24
+      font=0 txt="PEAK · 峰值浓度" txt_maxl=16 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=10
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[11] pv type=54 x=520 y=146 w=464 h=64
+      font=3 bco=4359 pco=62689 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=1 val=0 lenth=0 format=0 key=255 spax=0 spay=0 borderw=2 id=11
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[12] pd type=116 x=520 y=262 w=460 h=250
+      font=0 txt=" " txt_maxl=10 bco=4359 pco=0 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=12
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[13] p9 type=116 x=560 y=290 w=380 h=24
+      font=0 txt="响应时间 T90  ≈ 4.2 s" txt_maxl=22 bco=4359 pco=59230 borderc=0 xcen=0 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=13
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[14] pf type=116 x=560 y=336 w=380 h=24
+      font=0 txt="当前流量  0.5 L/min" txt_maxl=19 bco=4359 pco=59230 borderc=0 xcen=0 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=14
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[15] pt type=116 x=560 y=382 w=380 h=24
+      font=0 txt="探头温度  28.6 ℃" txt_maxl=17 bco=4359 pco=59230 borderc=0 xcen=0 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=15
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[16] pth type=116 x=560 y=428 w=380 h=24
+      font=0 txt="报警阈值  500 ppm" txt_maxl=17 bco=4359 pco=59230 borderc=0 xcen=0 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=16
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[17] lg type=112 x=14 y=6 w=52 h=52
+      pic=10 id=17
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[18] pc0b type=112 x=626 y=18 w=130 h=28
+      pic=8 id=18
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[19] pc0 type=116 x=650 y=18 w=92 h=28
+      font=0 txt="探头 已连接" txt_maxl=11 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=19
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[20] pc0d type=112 x=638 y=28 w=8 h=8
+      pic=5 id=20
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[21] pc1b type=112 x=768 y=18 w=110 h=28
+      pic=7 id=21
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[22] pc1 type=116 x=792 y=18 w=72 h=28
+      font=0 txt="泵 运行" txt_maxl=10 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=22
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[23] pc1d type=112 x=780 y=28 w=8 h=8
+      pic=5 id=23
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[24] pc2b type=112 x=890 y=18 w=110 h=28
+      pic=7 id=24
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[25] pc2 type=116 x=914 y=18 w=72 h=28
+      font=0 txt="电量 78%" txt_maxl=10 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=25
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[26] pc2d type=112 x=902 y=28 w=8 h=8
+      pic=5 id=26
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[27] prl type=116 x=560 y=214 w=140 h=30
+      font=0 txt="重置峰值" txt_maxl=10 bco=4359 pco=43681 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=27
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[28] pr type=53 x=560 y=214 w=140 h=30
+      font=3 txt=" " txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=1 ycen=1 sta=0 pic=65535 picc=65535 isbr=0 val=0 spax=0 spay=0 borderw=2 id=28
+      >> att-43
+      >> codesdown-0
+      >> codesup-2
+      >> pv.val=0
+      >> printh 01
+[29] pdh type=116 x=560 y=262 w=200 h=26
+      font=0 txt="检测状态" txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=0 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=29
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[30] navbg type=116 x=0 y=526 w=1024 h=74
+      font=0 txt=" " txt_maxl=10 bco=4359 pco=0 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=30
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[31] navdiv type=116 x=0 y=526 w=1024 h=2
+      font=0 txt=" " txt_maxl=10 bco=6603 pco=0 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=31
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[32] nh type=98 x=0 y=534 w=256 h=66
+      font=0 txt="主页" txt_maxl=10 bco=3222 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 val=0 spax=0 spay=0 borderw=2 id=32
+      >> att-42
+      >> codesdown-0
+      >> codesup-2
+      >> page 0
+      >> printh 40
+[33] ns type=98 x=256 y=534 w=256 h=66
+      font=0 txt="设置" txt_maxl=10 bco=2212 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 val=0 spax=0 spay=0 borderw=2 id=33
+      >> att-42
+      >> codesdown-0
+      >> codesup-2
+      >> page 1
+      >> printh 41
+[34] nc type=98 x=512 y=534 w=256 h=66
+      font=0 txt="历史曲线" txt_maxl=10 bco=2212 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 val=0 spax=0 spay=0 borderw=2 id=34
+      >> att-42
+      >> codesdown-0
+      >> codesup-2
+      >> page 2
+      >> printh 42
+[35] na type=98 x=768 y=534 w=256 h=66
+      font=0 txt="关于" txt_maxl=10 bco=2212 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 val=0 spax=0 spay=0 borderw=2 id=35
+      >> att-42
+      >> codesdown-0
+      >> codesup-2
+      >> page 3
+      >> printh 43
+[36] navI0 type=112 x=112 y=528 w=32 h=32
+      pic=15 id=36
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[37] navT0 type=116 x=0 y=566 w=256 h=20
+      font=0 txt="主页" txt_maxl=10 bco=4359 pco=9885 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=37
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[38] navH0 type=116 x=46 y=526 w=164 h=3
+      font=0 txt=" " txt_maxl=10 bco=9885 pco=0 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=38
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[39] navI1 type=112 x=368 y=528 w=32 h=32
+      pic=18 id=39
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[40] navT1 type=116 x=256 y=566 w=256 h=20
+      font=0 txt="设置" txt_maxl=10 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=40
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[41] navI2 type=112 x=624 y=528 w=32 h=32
+      pic=14 id=41
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[42] navT2 type=116 x=512 y=566 w=256 h=20
+      font=0 txt="历史曲线" txt_maxl=10 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=42
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[43] navI3 type=112 x=880 y=528 w=32 h=32
+      pic=12 id=43
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[44] navT3 type=116 x=768 y=566 w=256 h=20
+      font=0 txt="关于" txt_maxl=10 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=44
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+
+============================================================
+FILE 1.pa  pageName=设置  objCount=69
+============================================================
+[ 0] ÉèÖÃ type=121 x=0 y=0 w=1024 h=600
+      bco=2212 sta=1 pic=65535 up=255 down=255 id=0
+      >> att-28
+      >> codesload-0
+      >> codesloadend-0
+      >> codesdown-0
+      >> codesup-0
+      >> codesunload-0
+[ 1] p0t_s1 type=116 x=66 y=16 w=360 h=26
+      font=0 txt="C4F7N 便携式检漏仪" txt_maxl=18 bco=2212 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=1
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[ 2] dvr_s1 type=116 x=0 y=64 w=1024 h=2
+      font=0 txt=" " txt_maxl=10 bco=6603 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=2
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[ 3] p1L type=116 x=24 y=84 w=480 h=424
+      font=0 txt=" " txt_maxl=10 bco=4359 pco=0 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=3
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[ 4] htt type=116 x=48 y=104 w=200 h=28
+      font=0 txt="报警阈值" txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=4
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[ 5] hl type=116 x=48 y=150 w=200 h=26
+      font=0 txt="高报阈值" txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=5
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[ 6] hld type=116 x=48 y=178 w=280 h=22
+      font=0 txt="浓度达到后声光报警" txt_maxl=18 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=6
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[ 7] sep_hl type=116 x=48 y=200 w=432 h=2
+      font=0 txt=" " txt_maxl=10 bco=6603 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=7
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[ 8] hm type=53 x=300 y=142 w=44 h=44
+      font=0 txt="－" txt_maxl=10 bco=2212 pco=9885 borderc=0 xcen=1 ycen=1 sta=0 pic=65535 picc=65535 isbr=0 val=0 spax=0 spay=0 borderw=2 id=8
+      >> att-43
+      >> codesdown-0
+      >> codesup-6
+      >> h.val=h.val-50
+      >> if(h.val<100)
+      >> {
+      >> h.val=100
+      >> }
+      >> printh 11
+[ 9] h type=54 x=352 y=142 w=116 h=44
+      font=0 bco=2212 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=1 val=500 lenth=0 format=0 key=255 spax=0 spay=0 borderw=2 id=9
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[10] hp type=53 x=476 y=142 w=44 h=44
+      font=0 txt="+" txt_maxl=10 bco=2212 pco=9885 borderc=0 xcen=1 ycen=1 sta=0 pic=65535 picc=65535 isbr=0 val=0 spax=0 spay=0 borderw=2 id=10
+      >> att-43
+      >> codesdown-0
+      >> codesup-6
+      >> h.val=h.val+50
+      >> if(h.val>1000)
+      >> {
+      >> h.val=1000
+      >> }
+      >> printh 11
+[11] lo type=116 x=48 y=212 w=200 h=26
+      font=0 txt="低报阈值" txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=11
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[12] lod type=116 x=48 y=240 w=280 h=22
+      font=0 txt="低于此值解除报警" txt_maxl=16 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=12
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[13] sep_lo type=116 x=48 y=266 w=432 h=2
+      font=0 txt=" " txt_maxl=10 bco=6603 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=13
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[14] lm type=53 x=300 y=204 w=44 h=44
+      font=0 txt="－" txt_maxl=10 bco=2212 pco=9885 borderc=0 xcen=1 ycen=1 sta=0 pic=65535 picc=65535 isbr=0 val=0 spax=0 spay=0 borderw=2 id=14
+      >> att-43
+      >> codesdown-0
+      >> codesup-6
+      >> l.val=l.val-10
+      >> if(l.val<10)
+      >> {
+      >> l.val=10
+      >> }
+      >> printh 12
+[15] l type=54 x=352 y=204 w=116 h=44
+      font=0 bco=2212 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=1 val=100 lenth=0 format=0 key=255 spax=0 spay=0 borderw=2 id=15
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[16] lp type=53 x=476 y=204 w=44 h=44
+      font=0 txt="+" txt_maxl=10 bco=2212 pco=9885 borderc=0 xcen=1 ycen=1 sta=0 pic=65535 picc=65535 isbr=0 val=0 spax=0 spay=0 borderw=2 id=16
+      >> att-43
+      >> codesdown-0
+      >> codesup-6
+      >> l.val=l.val+10
+      >> if(l.val>1000)
+      >> {
+      >> l.val=1000
+      >> }
+      >> printh 12
+[17] ul type=116 x=48 y=278 w=200 h=26
+      font=0 txt="单位切换" txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=17
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[18] uld type=116 x=48 y=306 w=280 h=22
+      font=0 txt="ppm / 克每年(g·yr)" txt_maxl=19 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=18
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[19] sep_ce type=116 x=48 y=330 w=432 h=2
+      font=0 txt=" " txt_maxl=10 bco=6603 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=19
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[20] u type=53 x=300 y=270 w=140 h=40
+      font=0 txt="ppm" txt_maxl=10 bco=3222 pco=59230 borderc=0 xcen=1 ycen=1 sta=0 pic=65535 picc=65535 isbr=0 val=0 spax=0 spay=0 borderw=2 id=20
+      >> att-43
+      >> codesdown-0
+      >> codesup-1
+      >> printh 13
+[21] bl type=116 x=48 y=340 w=200 h=26
+      font=0 txt="蜂鸣器" txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=21
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[22] bld type=116 x=48 y=368 w=280 h=22
+      font=0 txt="报警声音提示" txt_maxl=12 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=22
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[23] sep_bz type=116 x=48 y=398 w=432 h=2
+      font=0 txt=" " txt_maxl=10 bco=6603 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=23
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[24] bb type=53 x=300 y=332 w=140 h=40
+      font=0 txt="开" txt_maxl=10 bco=9771 pco=59230 borderc=0 xcen=1 ycen=1 sta=0 pic=65535 picc=65535 isbr=0 val=0 spax=0 spay=0 borderw=2 id=24
+      >> att-43
+      >> codesdown-0
+      >> codesup-1
+      >> printh 14
+[25] dl type=116 x=48 y=402 w=200 h=26
+      font=0 txt="背光亮度" txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=25
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[26] di type=1 x=240 y=402 w=196 h=30
+      bco=2212 pco=9885 sta=1 pic=65535 picc=65535 val=70 maxval=100 minval=10 mode=0 dis=100 id=26
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+      >> codesslide-0
+[27] dv type=116 x=440 y=404 w=40 h=26
+      font=0 txt="70" txt_maxl=10 bco=4359 pco=9885 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=27
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[28] dvp type=116 x=486 y=404 w=18 h=26
+      font=0 txt="%" txt_maxl=10 bco=4359 pco=9885 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=28
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[29] p1R type=116 x=520 y=84 w=480 h=424
+      font=0 txt=" " txt_maxl=10 bco=4359 pco=0 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=29
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[30] calt type=116 x=544 y=104 w=200 h=28
+      font=0 txt="标定" txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=30
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[31] czl type=116 x=544 y=156 w=200 h=26
+      font=0 txt="零点标定" txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=31
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[32] czd type=116 x=544 y=184 w=300 h=22
+      font=0 txt="通入洁净空气后执行" txt_maxl=18 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=32
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[33] sep_c0 type=116 x=544 y=222 w=432 h=2
+      font=0 txt=" " txt_maxl=10 bco=6603 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=33
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[34] c0 type=53 x=860 y=150 w=110 h=44
+      font=0 txt="执行" txt_maxl=10 bco=3222 pco=59230 borderc=0 xcen=1 ycen=1 sta=0 pic=65535 picc=65535 isbr=0 val=0 spax=0 spay=0 borderw=2 id=34
+      >> att-43
+      >> codesdown-0
+      >> codesup-2
+      >> c0.txt="执行中"
+      >> printh 15
+[35] csl type=116 x=544 y=240 w=200 h=26
+      font=0 txt="量程标定" txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=35
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[36] csd type=116 x=544 y=268 w=300 h=22
+      font=0 txt="通入 1000 ppm 标气" txt_maxl=18 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=36
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[37] sep_c1 type=116 x=544 y=306 w=432 h=2
+      font=0 txt=" " txt_maxl=10 bco=6603 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=37
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[38] c1 type=53 x=860 y=234 w=110 h=44
+      font=0 txt="执行" txt_maxl=10 bco=3222 pco=59230 borderc=0 xcen=1 ycen=1 sta=0 pic=65535 picc=65535 isbr=0 val=0 spax=0 spay=0 borderw=2 id=38
+      >> att-43
+      >> codesdown-0
+      >> codesup-2
+      >> c1.txt="执行中"
+      >> printh 16
+[39] cfl type=116 x=544 y=324 w=200 h=26
+      font=0 txt="恢复出厂" txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=39
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[40] cfd type=116 x=544 y=352 w=300 h=22
+      font=0 txt="重置全部参数" txt_maxl=12 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=40
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[41] sep_cf type=116 x=544 y=392 w=432 h=2
+      font=0 txt=" " txt_maxl=10 bco=6603 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=41
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[42] cf type=53 x=860 y=318 w=110 h=44
+      font=0 txt="恢复" txt_maxl=10 bco=59944 pco=59230 borderc=0 xcen=1 ycen=1 sta=0 pic=65535 picc=65535 isbr=0 val=0 spax=0 spay=0 borderw=2 id=42
+      >> att-43
+      >> codesdown-0
+      >> codesup-1
+      >> printh 17
+[43] cht type=116 x=544 y=416 w=432 h=60
+      font=0 txt="标定需保持气路稳定 60 秒，完成后自动保存。" txt_maxl=42 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=43
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[44] lg_s1 type=112 x=14 y=6 w=52 h=52
+      pic=10 id=44
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[45] pc0b_s1 type=112 x=626 y=18 w=130 h=28
+      pic=8 id=45
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[46] pc0_s1 type=116 x=650 y=18 w=92 h=28
+      font=0 txt="探头 已连接" txt_maxl=11 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=46
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[47] pc0d_s1 type=112 x=638 y=28 w=8 h=8
+      pic=5 id=47
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[48] pc1b_s1 type=112 x=768 y=18 w=110 h=28
+      pic=7 id=48
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[49] pc1_s1 type=116 x=792 y=18 w=72 h=28
+      font=0 txt="泵 运行" txt_maxl=10 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=49
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[50] pc1d_s1 type=112 x=780 y=28 w=8 h=8
+      pic=5 id=50
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[51] pc2b_s1 type=112 x=890 y=18 w=110 h=28
+      pic=7 id=51
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[52] pc2_s1 type=116 x=914 y=18 w=72 h=28
+      font=0 txt="电量 78%" txt_maxl=10 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=52
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[53] pc2d_s1 type=112 x=902 y=28 w=8 h=8
+      pic=5 id=53
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[54] navbg_s1 type=116 x=0 y=526 w=1024 h=74
+      font=0 txt=" " txt_maxl=10 bco=4359 pco=0 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=54
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[55] navdiv_s1 type=116 x=0 y=526 w=1024 h=2
+      font=0 txt=" " txt_maxl=10 bco=6603 pco=0 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=55
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[56] nh1 type=98 x=0 y=534 w=256 h=66
+      font=0 txt="主页" txt_maxl=10 bco=2212 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 val=0 spax=0 spay=0 borderw=2 id=56
+      >> att-42
+      >> codesdown-0
+      >> codesup-2
+      >> page 0
+      >> printh 40
+[57] ns1 type=98 x=256 y=534 w=256 h=66
+      font=0 txt="设置" txt_maxl=10 bco=3222 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 val=0 spax=0 spay=0 borderw=2 id=57
+      >> att-42
+      >> codesdown-0
+      >> codesup-2
+      >> page 1
+      >> printh 41
+[58] nc1 type=98 x=512 y=534 w=256 h=66
+      font=0 txt="历史曲线" txt_maxl=10 bco=2212 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 val=0 spax=0 spay=0 borderw=2 id=58
+      >> att-42
+      >> codesdown-0
+      >> codesup-2
+      >> page 2
+      >> printh 42
+[59] na1 type=98 x=768 y=534 w=256 h=66
+      font=0 txt="关于" txt_maxl=10 bco=2212 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 val=0 spax=0 spay=0 borderw=2 id=59
+      >> att-42
+      >> codesdown-0
+      >> codesup-2
+      >> page 3
+      >> printh 43
+[60] navI_s10 type=112 x=112 y=528 w=32 h=32
+      pic=16 id=60
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[61] navT_s10 type=116 x=0 y=566 w=256 h=20
+      font=0 txt="主页" txt_maxl=10 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=61
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[62] navI_s11 type=112 x=368 y=528 w=32 h=32
+      pic=17 id=62
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[63] navT_s11 type=116 x=256 y=566 w=256 h=20
+      font=0 txt="设置" txt_maxl=10 bco=4359 pco=9885 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=63
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[64] navH_s11 type=116 x=302 y=526 w=164 h=3
+      font=0 txt=" " txt_maxl=10 bco=9885 pco=0 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=64
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[65] navI_s12 type=112 x=624 y=528 w=32 h=32
+      pic=14 id=65
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[66] navT_s12 type=116 x=512 y=566 w=256 h=20
+      font=0 txt="历史曲线" txt_maxl=10 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=66
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[67] navI_s13 type=112 x=880 y=528 w=32 h=32
+      pic=12 id=67
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[68] navT_s13 type=116 x=768 y=566 w=256 h=20
+      font=0 txt="关于" txt_maxl=10 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=68
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+
+============================================================
+FILE 2.pa  pageName=历史曲线  objCount=83
+============================================================
+[ 0] ÀúÊ·ÇúÏß type=121 x=0 y=0 w=1024 h=600
+      bco=2212 sta=1 pic=65535 up=255 down=255 id=0
+      >> att-28
+      >> codesload-0
+      >> codesloadend-0
+      >> codesdown-0
+      >> codesup-0
+      >> codesunload-0
+[ 1] p0t_s2 type=116 x=66 y=16 w=360 h=26
+      font=0 txt="C4F7N 便携式检漏仪" txt_maxl=18 bco=2212 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=1
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[ 2] dvr_s2 type=116 x=0 y=64 w=1024 h=2
+      font=0 txt=" " txt_maxl=10 bco=6603 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=2
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[ 3] p2L type=116 x=24 y=84 w=720 h=424
+      font=0 txt=" " txt_maxl=10 bco=4359 pco=0 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=3
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[ 4] ctt type=116 x=48 y=102 w=240 h=26
+      font=0 txt="浓度历史曲线" txt_maxl=12 bco=4359 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=4
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[ 5] sw0 type=53 x=420 y=98 w=92 h=32
+      font=0 txt="曲线" txt_maxl=10 bco=3222 pco=59230 borderc=0 xcen=1 ycen=1 sta=0 pic=65535 picc=65535 isbr=0 val=0 spax=0 spay=0 borderw=2 id=5
+      >> att-43
+      >> codesdown-0
+      >> codesup-1
+      >> printh 21
+[ 6] sw1 type=53 x=520 y=98 w=92 h=32
+      font=0 txt="数据" txt_maxl=10 bco=2212 pco=59230 borderc=0 xcen=1 ycen=1 sta=0 pic=65535 picc=65535 isbr=0 val=0 spax=0 spay=0 borderw=2 id=6
+      >> att-43
+      >> codesdown-0
+      >> codesup-1
+      >> printh 22
+[ 7] p2D type=116 x=24 y=84 w=976 h=424
+      font=0 txt=" " txt_maxl=10 bco=4359 pco=0 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=7
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[ 8] ht type=116 x=44 y=102 w=466 h=24
+      font=0 txt="时间" txt_maxl=10 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=8
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[ 9] hc type=116 x=510 y=102 w=466 h=24
+      font=0 txt="浓度(ppm)" txt_maxl=10 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=9
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[10] bup type=53 x=760 y=470 w=110 h=32
+      font=0 txt="上一页" txt_maxl=10 bco=2212 pco=59230 borderc=0 xcen=1 ycen=1 sta=0 pic=65535 picc=65535 isbr=0 val=0 spax=0 spay=0 borderw=2 id=10
+      >> att-43
+      >> codesdown-0
+      >> codesup-1
+      >> printh 25
+[11] bdn type=53 x=880 y=470 w=110 h=32
+      font=0 txt="下一页" txt_maxl=10 bco=2212 pco=59230 borderc=0 xcen=1 ycen=1 sta=0 pic=65535 picc=65535 isbr=0 val=0 spax=0 spay=0 borderw=2 id=11
+      >> att-43
+      >> codesdown-0
+      >> codesup-1
+      >> printh 23
+[12] tt0 type=116 x=44 y=134 w=466 h=24
+      font=0 txt=" " txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=12
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[13] np0 type=116 x=510 y=134 w=466 h=24
+      font=0 txt=" " txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=13
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[14] tt1 type=116 x=44 y=161 w=466 h=24
+      font=0 txt=" " txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=14
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[15] np1 type=116 x=510 y=161 w=466 h=24
+      font=0 txt=" " txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=15
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[16] tt2 type=116 x=44 y=188 w=466 h=24
+      font=0 txt=" " txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=16
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[17] np2 type=116 x=510 y=188 w=466 h=24
+      font=0 txt=" " txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=17
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[18] tt3 type=116 x=44 y=215 w=466 h=24
+      font=0 txt=" " txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=18
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[19] np3 type=116 x=510 y=215 w=466 h=24
+      font=0 txt=" " txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=19
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[20] tt4 type=116 x=44 y=242 w=466 h=24
+      font=0 txt=" " txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=20
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[21] np4 type=116 x=510 y=242 w=466 h=24
+      font=0 txt=" " txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=21
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[22] tt5 type=116 x=44 y=269 w=466 h=24
+      font=0 txt=" " txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=22
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[23] np5 type=116 x=510 y=269 w=466 h=24
+      font=0 txt=" " txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=23
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[24] tt6 type=116 x=44 y=296 w=466 h=24
+      font=0 txt=" " txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=24
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[25] np6 type=116 x=510 y=296 w=466 h=24
+      font=0 txt=" " txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=25
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[26] tt7 type=116 x=44 y=323 w=466 h=24
+      font=0 txt=" " txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=26
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[27] np7 type=116 x=510 y=323 w=466 h=24
+      font=0 txt=" " txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=27
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[28] tt8 type=116 x=44 y=350 w=466 h=24
+      font=0 txt=" " txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=28
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[29] np8 type=116 x=510 y=350 w=466 h=24
+      font=0 txt=" " txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=29
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[30] tt9 type=116 x=44 y=377 w=466 h=24
+      font=0 txt=" " txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=30
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[31] np9 type=116 x=510 y=377 w=466 h=24
+      font=0 txt=" " txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=31
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[32] tt10 type=116 x=44 y=404 w=466 h=24
+      font=0 txt=" " txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=32
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[33] np10 type=116 x=510 y=404 w=466 h=24
+      font=0 txt=" " txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=33
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[34] tt11 type=116 x=44 y=431 w=466 h=24
+      font=0 txt=" " txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=34
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[35] np11 type=116 x=510 y=431 w=466 h=24
+      font=0 txt=" " txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=35
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[36] pg type=116 x=640 y=474 w=110 h=24
+      font=0 txt="第1/1页" txt_maxl=10 bco=4359 pco=9885 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=36
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[37] wv type=0 x=48 y=148 w=672 h=330
+      bco=2212 sta=3 pic=65535 picc=65535 dis=100 dir=1 id=37
+      >> att-40
+      >> codesdown-0
+      >> codesup-0
+[38] leg type=116 x=48 y=486 w=400 h=22
+      font=0 txt="— 实时浓度   - - 报警阈值" txt_maxl=26 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=38
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[39] p2R type=116 x=760 y=84 w=240 h=424
+      font=0 txt=" " txt_maxl=10 bco=4359 pco=0 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=39
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[40] stt type=116 x=784 y=104 w=160 h=26
+      font=0 txt="数据统计" txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=40
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[41] mxl type=116 x=784 y=136 w=80 h=24
+      font=0 txt="最大值" txt_maxl=10 bco=4359 pco=31893 borderc=0 xcen=0 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=41
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[42] mx type=116 x=900 y=134 w=84 h=28
+      font=0 txt="248.5" txt_maxl=10 bco=4359 pco=62689 borderc=0 xcen=2 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=42
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[43] avl type=116 x=784 y=182 w=80 h=24
+      font=0 txt="平均值" txt_maxl=10 bco=4359 pco=31893 borderc=0 xcen=0 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=43
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[44] av type=116 x=900 y=180 w=84 h=28
+      font=0 txt="86.3" txt_maxl=10 bco=4359 pco=9885 borderc=0 xcen=2 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=44
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[45] mnl type=116 x=784 y=228 w=80 h=24
+      font=0 txt="最小值" txt_maxl=10 bco=4359 pco=31893 borderc=0 xcen=0 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=45
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[46] mn type=116 x=900 y=226 w=84 h=28
+      font=0 txt="0.00" txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=2 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=46
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[47] dul type=116 x=784 y=274 w=80 h=24
+      font=0 txt="记录时长" txt_maxl=10 bco=4359 pco=31893 borderc=0 xcen=0 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=47
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[48] du type=116 x=900 y=272 w=84 h=28
+      font=0 txt="10 分钟" txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=2 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=48
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[49] ctl type=116 x=784 y=320 w=80 h=24
+      font=0 txt="数据点数" txt_maxl=10 bco=4359 pco=31893 borderc=0 xcen=0 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=49
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[50] ct type=116 x=900 y=318 w=84 h=28
+      font=0 txt="600" txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=2 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=50
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[51] ex type=53 x=784 y=408 w=192 h=52
+      font=0 txt="导出 CSV（USB）" txt_maxl=15 bco=3222 pco=59230 borderc=0 xcen=1 ycen=1 sta=0 pic=65535 picc=65535 isbr=0 val=0 spax=0 spay=0 borderw=2 id=51
+      >> att-43
+      >> codesdown-0
+      >> codesup-2
+      >> ex.txt="导出中"
+      >> printh 24
+[52] alarm type=116 x=48 y=143 w=672 h=2
+      font=0 txt=" " txt_maxl=10 bco=59944 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=52
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[53] cys0 type=116 x=30 y=466 w=26 h=22
+      font=0 txt="0" txt_maxl=10 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=53
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[54] cys1 type=116 x=30 y=384 w=26 h=22
+      font=0 txt="125" txt_maxl=10 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=54
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[55] cys2 type=116 x=30 y=301 w=26 h=22
+      font=0 txt="250" txt_maxl=10 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=55
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[56] cys3 type=116 x=30 y=219 w=26 h=22
+      font=0 txt="375" txt_maxl=10 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=56
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[57] cys4 type=116 x=30 y=136 w=26 h=22
+      font=0 txt="500" txt_maxl=10 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=57
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[58] lg_s2 type=112 x=14 y=6 w=52 h=52
+      pic=10 id=58
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[59] pc0b_s2 type=112 x=626 y=18 w=130 h=28
+      pic=8 id=59
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[60] pc0_s2 type=116 x=650 y=18 w=92 h=28
+      font=0 txt="探头 已连接" txt_maxl=11 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=60
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[61] pc0d_s2 type=112 x=638 y=28 w=8 h=8
+      pic=5 id=61
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[62] pc1b_s2 type=112 x=768 y=18 w=110 h=28
+      pic=7 id=62
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[63] pc1_s2 type=116 x=792 y=18 w=72 h=28
+      font=0 txt="泵 运行" txt_maxl=10 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=63
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[64] pc1d_s2 type=112 x=780 y=28 w=8 h=8
+      pic=5 id=64
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[65] pc2b_s2 type=112 x=890 y=18 w=110 h=28
+      pic=7 id=65
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[66] pc2_s2 type=116 x=914 y=18 w=72 h=28
+      font=0 txt="电量 78%" txt_maxl=10 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=66
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[67] pc2d_s2 type=112 x=902 y=28 w=8 h=8
+      pic=5 id=67
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[68] navbg_s2 type=116 x=0 y=526 w=1024 h=74
+      font=0 txt=" " txt_maxl=10 bco=4359 pco=0 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=68
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[69] navdiv_s2 type=116 x=0 y=526 w=1024 h=2
+      font=0 txt=" " txt_maxl=10 bco=6603 pco=0 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=69
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[70] nh2 type=98 x=0 y=534 w=256 h=66
+      font=0 txt="主页" txt_maxl=10 bco=2212 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 val=0 spax=0 spay=0 borderw=2 id=70
+      >> att-42
+      >> codesdown-0
+      >> codesup-2
+      >> page 0
+      >> printh 40
+[71] ns2 type=98 x=256 y=534 w=256 h=66
+      font=0 txt="设置" txt_maxl=10 bco=2212 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 val=0 spax=0 spay=0 borderw=2 id=71
+      >> att-42
+      >> codesdown-0
+      >> codesup-2
+      >> page 1
+      >> printh 41
+[72] nc2 type=98 x=512 y=534 w=256 h=66
+      font=0 txt="历史曲线" txt_maxl=10 bco=3222 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 val=0 spax=0 spay=0 borderw=2 id=72
+      >> att-42
+      >> codesdown-0
+      >> codesup-2
+      >> page 2
+      >> printh 42
+[73] na2 type=98 x=768 y=534 w=256 h=66
+      font=0 txt="关于" txt_maxl=10 bco=2212 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 val=0 spax=0 spay=0 borderw=2 id=73
+      >> att-42
+      >> codesdown-0
+      >> codesup-2
+      >> page 3
+      >> printh 43
+[74] navI_s20 type=112 x=112 y=528 w=32 h=32
+      pic=16 id=74
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[75] navT_s20 type=116 x=0 y=566 w=256 h=20
+      font=0 txt="主页" txt_maxl=10 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=75
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[76] navI_s21 type=112 x=368 y=528 w=32 h=32
+      pic=18 id=76
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[77] navT_s21 type=116 x=256 y=566 w=256 h=20
+      font=0 txt="设置" txt_maxl=10 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=77
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[78] navI_s22 type=112 x=624 y=528 w=32 h=32
+      pic=13 id=78
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[79] navT_s22 type=116 x=512 y=566 w=256 h=20
+      font=0 txt="历史曲线" txt_maxl=10 bco=4359 pco=9885 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=79
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[80] navH_s22 type=116 x=558 y=526 w=164 h=3
+      font=0 txt=" " txt_maxl=10 bco=9885 pco=0 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=80
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[81] navI_s23 type=112 x=880 y=528 w=32 h=32
+      pic=12 id=81
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[82] navT_s23 type=116 x=768 y=566 w=256 h=20
+      font=0 txt="关于" txt_maxl=10 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=82
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+
+============================================================
+FILE 3.pa  pageName=关于  objCount=54
+============================================================
+[ 0] ¹ØÓÚ type=121 x=0 y=0 w=1024 h=600
+      bco=2212 sta=1 pic=65535 up=255 down=255 id=0
+      >> att-28
+      >> codesload-0
+      >> codesloadend-0
+      >> codesdown-0
+      >> codesup-0
+      >> codesunload-0
+[ 1] p0t_s3 type=116 x=66 y=16 w=360 h=26
+      font=0 txt="C4F7N 便携式检漏仪" txt_maxl=18 bco=2212 pco=59230 borderc=0 xcen=0 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=1
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[ 2] dvr_s3 type=116 x=0 y=64 w=1024 h=2
+      font=0 txt=" " txt_maxl=10 bco=6603 pco=59230 borderc=0 xcen=0 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=2
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[ 3] p3L type=116 x=24 y=84 w=480 h=424
+      font=0 txt=" " txt_maxl=10 bco=4359 pco=0 borderc=0 xcen=0 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=3
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[ 4] itt type=116 x=48 y=104 w=200 h=28
+      font=0 txt="设备信息" txt_maxl=10 bco=4359 pco=59230 borderc=0 xcen=0 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=4
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[ 5] mod type=116 x=48 y=156 w=420 h=24
+      font=0 txt="产品型号    C4F7N-1000" txt_maxl=22 bco=4359 pco=59230 borderc=0 xcen=0 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=5
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[ 6] sep_m1 type=116 x=48 y=190 w=432 h=2
+      font=0 txt=" " txt_maxl=10 bco=6603 pco=59230 borderc=0 xcen=0 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=6
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[ 7] sn type=116 x=48 y=196 w=420 h=24
+      font=0 txt="序列号    SN-C4F7N-2026-0001" txt_maxl=28 bco=4359 pco=59230 borderc=0 xcen=0 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=7
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[ 8] sep_m2 type=116 x=48 y=230 w=432 h=2
+      font=0 txt=" " txt_maxl=10 bco=6603 pco=59230 borderc=0 xcen=0 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=8
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[ 9] fw type=116 x=48 y=236 w=420 h=24
+      font=0 txt="固件版本    V1.0.0" txt_maxl=18 bco=4359 pco=59230 borderc=0 xcen=0 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=9
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[10] sep_m3 type=116 x=48 y=270 w=432 h=2
+      font=0 txt=" " txt_maxl=10 bco=6603 pco=59230 borderc=0 xcen=0 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=10
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[11] mcu type=116 x=48 y=276 w=420 h=24
+      font=0 txt="主控    STM32F103RCT6TR" txt_maxl=23 bco=4359 pco=59230 borderc=0 xcen=0 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=11
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[12] sep_m4 type=116 x=48 y=310 w=432 h=2
+      font=0 txt=" " txt_maxl=10 bco=6603 pco=59230 borderc=0 xcen=0 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=12
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[13] lcd type=116 x=48 y=316 w=420 h=24
+      font=0 txt="屏幕    淘晶驰 7寸 1024×600" txt_maxl=28 bco=4359 pco=59230 borderc=0 xcen=0 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=13
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[14] sep_m5 type=116 x=48 y=350 w=432 h=2
+      font=0 txt=" " txt_maxl=10 bco=6603 pco=59230 borderc=0 xcen=0 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=14
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[15] pri type=116 x=48 y=356 w=420 h=24
+      font=0 txt="检测原理    NDIR 双波长红外" txt_maxl=27 bco=4359 pco=59230 borderc=0 xcen=0 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=15
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[16] p3R type=116 x=520 y=84 w=480 h=424
+      font=0 txt=" " txt_maxl=10 bco=4359 pco=0 borderc=0 xcen=0 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=16
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[17] ptt type=116 x=544 y=104 w=200 h=28
+      font=0 txt="传感器与探头" txt_maxl=12 bco=4359 pco=59230 borderc=0 xcen=0 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=17
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[18] pst type=116 x=544 y=156 w=420 h=26
+      font=0 txt="GC5G1 探头 · 已连接" txt_maxl=20 bco=4359 pco=9771 borderc=0 xcen=0 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=18
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[19] psu type=116 x=544 y=186 w=420 h=22
+      font=0 txt="数字UART 主动上报 · 探头温度 28.6℃" txt_maxl=36 bco=4359 pco=31893 borderc=0 xcen=0 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=19
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[20] sep_p1 type=116 x=544 y=220 w=432 h=2
+      font=0 txt=" " txt_maxl=10 bco=6603 pco=59230 borderc=0 xcen=0 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=20
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[21] rng type=116 x=544 y=244 w=420 h=24
+      font=0 txt="量程    0 ~ 1000 ppm" txt_maxl=20 bco=4359 pco=59230 borderc=0 xcen=0 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=21
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[22] sep_p2 type=116 x=544 y=278 w=432 h=2
+      font=0 txt=" " txt_maxl=10 bco=6603 pco=59230 borderc=0 xcen=0 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=22
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[23] res type=116 x=544 y=284 w=420 h=24
+      font=0 txt="显示分辨率    0.01 ppm" txt_maxl=22 bco=4359 pco=59230 borderc=0 xcen=0 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=23
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[24] sep_p3 type=116 x=544 y=318 w=432 h=2
+      font=0 txt=" " txt_maxl=10 bco=6603 pco=59230 borderc=0 xcen=0 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=24
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[25] t90 type=116 x=544 y=324 w=420 h=24
+      font=0 txt="响应时间    T90 ≤ 5 s" txt_maxl=22 bco=4359 pco=59230 borderc=0 xcen=0 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=25
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[26] sep_p4 type=116 x=544 y=358 w=432 h=2
+      font=0 txt=" " txt_maxl=10 bco=6603 pco=59230 borderc=0 xcen=0 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=26
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[27] bat type=116 x=544 y=364 w=420 h=24
+      font=0 txt="电池    18650×2 · 78%" txt_maxl=23 bco=4359 pco=59230 borderc=0 xcen=0 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=27
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[28] note type=116 x=544 y=420 w=432 h=60
+      font=0 txt="用于 GIS / 高压断路器 / 环网柜等环保绝缘气体泄漏检测" txt_maxl=52 bco=4359 pco=31893 borderc=0 xcen=0 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=28
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[29] lg_s3 type=112 x=14 y=6 w=52 h=52
+      pic=10 id=29
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[30] pc0b_s3 type=112 x=626 y=18 w=130 h=28
+      pic=8 id=30
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[31] pc0_s3 type=116 x=650 y=18 w=92 h=28
+      font=0 txt="探头 已连接" txt_maxl=11 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=31
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[32] pc0d_s3 type=112 x=638 y=28 w=8 h=8
+      pic=5 id=32
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[33] pc1b_s3 type=112 x=768 y=18 w=110 h=28
+      pic=7 id=33
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[34] pc1_s3 type=116 x=792 y=18 w=72 h=28
+      font=0 txt="泵 运行" txt_maxl=10 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=34
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[35] pc1d_s3 type=112 x=780 y=28 w=8 h=8
+      pic=5 id=35
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[36] pc2b_s3 type=112 x=890 y=18 w=110 h=28
+      pic=7 id=36
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[37] pc2_s3 type=116 x=914 y=18 w=72 h=28
+      font=0 txt="电量 78%" txt_maxl=10 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=37
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[38] pc2d_s3 type=112 x=902 y=28 w=8 h=8
+      pic=5 id=38
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[39] navbg_s3 type=116 x=0 y=526 w=1024 h=74
+      font=0 txt=" " txt_maxl=10 bco=4359 pco=0 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=39
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[40] navdiv_s3 type=116 x=0 y=526 w=1024 h=2
+      font=0 txt=" " txt_maxl=10 bco=6603 pco=0 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=40
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[41] nh3 type=98 x=0 y=534 w=256 h=66
+      font=0 txt="主页" txt_maxl=10 bco=2212 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 val=0 spax=0 spay=0 borderw=2 id=41
+      >> att-42
+      >> codesdown-0
+      >> codesup-2
+      >> page 0
+      >> printh 40
+[42] ns3 type=98 x=256 y=534 w=256 h=66
+      font=0 txt="设置" txt_maxl=10 bco=2212 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 val=0 spax=0 spay=0 borderw=2 id=42
+      >> att-42
+      >> codesdown-0
+      >> codesup-2
+      >> page 1
+      >> printh 41
+[43] nc3 type=98 x=512 y=534 w=256 h=66
+      font=0 txt="历史曲线" txt_maxl=10 bco=2212 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 val=0 spax=0 spay=0 borderw=2 id=43
+      >> att-42
+      >> codesdown-0
+      >> codesup-2
+      >> page 2
+      >> printh 42
+[44] na3 type=98 x=768 y=534 w=256 h=66
+      font=0 txt="关于" txt_maxl=10 bco=3222 pco=59230 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 val=0 spax=0 spay=0 borderw=2 id=44
+      >> att-42
+      >> codesdown-0
+      >> codesup-2
+      >> page 3
+      >> printh 43
+[45] navI_s30 type=112 x=112 y=528 w=32 h=32
+      pic=16 id=45
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[46] navT_s30 type=116 x=0 y=566 w=256 h=20
+      font=0 txt="主页" txt_maxl=10 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=46
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[47] navI_s31 type=112 x=368 y=528 w=32 h=32
+      pic=18 id=47
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[48] navT_s31 type=116 x=256 y=566 w=256 h=20
+      font=0 txt="设置" txt_maxl=10 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=48
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[49] navI_s32 type=112 x=624 y=528 w=32 h=32
+      pic=14 id=49
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[50] navT_s32 type=116 x=512 y=566 w=256 h=20
+      font=0 txt="历史曲线" txt_maxl=10 bco=4359 pco=31893 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=50
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[51] navI_s33 type=112 x=880 y=528 w=32 h=32
+      pic=11 id=51
+      >> att-23
+      >> codesdown-0
+      >> codesup-0
+[52] navT_s33 type=116 x=768 y=566 w=256 h=20
+      font=0 txt="关于" txt_maxl=10 bco=4359 pco=9885 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=52
+      >> att-39
+      >> codesdown-0
+      >> codesup-0
+[53] navH_s33 type=116 x=814 y=526 w=164 h=3
+      font=0 txt=" " txt_maxl=10 bco=9885 pco=0 borderc=0 xcen=1 ycen=1 sta=1 pic=65535 picc=65535 isbr=0 pw=0 key=255 spax=0 spay=0 borderw=2 id=53
+      >> att-39
+      >> codesdown-0
+      >> codesup-0

@@ -54,6 +54,18 @@ void tjc_set_pco(const char *obj, uint32_t color) {
   tjc_send_raw(cmd);
 }
 
+void tjc_pic(const char *obj, uint16_t picid) {
+  char cmd[32];
+  HMI_CMD_SET_PIC(obj, picid);
+  tjc_send_raw(cmd);
+}
+
+void tjc_vis(const char *obj, uint8_t vis) {
+  char cmd[24];
+  HMI_CMD_SET_VIS(obj, vis);
+  tjc_send_raw(cmd);
+}
+
 void tjc_page(uint8_t n) {
   char cmd[16];
   HMI_CMD_PAGE(n);

@@ -27,10 +27,17 @@ typedef enum {
   HMI_CMD_CAL_ZERO     = 0x15,   /* 零点标定        */
   HMI_CMD_CAL_SPAN     = 0x16,   /* 量程标定        */
   HMI_CMD_CAL_FAC      = 0x17,   /* 恢复出厂        */
-  HMI_CMD_RANGE_10M    = 0x21,   /* 曲线 10分钟     */
-  HMI_CMD_RANGE_1H     = 0x22,   /* 曲线 1小时      */
-  HMI_CMD_RANGE_24H    = 0x23,   /* 曲线 24小时     */
-  HMI_CMD_EXPORT       = 0x24    /* 导出CSV         */
+  /* 0x21..0x23: 原曲线时段切换已移除, 复用为视图/翻页 */
+  HMI_CMD_VIEW_CURVE   = 0x21,   /* 切曲线视图      */
+  HMI_CMD_VIEW_DATA    = 0x22,   /* 切数据表视图    */
+  HMI_CMD_TBL_NEXT     = 0x23,   /* 表下一页        */
+  HMI_CMD_EXPORT       = 0x24,   /* 导出CSV         */
+  HMI_CMD_TBL_PREV     = 0x25,   /* 表上一页        */
+  /* 页码通知 (导航按钮 printh 4N) */
+  HMI_CMD_PAGE0_ENTER  = 0x40,
+  HMI_CMD_PAGE1_ENTER  = 0x41,
+  HMI_CMD_PAGE2_ENTER  = 0x42,
+  HMI_CMD_PAGE3_ENTER  = 0x43
 } hmi_cmd_t;
 
 /* =====================================================================
@@ -47,6 +54,7 @@ typedef enum {
 #define OBJ_THR_HI_VAL  "h"      /* 高报值   vvs=0 整数                */
 #define OBJ_THR_LO_VAL  "l"      /* 低报值   vvs=0 整数                */
 #define OBJ_UNIT_BTN    "u"      /* 单位按钮 txt                       */
+#define OBJ_CONC_SUB    "pu"     /* 主页 单位+副标题 txt(ppm 浓度实时值 / g/年 年泄漏率) */
 #define OBJ_BUZ_BTN     "bb"     /* 蜂鸣按钮 txt                       */
 #define OBJ_CAL0_BTN    "c0"     /* 零点标定按钮 txt 复位="执行"        */
 #define OBJ_CAL1_BTN    "c1"     /* 量程标定按钮 txt 复位="执行"        */
@@ -57,6 +65,9 @@ typedef enum {
 #define OBJ_STAT_CNT    "ct"
 #define OBJ_PROBE_ST    "pst"    /* 探头状态 txt                       */
 #define OBJ_WAVE        "wv"     /* 波形控件 add 0,val                 */
+/* 历史曲线：数据由 MCU 存 W25Q16 并逐点 add 回放(屏幕 SD 被外壳遮挡、且屏内无自动回填能力, 不用屏侧存储) */
+#define OBJ_HIST_RANGE  "rc"     /* 可选: 若需屏幕侧提示"切换范围" */
+#define OBJ_EXPORT      "ec"     /* 可选: 若需屏幕侧提示"导出中" */
 /* 电量显示 (MCU->屏幕 入站更新): 用 tjc_set_bat(pct) / HMI_CMD_SET_BAT 刷新 */
 #define OBJ_BAT_CHIP    "pc2"    /* 主页顶栏电量 chip                  */
 #define OBJ_BAT_CHIP_P1 "pc2_s1" /* 设置页顶栏电量 chip                */
@@ -64,12 +75,55 @@ typedef enum {
 #define OBJ_BAT_CHIP_P3 "pc2_s3" /* 关于页顶栏电量 chip                */
 #define OBJ_BAT_ROW     "bat"    /* 关于页电量行 txt                   */
 
+/* 主页顶栏状态 chip (胶囊底 + 状态圆点 + 文字标签) */
+#define OBJ_PROBE_CHIP      "pc0"  /* 探头 chip 文字标签(动态文案)       */
+#define OBJ_PUMP_CHIP       "pc1"  /* 泵   chip 文字标签(动态文案)       */
+#define OBJ_DOT_PROBE       "pc0d" /* 主页 探头 chip 圆点 picture        */
+#define OBJ_DOT_PUMP        "pc1d" /* 主页 泵   chip 圆点 picture        */
+#define OBJ_DOT_PROBE_P1    "pc0d_s1"
+#define OBJ_DOT_PUMP_P1     "pc1d_s1"
+#define OBJ_DOT_PROBE_P2    "pc0d_s2"
+#define OBJ_DOT_PUMP_P2     "pc1d_s2"
+#define OBJ_DOT_PROBE_P3    "pc0d_s3"
+#define OBJ_DOT_PUMP_P3     "pc1d_s3"
+#define OBJ_DOT_BAT         "pc2d" /* 主页 电量 chip 圆点 picture        */
+#define OBJ_DOT_BAT_P1      "pc2d_s1" /* 设置页 电量圆点                 */
+#define OBJ_DOT_BAT_P2      "pc2d_s2" /* 历史曲线页 电量圆点              */
+#define OBJ_DOT_BAT_P3      "pc2d_s3" /* 关于页 电量圆点                  */
+/* 状态圆点图片 ID (导入 GUI 后分配) */
+#define PIC_DOT_GREEN       5      /* 已连接/运行/高电量                */
+#define PIC_DOT_GRAY        4      /* 未连接/停止                       */
+#define PIC_DOT_AMBER       3      /* 中电量                            */
+#define PIC_DOT_RED         6      /* 低电量                            */
+/* 电量圆点变色阈值(%) */
+#define BAT_DOT_WARN_PCT    50     /* pct>=此值 绿; >=LOW 橙; 其它红     */
+#define BAT_DOT_LOW_PCT     20
+
+/* 历史曲线页 · 分割页 (视图切换 + 数据表) */
+#define OBJ_TBL_PANEL   "p2D"    /* 数据表视图面板                     */
+#define OBJ_TBL_HEAD_T  "ht"     /* 表头-时间(居中)                     */
+#define OBJ_TBL_HEAD_P  "hc"     /* 表头-浓度(居中)                     */
+#define OBJ_TBL_TIME_BASE "tt"   /* 表格时间行 tt0..tt11 (居中 text)  */
+#define OBJ_TBL_PPM_BASE  "np"   /* 表格浓度行 np0..np11 (居中 text)   */
+#define OBJ_TBL_PAGE    "pg"     /* 页指示 第x/y页                     */
+#define OBJ_SW_CURVE    "sw0"    /* 曲线视图按钮(状态高亮)              */
+#define OBJ_SW_DATA     "sw1"    /* 数据表视图按钮(状态高亮)            */
+/* 曲线组常显对象(需 vis 隐藏以切到表格) */
+#define OBJ_CT_TITLE    "ctt"    /* 曲线标题                          */
+#define OBJ_CT_LEG      "leg"    /* 图例                              */
+#define OBJ_CT_ALARM    "alarm"  /* 报警线                            */
+#define OBJ_CT_PL       "p2L"    /* 曲线左面板(装饰)                   */
+#define OBJ_CT_PR       "p2R"    /* 曲线右面板(装饰)                   */
+#define OBJ_CT_WAVE     "wv"     /* 波形                              */
+
 /* =====================================================================
  * 3. 指令拼装宏 (须自行追加帧尾 0xFF 0xFF 0xFF)
  * ===================================================================== */
 #define HMI_CMD_SET_VAL(obj, v)        sprintf(cmd, "%s.val=%d",    (obj), (int)(v))
 #define HMI_CMD_SET_TXT(obj, t)        sprintf(cmd, "%s.txt=\"%s\"",(obj), (t))
 #define HMI_CMD_SET_PCO(obj, c)        sprintf(cmd, "%s.pco=%d",    (obj), (int)(c))
+#define HMI_CMD_SET_PIC(obj, id)       sprintf(cmd, "%s.pic=%d",    (obj), (int)(id))
+#define HMI_CMD_SET_VIS(obj, v)        sprintf(cmd, "vis %s,%d",    (obj), (int)(v))
 #define HMI_CMD_SET_BAT(obj, pct)      sprintf(cmd, "%s.txt=\"电量 %d%%\"", (obj), (int)(pct))/* pct:0~100 */
 #define HMI_CMD_PAGE(n)                sprintf(cmd, "page %d",      (int)(n))
 #define HMI_CMD_WAVE_ADD(ch, v)        sprintf(cmd, "add %d,%d",    (int)(ch), (int)(v))

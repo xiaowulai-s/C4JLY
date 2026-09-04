@@ -49,6 +49,9 @@ void    sensor_get_cal(int32_t *k, int32_t *b);
 /* 新数据可用标志: 有更新返回 1, 并清除标志 (供上层判别) */
 int     sensor_has_new(void);
 
+/* 探头在线判定: 最近一次有效帧距今未超时 => 1 (在线), 否则 0 (未连接) */
+int     sensor_online(void);
+
 /* UART4 中断处理入口 (由 stm32f1xx_it.c 的 UART4_IRQHandler 调用) */
 void    sensor_uart4_irq_handler(void);
 

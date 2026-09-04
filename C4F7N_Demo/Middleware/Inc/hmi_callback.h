@@ -19,7 +19,9 @@ void hmi_on_buz_toggle(void);
 void hmi_on_cal_zero(void);
 void hmi_on_cal_span(void);
 void hmi_on_cal_factory(void);
-void hmi_on_range(int minutes);
+void hmi_on_view(int v);            /* 0=曲线 1=数据表 */
+void hmi_on_tbl_page(int delta);    /* ±1 翻页 */
+void hmi_on_page_enter(int p);      /* 进入页 0..3 */
 void hmi_on_export(void);
 
 #endif /* HMI_CALLBACK_H */

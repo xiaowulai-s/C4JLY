@@ -10,6 +10,7 @@
             "--header-insertion=never"
         ],
         "files.autoGuessEncoding": true,
+        "OpenOCD.ExePath": "C:/openOCD/xpack-openocd-0.12.0-7/bin/openocd.exe",
         "C_Cpp.default.configurationProvider": "cl.eide",
         "C_Cpp.errorSquiggles": "disabled",
         "files.associations": {
@@ -28,7 +29,8 @@
             "editor.insertSpaces": true,
             "editor.tabSize": 4,
             "editor.autoIndent": "advanced"
-        }
+        },
+        "EIDE.OpenOCD.ExePath": "C:/openOCD/xpack-openocd-0.12.0-7/bin/openocd.exe"
     },
     "extensions": {
         "recommendations": [

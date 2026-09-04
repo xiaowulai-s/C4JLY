@@ -1,0 +1,87 @@
+<style>
+:root{
+  color-scheme:light;
+  --surface:#F7F7F8; --surface-muted:#EFEFF2; --text:#171717; --text-muted:#52525B; --border:rgba(23,23,23,.12);
+  --brand:#4B3FE3; --brand-soft:#F2F7FF; --brand-soft-strong:#E5EAFF; --brand-text:#1A1759; --brand-on:#FFFFFF;
+  --font-sans:"SF Pro Text","PingFang SC",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --weight-regular:400; --weight-medium:500;
+  --text-caption:12px/18px; --text-body:14px/20px; --text-title:16px/24px;
+}
+:root[data-widget-theme="dark"]{
+  color-scheme:dark;
+  --surface:#171717; --surface-muted:#262626; --text:#E5E5E5; --text-muted:#A1A1AA; --border:rgba(229,229,229,.12);
+  --brand:#6054F1; --brand-soft:#1A1759; --brand-text:#CFD8FF;
+}
+.w{color:var(--text);background:transparent;font:var(--weight-regular) var(--text-body) var(--font-sans);}
+.t{fill:var(--text);font:var(--weight-regular) var(--text-body) var(--font-sans);}
+.ts{fill:var(--text-muted);font:var(--weight-regular) var(--text-caption) var(--font-sans);}
+.tc{fill:var(--text);font:var(--weight-medium) var(--text-caption) var(--font-mono);}
+.th{fill:var(--text);font:var(--weight-medium) var(--text-title) var(--font-sans);}
+.brand{fill:var(--brand);font:var(--weight-medium) var(--text-caption) var(--font-sans);}
+rect{fill:var(--surface);stroke:var(--border);}
+rect.core{fill:var(--brand-soft);stroke:var(--brand);}
+rect.tag{fill:var(--surface-muted);stroke:var(--border);}
+.arr{stroke:var(--text-muted);stroke-width:1.5;fill:none;stroke-linecap:round;stroke-linejoin:round;}
+.arr.b{stroke:var(--brand);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;}
+.arr.d{stroke:var(--text-muted);stroke-width:1.5;fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:5 4;}
+</style>
+<svg class="w" viewBox="0 0 1120 520" width="100%" height="auto" role="img" aria-label="C4F7N 设备数据流网络（含协议/频率）" data-dynamic-ui-widget data-template="architecture-elements">
+  <defs>
+    <marker id="ah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 1 L7 4 L1 7 Z" fill="var(--text-muted)"/></marker>
+    <marker id="ahb" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 1 L7 4 L1 7 Z" fill="var(--brand)"/></marker>
+  </defs>
+
+  <!-- ===== 左列 · 输入外设 ===== -->
+  <g><rect x="40" y="150" width="150" height="86" rx="8"/><text class="t" x="115" y="180" text-anchor="middle">GC5G1 传感器</text><text class="ts" x="115" y="206" text-anchor="middle">NDIR · 数字UART</text></g>
+  <g><rect x="40" y="340" width="150" height="86" rx="8"/><text class="t" x="115" y="370" text-anchor="middle">14.8V 电池组</text><text class="ts" x="115" y="396" text-anchor="middle">满16.8 · 4.65-6.5</text></g>
+
+  <!-- ===== 中列 · MCU 核心 ===== -->
+  <g><rect x="420" y="110" width="220" height="380" rx="12" class="core"/><text class="th" x="530" y="142" text-anchor="middle">STM32F103RCT6</text>
+    <text class="tc" x="530" y="176" text-anchor="middle">USART1 · 屏幕 115200</text>
+    <text class="tc" x="530" y="206" text-anchor="middle">UART4 · 传感器 9600</text>
+    <text class="tc" x="530" y="236" text-anchor="middle">ADC1 · 电池 IN9 12MHz</text>
+    <text class="tc" x="530" y="266" text-anchor="middle">SPI1 · W25Q16 9MHz</text>
+    <text class="ts" x="530" y="304" text-anchor="middle">72MHz · HAL · RTOS 无</text>
+    <text class="ts" x="530" y="330" text-anchor="middle">主循环 250ms 刷新</text>
+    <text class="ts" x="530" y="356" text-anchor="middle">历史 1s 落盘 · RX 中断</text>
+  </g>
+
+  <!-- ===== 右列 · 输出 / 存储 ===== -->
+  <g><rect x="860" y="150" width="190" height="98" rx="8"/><text class="t" x="955" y="182" text-anchor="middle">TJC 7寸屏</text><text class="ts" x="955" y="210" text-anchor="middle">1024×600 · USART1</text><text class="ts" x="955" y="230" text-anchor="middle">显示 + 交互</text></g>
+  <g><rect x="860" y="340" width="190" height="104" rx="8"/><text class="t" x="955" y="372" text-anchor="middle">W25Q16 2MB</text><text class="ts" x="955" y="400" text-anchor="middle">0扇区 = 标定+设置</text><text class="ts" x="955" y="422" text-anchor="middle">1~511 = 历史环形</text></g>
+
+  <!-- ===== 链路：传感器 → MCU ===== -->
+  <path class="arr" d="M190 196 L420 196" marker-end="url(#ah)"/>
+  <g><rect class="tag" x="210" y="116" width="190" height="66" rx="8"/><text class="tc" x="305" y="140" text-anchor="middle">UART4 · 9600 8N1</text><text class="ts" x="305" y="160" text-anchor="middle">帧: AA 55 + PPM(小端)</text><text class="ts" x="305" y="178" text-anchor="middle">主动上报 · 0~1000ppm</text></g>
+
+  <!-- ===== 链路：电池 → MCU ===== -->
+  <path class="arr" d="M190 378 L420 378" marker-end="url(#ah)"/>
+  <g><rect class="tag" x="210" y="316" width="190" height="66" rx="8"/><text class="tc" x="305" y="340" text-anchor="middle">ADC1 · IN9 · 12MHz</text><text class="ts" x="305" y="360" text-anchor="middle">R22/R23 100k/24k 分压</text><text class="ts" x="305" y="378" text-anchor="middle">250ms 采样 · Vref 3.3V</text></g>
+
+  <!-- ===== 链路：MCU → 屏幕（主径） ===== -->
+  <path class="arr b" d="M640 196 L860 196" marker-end="url(#ahb)"/>
+  <g><rect class="tag" x="655" y="116" width="190" height="66" rx="8"/><text class="tc" x="750" y="140" text-anchor="middle">USART1 · 115200 8N1</text><text class="ts" x="750" y="160" text-anchor="middle">obj.attr=val · 0xFF×3</text><text class="brand" x="750" y="178" text-anchor="middle">250ms · 浓度/曲线/状态</text></g>
+
+  <!-- ===== 链路：屏 → MCU（命令） ===== -->
+  <path class="arr d" d="M860 232 L640 232" marker-end="url(#ah)"/>
+  <g><rect class="tag" x="655" y="252" width="190" height="66" rx="8"/><text class="tc" x="750" y="276" text-anchor="middle">printh 单字节命令</text><text class="ts" x="750" y="296" text-anchor="middle">0x01 峰值 · 11~17 阈值/单位/标定</text><text class="ts" x="750" y="314" text-anchor="middle">21~24 曲线/导出 · 按钮触发</text></g>
+
+  <!-- ===== 链路：MCU → W25Q16（写/读） ===== -->
+  <path class="arr" d="M640 378 L860 378" marker-end="url(#ah)"/>
+  <g><rect class="tag" x="655" y="316" width="190" height="66" rx="8"/><text class="tc" x="750" y="340" text-anchor="middle">SPI1 · Mode0 · 9MHz</text><text class="ts" x="750" y="360" text-anchor="middle">0x03读 / 0x02写 / 0x20擦</text><text class="ts" x="750" y="378" text-anchor="middle">参数低频 · 历史 1s</text></g>
+
+  <!-- ===== 链路：历史回放（读回 → 曲线） ===== -->
+  <path class="arr d" d="M860 408 L640 408" marker-end="url(#ah)"/>
+  <g><rect class="tag" x="655" y="428" width="190" height="66" rx="8"/><text class="tc" x="750" y="452" text-anchor="middle">0x21/22/23 切范围</text><text class="ts" x="750" y="472" text-anchor="middle">读 W25Q16 → 逐点 add</text><text class="ts" x="750" y="490" text-anchor="middle">曲线回放 · 10m/1h/24h</text></g>
+
+  <!-- ===== 图例 ===== -->
+  <g>
+    <line x1="300" y1="506" x2="330" y2="506" stroke="var(--brand)" stroke-width="2"/>
+    <text class="ts" x="338" y="510">主数据流</text>
+    <line x1="430" y1="506" x2="460" y2="506" stroke="var(--text-muted)" stroke-width="1.5"/>
+    <text class="ts" x="468" y="510">采集/存储</text>
+    <line x1="586" y1="506" x2="616" y2="506" stroke="var(--text-muted)" stroke-width="1.5" stroke-dasharray="5 4"/>
+    <text class="ts" x="624" y="510">命令/回读</text>
+  </g>
+</svg>
